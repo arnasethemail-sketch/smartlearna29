@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "validate:stories": "vitest run tests/storyLessons.test.ts tests/storyProgress.test.ts tests/StoryAdventures.test.tsx tests/StoryAdventureProgression.test.tsx tests/LessonRunner.milestones.test.tsx"
   },
   "dependencies": {
     "react": "19.2.6",

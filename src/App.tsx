@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { AnnouncementBar, Brand } from "./components/AppChrome";
 import { TopicCard } from "./components/TopicCard";
 import { AdditionPractice } from "./features/addition/AdditionPractice";
@@ -13,7 +13,14 @@ import type {
   SocialStudiesTopicName,
 } from "./features/knowledge/knowledgeContent";
 import { SubtractionPractice } from "./features/subtraction/SubtractionPractice";
+import { StoryAdventureCard } from "./features/story-adventures/StoryAdventureCard";
 import { UcmasPractice } from "./features/ucmas/UcmasPractice";
+
+const StoryAdventures = lazy(() =>
+  import("./features/story-adventures/StoryAdventures").then((module) => ({
+    default: module.StoryAdventures,
+  })),
+);
 
 type MathTopicName =
   | "Addition"
@@ -22,10 +29,11 @@ type MathTopicName =
   | "Fractions";
 
 type SubjectName = "Math" | "English" | KnowledgeSubjectName;
+type EnglishSelection = EnglishTopicName | "Story Adventures";
 
 type SelectedTopic =
   | { subject: "Math"; name: MathTopicName }
-  | { subject: "English"; name: EnglishTopicName }
+  | { subject: "English"; name: EnglishSelection }
   | { subject: KnowledgeSubjectName; name: KnowledgeTopicName };
 
 type TopicDetails<T extends string> = {
@@ -262,7 +270,7 @@ export default function App() {
     setSelectedTopic({ subject: "Math", name: topic });
   };
 
-  const startEnglishTopic = (topic: EnglishTopicName) => {
+  const startEnglishTopic = (topic: EnglishSelection) => {
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
     setSelectedTopic({ subject: "English", name: topic });
@@ -304,10 +312,32 @@ export default function App() {
     return <FractionPractice onBackToTopics={() => setSelectedTopic(null)} />;
   }
 
+  if (
+    selectedTopic?.subject === "English" &&
+    selectedTopic.name === "Story Adventures"
+  ) {
+    return (
+      <Suspense
+        fallback={
+          <main className="flex min-h-screen items-center justify-center bg-[#f7f8fc] px-5 text-center text-[#17213b]">
+            <div>
+              <p className="text-sm font-black uppercase tracking-[0.18em] text-[#4f6df5]">
+                Opening the case file
+              </p>
+              <p className="mt-3 text-2xl font-black">Loading Story Adventures…</p>
+            </div>
+          </main>
+        }
+      >
+        <StoryAdventures onBackToEnglish={() => setSelectedTopic(null)} />
+      </Suspense>
+    );
+  }
+
   if (selectedTopic?.subject === "English") {
     return (
       <EnglishPractice
-        topic={selectedTopic.name}
+        topic={selectedTopic.name as EnglishTopicName}
         onBackToTopics={() => setSelectedTopic(null)}
       />
     );
@@ -394,13 +424,14 @@ export default function App() {
                 >
                   {(["Math", "English", "Science", "Social Studies"] as const).map((subjectOption) => {
                     const isActive = subjectOption === subject;
+                    const topicCount = subjectOption === "English" ? 5 : 4;
                     return (
                       <button
                         key={subjectOption}
                         type="button"
                         role="menuitemradio"
                         aria-checked={isActive}
-                        aria-label={`${subjectOption}, 4 practice topics`}
+                        aria-label={`${subjectOption}, ${topicCount} practice topics`}
                         onClick={() => chooseSubject(subjectOption)}
                         className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-left transition ${
                           isActive
@@ -413,7 +444,7 @@ export default function App() {
                             {subjectOption}
                           </span>
                           <span className="mt-0.5 block text-xs font-semibold text-[#777980]">
-                            4 practice topics
+                            {topicCount} practice topics
                           </span>
                         </span>
                         <span className="text-lg" aria-hidden="true">
@@ -547,7 +578,9 @@ export default function App() {
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <p className="text-sm font-black text-[#263665]">
-                    Four skills are ready for you
+                    {subject === "English"
+                      ? "Five learning paths are ready for you"
+                      : "Four skills are ready for you"}
                   </p>
                   <p className="mt-1 text-sm font-semibold text-[#6a7190]">
                     Start anywhere and practice at your own pace.
@@ -598,13 +631,20 @@ export default function App() {
                 />
               ))
             : subject === "English"
-              ? englishTopics.map((topic) => (
-                  <TopicCard
-                    key={topic.name}
-                    {...topic}
-                    onSelect={() => startEnglishTopic(topic.name)}
-                  />
-                ))
+              ? (
+                  <>
+                    {englishTopics.map((topic) => (
+                      <TopicCard
+                        key={topic.name}
+                        {...topic}
+                        onSelect={() => startEnglishTopic(topic.name)}
+                      />
+                    ))}
+                    <StoryAdventureCard
+                      onSelect={() => startEnglishTopic("Story Adventures")}
+                    />
+                  </>
+                )
               : subject === "Science"
                 ? scienceTopics.map((topic) => (
                     <TopicCard

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc" data-lesson="35" data-scene-key="sunflower-life-cycle-garden">
+  <title id="title">From Seed to Sunflower</title>
+  <desc id="desc">From Seed to Sunflower. Nia kneels beside a sunflower whose roots, seedling, bud, open flower, and seed head appear as a labelled life-cycle arc.. One sunflower&apos;s stages connect in a repeating life cycle.</desc>
+  <metadata data-alt="Nia kneels beside a sunflower whose roots, seedling, bud, open flower, and seed head appear as a labelled life-cycle arc." data-caption="One sunflower&apos;s stages connect in a repeating life cycle." data-cues="flower,stage,chart,bell"/>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7fbff"/><stop offset="1" stop-color="#F7C948" stop-opacity=".22"/></linearGradient>
+    <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="4" fill="#F7C948" opacity=".12"/></pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#17223b" flood-opacity=".2"/></filter>
+  </defs>
+  <rect width="1200" height="720" rx="48" fill="url(#bg)"/>
+  <rect x="24" y="24" width="1152" height="672" rx="38" fill="url(#dots)" stroke="#F7C948" stroke-width="8"/>
+  <circle cx="105" cy="105" r="50" fill="#f7cf3f"/><path d="M84 105l14 15 30-38" fill="none" stroke="#17223b" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <g aria-hidden="true"><circle cx="890" cy="75" r="10" fill="#f7cf3f" stroke="#17223b" stroke-width="4" opacity="1"/><circle cx="924" cy="75" r="10" fill="#f7cf3f" stroke="#17223b" stroke-width="4" opacity="1"/><circle cx="958" cy="87" r="6" fill="#ffffff" stroke="#17223b" stroke-width="4" opacity="0.72"/><circle cx="992" cy="99" r="6" fill="#ffffff" stroke="#17223b" stroke-width="4" opacity="0.72"/><circle cx="1026" cy="87" r="6" fill="#ffffff" stroke="#17223b" stroke-width="4" opacity="0.72"/><circle cx="1060" cy="99" r="10" fill="#f7cf3f" stroke="#17223b" stroke-width="4" opacity="1"/><circle cx="1094" cy="99" r="6" fill="#ffffff" stroke="#17223b" stroke-width="4" opacity="0.72"/></g>
+  <g data-scene="sunflower-life-cycle-garden" filter="url(#shadow)"><path d="M390 610q105-95 210 0 105-120 220 0Z" fill="#31b998" opacity=".2"/><path d="M430 590q14-38 28 0M760 585q14-42 28 0" fill="none" stroke="#31b998" stroke-width="9"/>
+    <path d="M500 365C560 420 635 420 690 355M690 355c30 55 64 68 98 60" fill="none" stroke="#F7C948" stroke-width="7" stroke-dasharray="10 14" opacity=".48"/>
+    <g transform="rotate(0 610 260)"><g data-cue="flower" transform="translate(520 150) scale(1.8)">
+    <circle cx="50" cy="50" r="49" fill="#fff" stroke="#F7C948" stroke-width="6"/>
+    <g transform="translate(14 14) scale(.72)"><g fill="none" stroke="#17223b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M50 89V52M49 69q-22-17-29 4 17 10 29-4M51 75q22-17 29 4-17 10-29-4" fill="#31b998"/><g fill="#F7C948"><circle cx="50" cy="27" r="13"/><circle cx="31" cy="39" r="13"/><circle cx="69" cy="39" r="13"/><circle cx="38" cy="17" r="13"/><circle cx="62" cy="17" r="13"/></g><circle cx="50" cy="30" r="11" fill="#f7cf3f"/></g></g>
+    <rect x="-1.1111111111111072" y="102" width="102.22222222222221" height="26" rx="12" fill="#fff" stroke="#17223b" stroke-width="1.6666666666666665"/>
+    <text x="50" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#17223b">flower</text>
+  </g></g>
+    <g data-cue="stage" transform="translate(405 430) scale(1.04)">
+    <circle cx="50" cy="50" r="49" fill="#fff" stroke="#F7C948" stroke-width="4"/>
+    <g transform="translate(14 14) scale(.72)"><g fill="none" stroke="#17223b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 87h84M17 87V25h66v62" fill="#fff"/><path d="M17 25q20 25 33 0 13 25 33 0" fill="#F7C948"/><path d="M32 58h36"/></g></g>
+    <rect x="-10.576923076923073" y="102" width="121.15384615384615" height="24" rx="12" fill="#fff" stroke="#17223b" stroke-width="2.8846153846153846"/>
+    <text x="50" y="119" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#17223b">stage</text>
+  </g>
+    <g data-cue="chart" transform="translate(565 445) scale(1.04)">
+    <circle cx="50" cy="50" r="49" fill="#fff" stroke="#F7C948" stroke-width="4"/>
+    <g transform="translate(14 14) scale(.72)"><g fill="none" stroke="#17223b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 12v75h77"/><path d="M25 70l17-19 15 10 24-34" stroke="#F7C948"/><circle cx="25" cy="70" r="4" fill="#f7cf3f"/><circle cx="42" cy="51" r="4" fill="#f7cf3f"/><circle cx="57" cy="61" r="4" fill="#f7cf3f"/><circle cx="81" cy="27" r="4" fill="#f7cf3f"/></g></g>
+    <rect x="-10.576923076923073" y="102" width="121.15384615384615" height="24" rx="12" fill="#fff" stroke="#17223b" stroke-width="2.8846153846153846"/>
+    <text x="50" y="119" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#17223b">chart</text>
+  </g>
+    <g data-cue="bell" transform="translate(725 420) scale(1.04)">
+    <circle cx="50" cy="50" r="49" fill="#fff" stroke="#F7C948" stroke-width="4"/>
+    <g transform="translate(14 14) scale(.72)"><g fill="none" stroke="#17223b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M23 65h54Q68 56 68 38q0-20-18-20T32 38q0 18-9 27Z" fill="#f7cf3f"/><path d="M38 73q12 17 24 0"/><circle cx="50" cy="67" r="6" fill="#F7C948"/></g></g>
+    <rect x="-10.576923076923073" y="102" width="121.15384615384615" height="24" rx="12" fill="#fff" stroke="#17223b" stroke-width="2.8846153846153846"/>
+    <text x="50" y="119" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#17223b">bell</text>
+  </g></g>
+  <g data-character="Bark Bolt" transform=""><path d="M180 360Q75 430 92 590Q160 555 205 490Z" fill="#F7C948" stroke="#17223b" stroke-width="9"/><ellipse cx="245" cy="430" rx="105" ry="145" fill="#b96836" stroke="#17223b" stroke-width="10"/><ellipse cx="245" cy="485" rx="58" ry="80" fill="#fff6e9"/><circle cx="238" cy="235" r="112" fill="#b96836" stroke="#17223b" stroke-width="10"/><path d="M150 175Q82 130 90 240Q125 255 165 230ZM330 175Q398 130 390 240Q355 255 315 230Z" fill="#8d472a" stroke="#17223b" stroke-width="10"/><ellipse cx="238" cy="268" rx="70" ry="57" fill="#fff6e9"/><path d="M142 220Q238 150 334 220L316 276Q238 235 160 276Z" fill="#F7C948"/><circle cx="198" cy="222" r="17" fill="#fff"/><circle cx="278" cy="222" r="17" fill="#fff"/><circle cx="202" cy="224" r="8"/><circle cx="282" cy="224" r="8"/><ellipse cx="238" cy="260" rx="19" ry="15" fill="#17223b"/><path d="M215 286q23 24 48 0" fill="none" stroke="#17223b" stroke-width="8" stroke-linecap="round"/><path d="M210 350l28 42 28-42 38 45-66 68-66-68Z" fill="#f7cf3f" stroke="#17223b" stroke-width="8"/><circle cx="238" cy="400" r="13" fill="#F7C948"/><path d="M180 555l-25 80M300 555l30 80" stroke="#17223b" stroke-width="24" stroke-linecap="round"/></g>
+  <g data-character="Nia" transform=""><path d="M920 390q-85 75-70 230h160q18-150-70-230Z" fill="#f7cf3f" stroke="#17223b" stroke-width="10"/><circle cx="930" cy="245" r="100" fill="#8d4b2f" stroke="#17223b" stroke-width="10"/><circle cx="865" cy="155" r="55" fill="#34231f"/><circle cx="995" cy="155" r="55" fill="#34231f"/><path d="M840 235q90-120 180 0q-20-145-90-145t-90 145Z" fill="#34231f"/><circle cx="892" cy="245" r="13" fill="#17223b"/><circle cx="968" cy="245" r="13" fill="#17223b"/><path d="M902 300q28 20 56 0" fill="none" stroke="#5c2e25" stroke-width="8" stroke-linecap="round"/><path d="M858 410l72-48 72 48-25 85h-94Z" fill="#F7C948" stroke="#17223b" stroke-width="9"/><path d="M875 605l-8 55M980 605l12 55" stroke="#17223b" stroke-width="24" stroke-linecap="round"/><circle cx="815" cy="420" r="48" fill="none" stroke="#17223b" stroke-width="12"/><path d="M845 455l55 70" stroke="#17223b" stroke-width="14" stroke-linecap="round"/></g>
+  <path d="M70 650Q300 615 470 650T820 650T1130 650" fill="none" stroke="#F7C948" stroke-width="14" stroke-linecap="round" opacity=".45"/>
+</svg>

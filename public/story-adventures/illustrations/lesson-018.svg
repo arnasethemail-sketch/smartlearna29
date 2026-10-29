@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc" data-lesson="18" data-scene-key="raindrop-water-cycle-path">
+  <title id="title">The Adventure of a Raindrop</title>
+  <desc id="desc">The Adventure of a Raindrop. A labelled landscape traces one water drop from a lake to a cloud, rain, soil, creek, and plant. One raindrop can follow several pathways through Earth’s water cycle.</desc>
+  <metadata data-alt="A labelled landscape traces one water drop from a lake to a cloud, rain, soil, creek, and plant" data-caption="One raindrop can follow several pathways through Earth’s water cycle." data-cues="rain,flower,water,chart"/>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7fbff"/><stop offset="1" stop-color="#2b9dd6" stop-opacity=".22"/></linearGradient>
+    <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="4" fill="#2b9dd6" opacity=".12"/></pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#17223b" flood-opacity=".2"/></filter>
+  </defs>
+  <rect width="1200" height="720" rx="48" fill="url(#bg)"/>
+  <rect x="24" y="24" width="1152" height="672" rx="38" fill="url(#dots)" stroke="#2b9dd6" stroke-width="8"/>
+  <circle cx="105" cy="105" r="50" fill="#ff7956"/><path d="M84 105l14 15 30-38" fill="none" stroke="#17223b" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <g aria-hidden="true"><circle cx="890" cy="99" r="6" fill="#ffffff" stroke="#17223b" stroke-width="4" opacity="0.72"/><circle cx="924" cy="87" r="10" fill="#ff7956" stroke="#17223b" stroke-width="4" opacity="1"/><circle cx="958" cy="75" r="6" fill="#ffffff" stroke="#17223b" stroke-width="4" opacity="0.72"/><circle cx="992" cy="87" r="6" fill="#ffffff" stroke="#17223b" stroke-width="4" opacity="0.72"/><circle cx="1026" cy="99" r="10" fill="#ff7956" stroke="#17223b" stroke-width="4" opacity="1"/><circle cx="1060" cy="99" r="6" fill="#ffffff" stroke="#17223b" stroke-width="4" opacity="0.72"/><circle cx="1094" cy="99" r="6" fill="#ffffff" stroke="#17223b" stroke-width="4" opacity="0.72"/></g>
+  <g data-scene="raindrop-water-cycle-path" filter="url(#shadow)"><path d="M390 570q75-45 150 0t150 0t150 0" fill="none" stroke="#2b9dd6" stroke-width="18" stroke-linecap="round" opacity=".35"/><path d="M420 610q75-38 150 0t150 0" fill="none" stroke="#2fc9a2" stroke-width="12" stroke-linecap="round" opacity=".3"/>
+    <path d="M500 365C560 420 635 420 690 355M690 355c30 55 64 68 98 60" fill="none" stroke="#2b9dd6" stroke-width="7" stroke-dasharray="10 14" opacity=".48"/>
+    <g transform="rotate(1 610 260)"><g data-cue="rain" transform="translate(520 150) scale(1.8)">
+    <circle cx="50" cy="50" r="49" fill="#fff" stroke="#2b9dd6" stroke-width="6"/>
+    <g transform="translate(14 14) scale(.72)"><g fill="none" stroke="#17223b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 48q-6-25 20-27 9-20 29-7 18 0 18 19 10 7 2 20H23" fill="#fff"/><path d="M31 65l-7 15M52 65l-7 15M73 65l-7 15" stroke="#2b9dd6"/></g></g>
+    <rect x="-1.1111111111111072" y="102" width="102.22222222222221" height="26" rx="12" fill="#fff" stroke="#17223b" stroke-width="1.6666666666666665"/>
+    <text x="50" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#17223b">rain</text>
+  </g></g>
+    <g data-cue="flower" transform="translate(405 430) scale(1.04)">
+    <circle cx="50" cy="50" r="49" fill="#fff" stroke="#2b9dd6" stroke-width="4"/>
+    <g transform="translate(14 14) scale(.72)"><g fill="none" stroke="#17223b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M50 89V52M49 69q-22-17-29 4 17 10 29-4M51 75q22-17 29 4-17 10-29-4" fill="#2fc9a2"/><g fill="#2b9dd6"><circle cx="50" cy="27" r="13"/><circle cx="31" cy="39" r="13"/><circle cx="69" cy="39" r="13"/><circle cx="38" cy="17" r="13"/><circle cx="62" cy="17" r="13"/></g><circle cx="50" cy="30" r="11" fill="#ff7956"/></g></g>
+    <rect x="-10.576923076923073" y="102" width="121.15384615384615" height="24" rx="12" fill="#fff" stroke="#17223b" stroke-width="2.8846153846153846"/>
+    <text x="50" y="119" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#17223b">flower</text>
+  </g>
+    <g data-cue="water" transform="translate(565 445) scale(1.04)">
+    <circle cx="50" cy="50" r="49" fill="#fff" stroke="#2b9dd6" stroke-width="4"/>
+    <g transform="translate(14 14) scale(.72)"><g fill="none" stroke="#17223b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M50 8Q19 47 19 65a31 31 0 0 0 62 0Q81 47 50 8Z" fill="#2b9dd6"/><path d="M28 67q22-18 44 0" stroke="#fff"/></g></g>
+    <rect x="-10.576923076923073" y="102" width="121.15384615384615" height="24" rx="12" fill="#fff" stroke="#17223b" stroke-width="2.8846153846153846"/>
+    <text x="50" y="119" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#17223b">water</text>
+  </g>
+    <g data-cue="chart" transform="translate(725 420) scale(1.04)">
+    <circle cx="50" cy="50" r="49" fill="#fff" stroke="#2b9dd6" stroke-width="4"/>
+    <g transform="translate(14 14) scale(.72)"><g fill="none" stroke="#17223b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 12v75h77"/><path d="M25 70l17-19 15 10 24-34" stroke="#2b9dd6"/><circle cx="25" cy="70" r="4" fill="#ff7956"/><circle cx="42" cy="51" r="4" fill="#ff7956"/><circle cx="57" cy="61" r="4" fill="#ff7956"/><circle cx="81" cy="27" r="4" fill="#ff7956"/></g></g>
+    <rect x="-10.576923076923073" y="102" width="121.15384615384615" height="24" rx="12" fill="#fff" stroke="#17223b" stroke-width="2.8846153846153846"/>
+    <text x="50" y="119" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#17223b">chart</text>
+  </g></g>
+  <g data-character="Bark Bolt" transform="translate(1200 0) scale(-1 1)"><path d="M180 360Q75 430 92 590Q160 555 205 490Z" fill="#2b9dd6" stroke="#17223b" stroke-width="9"/><ellipse cx="245" cy="430" rx="105" ry="145" fill="#b96836" stroke="#17223b" stroke-width="10"/><ellipse cx="245" cy="485" rx="58" ry="80" fill="#fff6e9"/><circle cx="238" cy="235" r="112" fill="#b96836" stroke="#17223b" stroke-width="10"/><path d="M150 175Q82 130 90 240Q125 255 165 230ZM330 175Q398 130 390 240Q355 255 315 230Z" fill="#8d472a" stroke="#17223b" stroke-width="10"/><ellipse cx="238" cy="268" rx="70" ry="57" fill="#fff6e9"/><path d="M142 220Q238 150 334 220L316 276Q238 235 160 276Z" fill="#2b9dd6"/><circle cx="198" cy="222" r="17" fill="#fff"/><circle cx="278" cy="222" r="17" fill="#fff"/><circle cx="202" cy="224" r="8"/><circle cx="282" cy="224" r="8"/><ellipse cx="238" cy="260" rx="19" ry="15" fill="#17223b"/><path d="M215 286q23 24 48 0" fill="none" stroke="#17223b" stroke-width="8" stroke-linecap="round"/><path d="M210 350l28 42 28-42 38 45-66 68-66-68Z" fill="#ff7956" stroke="#17223b" stroke-width="8"/><circle cx="238" cy="400" r="13" fill="#2b9dd6"/><path d="M180 555l-25 80M300 555l30 80" stroke="#17223b" stroke-width="24" stroke-linecap="round"/></g>
+  <g data-character="Nia" transform="translate(1200 0) scale(-1 1)"><path d="M920 390q-85 75-70 230h160q18-150-70-230Z" fill="#ff7956" stroke="#17223b" stroke-width="10"/><circle cx="930" cy="245" r="100" fill="#8d4b2f" stroke="#17223b" stroke-width="10"/><circle cx="865" cy="155" r="55" fill="#34231f"/><circle cx="995" cy="155" r="55" fill="#34231f"/><path d="M840 235q90-120 180 0q-20-145-90-145t-90 145Z" fill="#34231f"/><circle cx="892" cy="245" r="13" fill="#17223b"/><circle cx="968" cy="245" r="13" fill="#17223b"/><path d="M902 300q28 20 56 0" fill="none" stroke="#5c2e25" stroke-width="8" stroke-linecap="round"/><path d="M858 410l72-48 72 48-25 85h-94Z" fill="#2b9dd6" stroke="#17223b" stroke-width="9"/><path d="M875 605l-8 55M980 605l12 55" stroke="#17223b" stroke-width="24" stroke-linecap="round"/><circle cx="815" cy="420" r="48" fill="none" stroke="#17223b" stroke-width="12"/><path d="M845 455l55 70" stroke="#17223b" stroke-width="14" stroke-linecap="round"/></g>
+  <path d="M70 650Q300 615 470 650T820 650T1130 650" fill="none" stroke="#2b9dd6" stroke-width="14" stroke-linecap="round" opacity=".45"/>
+</svg>

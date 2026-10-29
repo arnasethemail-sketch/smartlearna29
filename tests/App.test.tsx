@@ -119,7 +119,7 @@ describe("topic selection", () => {
 
     fireEvent.click(
       screen.getByRole("menuitemradio", {
-        name: "English, 4 practice topics",
+        name: "English, 5 practice topics",
       }),
     );
 

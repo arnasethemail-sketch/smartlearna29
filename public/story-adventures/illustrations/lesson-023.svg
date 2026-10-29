@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc" data-lesson="23" data-scene-key="volcano-formation-cross-section">
+  <title id="title">How Volcanoes Form</title>
+  <desc id="desc">How Volcanoes Form. A labelled cross-section compares a spreading boundary, subduction zone, and hot spot where magma rises. Magma can form and rise in several tectonic settings.</desc>
+  <metadata data-alt="A labelled cross-section compares a spreading boundary, subduction zone, and hot spot where magma rises" data-caption="Magma can form and rise in several tectonic settings." data-cues="chart,compare,volcano,bell"/>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7fbff"/><stop offset="1" stop-color="#d94b32" stop-opacity=".22"/></linearGradient>
+    <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="4" fill="#d94b32" opacity=".12"/></pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#17223b" flood-opacity=".2"/></filter>
+  </defs>
+  <rect width="1200" height="720" rx="48" fill="url(#bg)"/>
+  <rect x="24" y="24" width="1152" height="672" rx="38" fill="url(#dots)" stroke="#d94b32" stroke-width="8"/>
+  <circle cx="105" cy="105" r="50" fill="#ffd45a"/><path d="M84 105l14 15 30-38" fill="none" stroke="#17223b" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+  <g aria-hidden="true"><circle cx="890" cy="75" r="10" fill="#ffd45a" stroke="#17223b" stroke-width="4" opacity="1"/><circle cx="924" cy="75" r="10" fill="#ffd45a" stroke="#17223b" stroke-width="4" opacity="1"/><circle cx="958" cy="87" r="10" fill="#ffd45a" stroke="#17223b" stroke-width="4" opacity="1"/><circle cx="992" cy="75" r="6" fill="#ffffff" stroke="#17223b" stroke-width="4" opacity="0.72"/><circle cx="1026" cy="75" r="10" fill="#ffd45a" stroke="#17223b" stroke-width="4" opacity="1"/><circle cx="1060" cy="75" r="6" fill="#ffffff" stroke="#17223b" stroke-width="4" opacity="0.72"/><circle cx="1094" cy="87" r="6" fill="#ffffff" stroke="#17223b" stroke-width="4" opacity="0.72"/></g>
+  <g data-scene="volcano-formation-cross-section" filter="url(#shadow)"><path d="M405 596q55-36 110 0t110 0t110 0" fill="none" stroke="#ffd45a" stroke-width="12" stroke-linecap="round" stroke-dasharray="3 24" opacity=".55"/>
+    <path d="M500 365C560 420 635 420 690 355M690 355c30 55 64 68 98 60" fill="none" stroke="#d94b32" stroke-width="7" stroke-dasharray="10 14" opacity=".48"/>
+    <g transform="rotate(3 610 260)"><g data-cue="chart" transform="translate(520 150) scale(1.8)">
+    <circle cx="50" cy="50" r="49" fill="#fff" stroke="#d94b32" stroke-width="6"/>
+    <g transform="translate(14 14) scale(.72)"><g fill="none" stroke="#17223b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 12v75h77"/><path d="M25 70l17-19 15 10 24-34" stroke="#d94b32"/><circle cx="25" cy="70" r="4" fill="#ffd45a"/><circle cx="42" cy="51" r="4" fill="#ffd45a"/><circle cx="57" cy="61" r="4" fill="#ffd45a"/><circle cx="81" cy="27" r="4" fill="#ffd45a"/></g></g>
+    <rect x="-1.1111111111111072" y="102" width="102.22222222222221" height="26" rx="12" fill="#fff" stroke="#17223b" stroke-width="1.6666666666666665"/>
+    <text x="50" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" font-weight="700" fill="#17223b">chart</text>
+  </g></g>
+    <g data-cue="compare" transform="translate(405 430) scale(1.04)">
+    <circle cx="50" cy="50" r="49" fill="#fff" stroke="#d94b32" stroke-width="4"/>
+    <g transform="translate(14 14) scale(.72)"><g fill="none" stroke="#17223b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 50h76M50 20v60M18 50l12-12M18 50l12 12M82 50L70 38M82 50L70 62" stroke="#d94b32"/><circle cx="50" cy="20" r="9" fill="#ffd45a"/><circle cx="50" cy="80" r="9" fill="#2fc9a2"/></g></g>
+    <rect x="-10.576923076923073" y="102" width="121.15384615384615" height="24" rx="12" fill="#fff" stroke="#17223b" stroke-width="2.8846153846153846"/>
+    <text x="50" y="119" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#17223b">compare</text>
+  </g>
+    <g data-cue="volcano" transform="translate(565 445) scale(1.04)">
+    <circle cx="50" cy="50" r="49" fill="#fff" stroke="#d94b32" stroke-width="4"/>
+    <g transform="translate(14 14) scale(.72)"><g fill="none" stroke="#17223b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 88l29-55 12 17 10-17 25 55Z" fill="#d94b32"/><path d="M42 31q-9-11 2-18M55 32q12-13 1-24M67 35q12-8 7-19" stroke="#ffd45a"/><path d="M41 33l12 17 10-17" fill="#fff"/></g></g>
+    <rect x="-10.576923076923073" y="102" width="121.15384615384615" height="24" rx="12" fill="#fff" stroke="#17223b" stroke-width="2.8846153846153846"/>
+    <text x="50" y="119" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#17223b">volcano</text>
+  </g>
+    <g data-cue="bell" transform="translate(725 420) scale(1.04)">
+    <circle cx="50" cy="50" r="49" fill="#fff" stroke="#d94b32" stroke-width="4"/>
+    <g transform="translate(14 14) scale(.72)"><g fill="none" stroke="#17223b" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"><path d="M23 65h54Q68 56 68 38q0-20-18-20T32 38q0 18-9 27Z" fill="#ffd45a"/><path d="M38 73q12 17 24 0"/><circle cx="50" cy="67" r="6" fill="#d94b32"/></g></g>
+    <rect x="-10.576923076923073" y="102" width="121.15384615384615" height="24" rx="12" fill="#fff" stroke="#17223b" stroke-width="2.8846153846153846"/>
+    <text x="50" y="119" text-anchor="middle" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#17223b">bell</text>
+  </g></g>
+  <g data-character="Bark Bolt" transform=""><path d="M180 360Q75 430 92 590Q160 555 205 490Z" fill="#d94b32" stroke="#17223b" stroke-width="9"/><ellipse cx="245" cy="430" rx="105" ry="145" fill="#b96836" stroke="#17223b" stroke-width="10"/><ellipse cx="245" cy="485" rx="58" ry="80" fill="#fff6e9"/><circle cx="238" cy="235" r="112" fill="#b96836" stroke="#17223b" stroke-width="10"/><path d="M150 175Q82 130 90 240Q125 255 165 230ZM330 175Q398 130 390 240Q355 255 315 230Z" fill="#8d472a" stroke="#17223b" stroke-width="10"/><ellipse cx="238" cy="268" rx="70" ry="57" fill="#fff6e9"/><path d="M142 220Q238 150 334 220L316 276Q238 235 160 276Z" fill="#d94b32"/><circle cx="198" cy="222" r="17" fill="#fff"/><circle cx="278" cy="222" r="17" fill="#fff"/><circle cx="202" cy="224" r="8"/><circle cx="282" cy="224" r="8"/><ellipse cx="238" cy="260" rx="19" ry="15" fill="#17223b"/><path d="M215 286q23 24 48 0" fill="none" stroke="#17223b" stroke-width="8" stroke-linecap="round"/><path d="M210 350l28 42 28-42 38 45-66 68-66-68Z" fill="#ffd45a" stroke="#17223b" stroke-width="8"/><circle cx="238" cy="400" r="13" fill="#d94b32"/><path d="M180 555l-25 80M300 555l30 80" stroke="#17223b" stroke-width="24" stroke-linecap="round"/></g>
+  <g data-character="Nia" transform=""><path d="M920 390q-85 75-70 230h160q18-150-70-230Z" fill="#ffd45a" stroke="#17223b" stroke-width="10"/><circle cx="930" cy="245" r="100" fill="#8d4b2f" stroke="#17223b" stroke-width="10"/><circle cx="865" cy="155" r="55" fill="#34231f"/><circle cx="995" cy="155" r="55" fill="#34231f"/><path d="M840 235q90-120 180 0q-20-145-90-145t-90 145Z" fill="#34231f"/><circle cx="892" cy="245" r="13" fill="#17223b"/><circle cx="968" cy="245" r="13" fill="#17223b"/><path d="M902 300q28 20 56 0" fill="none" stroke="#5c2e25" stroke-width="8" stroke-linecap="round"/><path d="M858 410l72-48 72 48-25 85h-94Z" fill="#d94b32" stroke="#17223b" stroke-width="9"/><path d="M875 605l-8 55M980 605l12 55" stroke="#17223b" stroke-width="24" stroke-linecap="round"/><circle cx="815" cy="420" r="48" fill="none" stroke="#17223b" stroke-width="12"/><path d="M845 455l55 70" stroke="#17223b" stroke-width="14" stroke-linecap="round"/></g>
+  <path d="M70 650Q300 615 470 650T820 650T1130 650" fill="none" stroke="#d94b32" stroke-width="14" stroke-linecap="round" opacity=".45"/>
+</svg>

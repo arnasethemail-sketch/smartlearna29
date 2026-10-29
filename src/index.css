@@ -997,3 +997,100 @@ button {
     animation-iteration-count: 1 !important;
   }
 }
+
+@media print {
+  @page {
+    size: letter portrait;
+    margin: 0.35in;
+  }
+
+  body {
+    background: white !important;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  .story-print-spread,
+  .story-print-spread * {
+    visibility: visible;
+  }
+
+  .story-print-spread {
+    position: absolute;
+    inset: 0;
+    display: block !important;
+  }
+
+  .story-print-page {
+    min-height: 0 !important;
+    height: auto !important;
+    min-height: 10.25in !important;
+    margin: 0;
+    break-after: page;
+    break-inside: avoid-page;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    padding: 0.2in !important;
+    font-size: 9.5pt !important;
+    line-height: 1.35 !important;
+  }
+
+  .story-print-page > div:first-child {
+    padding-bottom: 0.08in !important;
+  }
+
+  .story-print-page h3 {
+    margin-top: 0.04in !important;
+    font-size: 15pt !important;
+    line-height: 1.15 !important;
+  }
+
+  .story-print-page figure {
+    margin-block: 0.1in !important;
+  }
+
+  .story-print-page figure img {
+    height: 1.55in !important;
+    object-fit: cover !important;
+  }
+
+  .story-print-page figcaption {
+    padding: 0.05in 0.1in !important;
+    font-size: 7.5pt !important;
+    line-height: 1.25 !important;
+  }
+
+  .story-print-page > div:nth-of-type(2) {
+    margin-block: 0.08in !important;
+  }
+
+  .story-print-page .space-y-4 {
+    font-size: 9.5pt !important;
+    line-height: 1.35 !important;
+  }
+
+  .story-print-page .space-y-4 > :not([hidden]) ~ :not([hidden]) {
+    margin-top: 0.08in !important;
+  }
+
+  .story-print-page .mt-auto {
+    margin-top: 0.08in !important;
+    padding-top: 0 !important;
+  }
+
+  .story-print-page .rounded-2xl {
+    border-radius: 0.08in !important;
+  }
+
+  .story-print-page > p:last-child {
+    margin-top: 0.08in !important;
+  }
+
+  .story-print-page:last-child {
+    break-after: auto;
+  }
+}
