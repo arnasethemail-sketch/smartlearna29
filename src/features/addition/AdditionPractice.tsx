@@ -142,18 +142,15 @@ export function AdditionPractice({ onBackToTopics }: AdditionPracticeProps) {
   };
 
   return (
-    <main className="min-h-screen bg-[#f7f5ff] text-[#17213b]">
+    <main className="min-h-screen bg-[#f7f7f8] text-[#17181a]">
       <AnnouncementBar />
-      <section className="relative min-h-[calc(100vh-42px)] overflow-hidden bg-[#5d43dc] px-5 pb-14 sm:px-8">
-        <div className="pointer-events-none absolute -right-28 top-28 h-80 w-80 rounded-full border-[22px] border-[#ffd84d]/20" aria-hidden="true" />
-        <div className="pointer-events-none absolute -left-24 bottom-24 h-64 w-64 rounded-full bg-[#ff6633]/20" aria-hidden="true" />
-
+      <section className="relative min-h-[calc(100vh-42px)] overflow-hidden bg-[#f7f7f8] px-5 pb-14 sm:px-8">
         <nav className="relative z-10 mx-auto flex w-full max-w-6xl items-center justify-between py-6">
           <Brand />
           <button
             type="button"
             onClick={onBackToTopics}
-            className="rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm font-black text-white backdrop-blur-sm transition hover:bg-white/20 focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#ffd84d]"
+            className="rounded-full border-2 border-[#d7d8dc] bg-white px-4 py-2 text-sm font-black text-[#34363a] transition hover:border-[#bfc1c6] hover:bg-[#f1f2f4] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#4f6df5]"
           >
             Exit to Topics
           </button>
@@ -171,10 +168,10 @@ export function AdditionPractice({ onBackToTopics }: AdditionPracticeProps) {
             />
           ) : (
             <>
-              <header className="mb-6 text-white">
+              <header className="mb-6 text-[#17181a]">
                 <div className="flex flex-wrap items-end justify-between gap-4">
                   <div>
-                    <p className="text-sm font-black uppercase tracking-[0.18em] text-[#fff3b0]">
+                    <p className="text-sm font-black uppercase tracking-[0.18em] text-[#4f6df5]">
                       Addition round
                     </p>
                     <h1 className="mt-2 text-3xl font-black tracking-[-0.04em] sm:text-5xl">
@@ -182,7 +179,7 @@ export function AdditionPractice({ onBackToTopics }: AdditionPracticeProps) {
                     </h1>
                   </div>
                   <div className="grid grid-cols-2 gap-2">
-                    <div className="min-w-28 rounded-2xl bg-[#ffd84d] px-4 py-2.5 text-[#33286e] shadow-[0_4px_0_#d6aa00]">
+                    <div className="min-w-28 rounded-2xl border-2 border-[#a7bf21] bg-[#dfff38] px-4 py-2.5 text-[#293200] shadow-[0_4px_0_#a7bf21]">
                       <p className="text-[10px] font-black uppercase tracking-[0.14em]">Time</p>
                       <time
                         aria-label="Elapsed time"
@@ -191,8 +188,8 @@ export function AdditionPractice({ onBackToTopics }: AdditionPracticeProps) {
                         {formatAdditionTime(elapsedSeconds)}
                       </time>
                     </div>
-                    <div className="min-w-28 rounded-2xl border border-white/20 bg-white/10 px-4 py-2.5 text-white backdrop-blur-sm">
-                      <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#d9d2ff]">Best Time</p>
+                    <div className="min-w-28 rounded-2xl border-2 border-[#dedfe2] bg-white px-4 py-2.5 text-[#17181a]">
+                      <p className="text-[10px] font-black uppercase tracking-[0.14em] text-[#72747a]">Best Time</p>
                       <p
                         aria-label="Best time"
                         className="mt-0.5 font-mono text-xl font-black tabular-nums"
@@ -205,25 +202,34 @@ export function AdditionPractice({ onBackToTopics }: AdditionPracticeProps) {
                   </div>
                 </div>
 
-                <div className="mt-5 h-3 overflow-hidden rounded-full bg-white/20">
+                <div className="mt-5 h-3 overflow-hidden rounded-full bg-[#e1e3e8]">
                   <div
-                    className="h-full rounded-full bg-[#ffd84d] transition-[width] duration-300"
+                    className="h-full rounded-full bg-[#4f6df5] transition-[width] duration-300"
                     style={{ width: `${(questionNumber / TOTAL_ADDITION_QUESTIONS) * 100}%` }}
                   />
                 </div>
 
-                <div className="mt-5 grid gap-3 sm:grid-cols-3">
-                  <div className="rounded-2xl bg-white/10 px-4 py-3 backdrop-blur-sm">
-                    <p className="text-xs font-black uppercase tracking-[0.12em] text-[#d9d2ff]">Score</p>
-                    <p className="mt-1 text-lg font-black">{score} / 20</p>
+                <div className="mt-5 grid grid-cols-2 gap-3 lg:grid-cols-4">
+                  <div className="rounded-2xl border-2 border-[#e0e1e4] bg-white px-4 py-3">
+                    <p className="text-xs font-black uppercase tracking-[0.12em] text-[#72747a]">Correct</p>
+                    <p aria-label="Correct answers" className="mt-1 text-lg font-black">{score} / {TOTAL_ADDITION_QUESTIONS}</p>
                   </div>
-                  <div className="rounded-2xl bg-white/10 px-4 py-3 backdrop-blur-sm">
-                    <p className="text-xs font-black uppercase tracking-[0.12em] text-[#d9d2ff]">Correct streak</p>
+                  <div className="rounded-2xl border-2 border-[#e0e1e4] bg-white px-4 py-3">
+                    <p className="text-xs font-black uppercase tracking-[0.12em] text-[#72747a]">Correct streak</p>
                     <p className="mt-1 text-lg font-black">{streak} / {LEVEL_UP_STREAK}</p>
                   </div>
-                  <div className="rounded-2xl bg-white/10 px-4 py-3 backdrop-blur-sm">
-                    <p className="text-xs font-black uppercase tracking-[0.12em] text-[#d9d2ff]">Current level</p>
+                  <div className="rounded-2xl border-2 border-[#e0e1e4] bg-white px-4 py-3">
+                    <p className="text-xs font-black uppercase tracking-[0.12em] text-[#72747a]">Current level</p>
                     <p className="mt-1 text-sm font-black">{ADDITION_LEVEL_LABELS[question.level]}</p>
+                  </div>
+                  <div className="rounded-2xl border-2 border-[#f0c13d] bg-[#fff9dc] px-4 py-3">
+                    <p className="text-xs font-black uppercase tracking-[0.12em] text-[#7b5c00]">Stars</p>
+                    <p
+                      aria-label="Stars"
+                      className="mt-1 text-lg font-black tracking-wider text-[#e3a500]"
+                    >
+                      {"\u2606".repeat(5)}
+                    </p>
                   </div>
                 </div>
               </header>

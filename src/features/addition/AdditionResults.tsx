@@ -1,4 +1,8 @@
 import { TOTAL_ADDITION_QUESTIONS } from "./additionEngine";
+import {
+  formatAdditionStars,
+  getAdditionStarRating,
+} from "./additionStars";
 import { formatAdditionTime } from "./additionTimer";
 import { RewardPrize } from "./RewardPrize";
 
@@ -20,6 +24,7 @@ export function AdditionResults({
   onBackToTopics,
 }: AdditionResultsProps) {
   const accuracy = Math.round((score / TOTAL_ADDITION_QUESTIONS) * 100);
+  const starRating = getAdditionStarRating(score);
 
   return (
     <section className="mx-auto w-full max-w-3xl rounded-[2.25rem] bg-white px-5 py-8 text-center shadow-[0_22px_70px_rgba(31,20,96,0.30)] sm:px-10 sm:py-10" aria-labelledby="addition-results-heading">
@@ -35,10 +40,25 @@ export function AdditionResults({
         totalQuestions={TOTAL_ADDITION_QUESTIONS}
       />
 
+      <div className="mx-auto mt-6 max-w-xl rounded-3xl border-2 border-[#f0c13d] bg-[#fff9dc] px-5 py-5 shadow-[0_5px_0_#f0c13d]">
+        <p className="text-xs font-black uppercase tracking-[0.16em] text-[#7b5c00]">
+          Stars earned
+        </p>
+        <p
+          aria-label="Star rating"
+          className="mt-2 text-4xl font-black tracking-wider text-[#e3a500] sm:text-5xl"
+        >
+          {formatAdditionStars(starRating)}
+        </p>
+        <p className="mt-2 text-base font-black text-[#5f4900]">
+          You earned {starRating} {starRating === 1 ? "star" : "stars"}!
+        </p>
+      </div>
+
       <div className="mx-auto mt-6 grid max-w-xl gap-3 sm:grid-cols-2">
         <div className="rounded-2xl bg-[#f0ebff] p-5">
-          <p className="text-sm font-black uppercase tracking-[0.12em] text-[#6b4ce6]">Final score</p>
-          <p className="mt-2 text-2xl font-black text-[#17213b]">{score} out of {TOTAL_ADDITION_QUESTIONS}</p>
+          <p className="text-sm font-black uppercase tracking-[0.12em] text-[#6b4ce6]">Correct answers</p>
+          <p aria-label="Final correct answers" className="mt-2 text-2xl font-black text-[#17213b]">{score} out of {TOTAL_ADDITION_QUESTIONS}</p>
         </div>
         <div className="rounded-2xl bg-[#eafaf4] p-5">
           <p className="text-sm font-black uppercase tracking-[0.12em] text-[#16805c]">Accuracy</p>

@@ -1,11 +1,24 @@
-export function Brand() {
+type BrandProps = {
+  tone?: "dark" | "light";
+};
+
+export function Brand({ tone = "dark" }: BrandProps) {
+  const isLight = tone === "light";
+
   return (
-    <div className="flex items-center gap-3" aria-label="Grade 4 Math Practice">
-      <span className="flex h-11 w-11 rotate-3 items-center justify-center rounded-2xl bg-[#ff6633] text-2xl font-black text-white shadow-[0_4px_0_#c93d17]">
-        +
+    <div className="flex items-center gap-2.5" aria-label="Grade 4 Math Practice">
+      <span className="grid h-10 w-10 grid-cols-2 gap-1 rounded-xl border-2 border-[#25272b] bg-[#dfff38] p-2 shadow-[3px_3px_0_#25272b]">
+        <span className="rounded-sm bg-[#25272b]" />
+        <span className="rounded-sm bg-[#4f6df5]" />
+        <span className="rounded-sm bg-[#4f6df5]" />
+        <span className="rounded-sm bg-[#25272b]" />
       </span>
-      <span className="text-lg font-black tracking-tight text-white sm:text-xl">
-        Math<span className="text-[#ffd84d]">Practice</span>
+      <span
+        className={`text-lg font-black tracking-[-0.045em] sm:text-xl ${
+          isLight ? "text-white" : "text-[#17181a]"
+        }`}
+      >
+        MathPractice
       </span>
     </div>
   );
@@ -13,11 +26,20 @@ export function Brand() {
 
 export function AnnouncementBar() {
   return (
-    <div className="bg-[#ff6633] px-4 py-2.5 text-center text-xs font-black uppercase tracking-[0.12em] text-white sm:text-sm">
-      <span className="mr-2 text-[#ffd84d]" aria-hidden="true">
-        {"\u2605"}
+    <div className="border-b border-[#e4dfee] bg-[linear-gradient(90deg,#e9edff_0%,#f8eaf5_52%,#fff0d9_100%)] px-4 py-3 text-center text-sm font-extrabold text-[#30205f]">
+      <span
+        className="mr-2 inline-flex h-6 w-6 items-center justify-center rounded-lg bg-[#dfff38] text-[#2f3900]"
+        aria-hidden="true"
+      >
+        {"\u26a1"}
       </span>
-      Small steps, big math confidence
+      Small steps today build big math confidence.
+      <a
+        href="#topics"
+        className="ml-2 underline decoration-2 underline-offset-4"
+      >
+        Start practicing
+      </a>
     </div>
   );
 }

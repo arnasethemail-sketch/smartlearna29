@@ -48,6 +48,17 @@ function getPerfectAnswer(questionNumber: number) {
 }
 
 describe("Addition practice round", () => {
+  it("shows the correct-answer count and empty stars during the round", () => {
+    render(<AdditionPractice onBackToTopics={vi.fn()} />);
+
+    expect(screen.getByLabelText("Correct answers").textContent).toBe(
+      "0 / 20",
+    );
+    expect(screen.getByLabelText("Stars").textContent).toBe(
+      "\u2606".repeat(5),
+    );
+  });
+
   it("highlights only incorrect place-value boxes with a bright red border", () => {
     render(<AdditionPractice onBackToTopics={vi.fn()} />);
 
@@ -208,6 +219,10 @@ describe("Addition practice round", () => {
     ).toBeTruthy();
     expect(screen.getByText("20 out of 20")).toBeTruthy();
     expect(screen.getByText("100%")).toBeTruthy();
+    expect(screen.getByLabelText("Star rating").textContent).toBe(
+      "\u2605".repeat(5),
+    );
+    expect(screen.getByText("You earned 5 stars!")).toBeTruthy();
     expect(
       screen.getByText(
         "Perfect score! Your golden egg hatched into a Legendary Dragon!",
@@ -276,6 +291,12 @@ describe("Addition practice round", () => {
     );
 
     expect(screen.getByText("70%")).toBeTruthy();
+    expect(screen.getByLabelText("Final correct answers").textContent).toBe(
+      "14 out of 20",
+    );
+    expect(screen.getByLabelText("Star rating").textContent).toBe(
+      `${"\u2605".repeat(4)}${"\u2606"}`,
+    );
     expect(screen.getByLabelText("Final time").textContent).toBe("01:32");
     expect(screen.getByLabelText("Best time").textContent).toBe("01:20");
     fireEvent.click(
