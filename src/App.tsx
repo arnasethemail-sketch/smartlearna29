@@ -1,26 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnnouncementBar, Brand } from "./components/AppChrome";
 import { TopicCard } from "./components/TopicCard";
 import { AdditionPractice } from "./features/addition/AdditionPractice";
+import { EnglishPractice } from "./features/english/EnglishPractice";
+import type { EnglishTopicName } from "./features/english/englishContent";
 import { FractionPractice } from "./features/fractions/FractionPractice";
 import { SubtractionPractice } from "./features/subtraction/SubtractionPractice";
 import { UcmasPractice } from "./features/ucmas/UcmasPractice";
 
-type TopicName =
+type MathTopicName =
   | "Addition"
   | "Subtraction"
   | "UCMAS Mental Maths"
   | "Fractions";
 
-const topics: Array<{
-  name: TopicName;
+type SubjectName = "Math" | "English";
+
+type SelectedTopic =
+  | { subject: "Math"; name: MathTopicName }
+  | { subject: "English"; name: EnglishTopicName };
+
+type TopicDetails<T extends string> = {
+  name: T;
   icon: string;
   description: string;
   accent: "purple" | "mint" | "sky" | "coral";
   number: string;
   buttonLabel?: string;
   statusLabel?: string;
-}> = [
+};
+
+const mathTopics: Array<TopicDetails<MathTopicName>> = [
   {
     name: "Addition",
     icon: "+",
@@ -53,6 +63,38 @@ const topics: Array<{
   },
 ];
 
+const englishTopics: Array<TopicDetails<EnglishTopicName>> = [
+  {
+    name: "Reading",
+    icon: "📖",
+    description: "Read short passages and find the main idea, details, and clues.",
+    accent: "purple",
+    number: "01",
+  },
+  {
+    name: "Grammar",
+    icon: "Aa",
+    description: "Build clear sentences with the right words, verbs, and punctuation.",
+    accent: "mint",
+    number: "02",
+  },
+  {
+    name: "Vocabulary",
+    icon: "💬",
+    description: "Grow your word power with meanings, synonyms, and context clues.",
+    accent: "sky",
+    number: "03",
+  },
+  {
+    name: "Spelling",
+    icon: "✎",
+    description: "Practice tricky Grade 4 words and choose the correct spelling.",
+    accent: "coral",
+    number: "04",
+    statusLabel: "New",
+  },
+];
+
 const practiceDays = [
   { label: "M", complete: true },
   { label: "T", complete: false },
@@ -61,7 +103,28 @@ const practiceDays = [
   { label: "F", complete: false },
 ];
 
-function LearningPathIllustration() {
+function LearningPathIllustration({ subject }: { subject: SubjectName }) {
+  if (subject === "English") {
+    return (
+      <div
+        className="relative mx-auto h-48 w-56"
+        role="img"
+        aria-label="Colorful Grade 4 English learning blocks"
+      >
+        <div className="absolute inset-x-4 bottom-1 h-6 rounded-[50%] bg-[#cfd7f6]/70 blur-sm" />
+        <div className="absolute left-3 top-10 flex h-28 w-28 -rotate-6 items-center justify-center rounded-[1.75rem] border-2 border-[#263665] bg-[#4f6df5] text-5xl font-black text-white shadow-[8px_10px_0_#dbe2ff]">
+          Aa
+        </div>
+        <div className="absolute right-2 top-4 flex h-24 w-24 rotate-6 items-center justify-center rounded-[1.5rem] border-2 border-[#624b09] bg-[#ffd84d] text-5xl shadow-[7px_8px_0_#fff1a8]">
+          <span aria-hidden="true">📖</span>
+        </div>
+        <div className="absolute bottom-3 right-7 flex h-24 w-24 -rotate-2 items-center justify-center rounded-full border-2 border-[#17624c] bg-[#36d3a0] text-2xl font-black text-[#123d31] shadow-[7px_8px_0_#c7f7e8]">
+          ABC
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className="relative mx-auto h-48 w-56"
@@ -90,36 +153,70 @@ function LearningPathIllustration() {
 }
 
 export default function App() {
-  const [selectedTopic, setSelectedTopic] = useState<TopicName | null>(null);
+  const [subject, setSubject] = useState<SubjectName>("Math");
+  const [subjectMenuOpen, setSubjectMenuOpen] = useState(false);
+  const [selectedTopic, setSelectedTopic] = useState<SelectedTopic | null>(null);
 
-  const startTopic = (topic: TopicName) => {
+  useEffect(() => {
+    document.title = `Grade 4 ${subject} Practice`;
+  }, [subject]);
+
+  const startMathTopic = (topic: MathTopicName) => {
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
-    setSelectedTopic(topic);
+    setSelectedTopic({ subject: "Math", name: topic });
   };
 
-  if (selectedTopic === "Addition") {
+  const startEnglishTopic = (topic: EnglishTopicName) => {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    setSelectedTopic({ subject: "English", name: topic });
+  };
+
+  const chooseSubject = (nextSubject: SubjectName) => {
+    setSubject(nextSubject);
+    setSelectedTopic(null);
+    setSubjectMenuOpen(false);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  };
+
+  if (selectedTopic?.subject === "Math" && selectedTopic.name === "Addition") {
     return <AdditionPractice onBackToTopics={() => setSelectedTopic(null)} />;
   }
 
-  if (selectedTopic === "Subtraction") {
+  if (selectedTopic?.subject === "Math" && selectedTopic.name === "Subtraction") {
     return <SubtractionPractice onBackToTopics={() => setSelectedTopic(null)} />;
   }
 
-  if (selectedTopic === "UCMAS Mental Maths") {
+  if (
+    selectedTopic?.subject === "Math" &&
+    selectedTopic.name === "UCMAS Mental Maths"
+  ) {
     return <UcmasPractice onBackToTopics={() => setSelectedTopic(null)} />;
   }
 
-  if (selectedTopic === "Fractions") {
+  if (selectedTopic?.subject === "Math" && selectedTopic.name === "Fractions") {
     return <FractionPractice onBackToTopics={() => setSelectedTopic(null)} />;
   }
 
+  if (selectedTopic?.subject === "English") {
+    return (
+      <EnglishPractice
+        topic={selectedTopic.name}
+        onBackToTopics={() => setSelectedTopic(null)}
+      />
+    );
+  }
+
+  const isMath = subject === "Math";
+
   return (
     <main className="min-h-screen bg-[#f7f7f8] text-[#17181a]">
-      <header className="border-b border-[#dedfe2] bg-white">
+      <header className="relative z-30 border-b border-[#dedfe2] bg-white">
         <nav className="mx-auto flex h-[74px] w-full max-w-6xl items-center justify-between px-5 sm:px-8">
           <div className="flex items-center gap-10">
-            <Brand />
+            <Brand label={isMath ? "MathPractice" : "EnglishPractice"} />
             <div className="hidden h-full items-center gap-7 md:flex">
               <a
                 href="#home"
@@ -139,9 +236,68 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-2.5">
-            <span className="hidden rounded-full border-2 border-[#e1e2e5] bg-white px-4 py-2 text-sm font-extrabold text-[#3f4146] sm:inline-flex">
-              4 topics
-            </span>
+            <div
+              className="relative"
+              onKeyDown={(event) => {
+                if (event.key === "Escape") setSubjectMenuOpen(false);
+              }}
+            >
+              <button
+                type="button"
+                aria-label="Choose subject"
+                aria-haspopup="menu"
+                aria-expanded={subjectMenuOpen}
+                onClick={() => setSubjectMenuOpen((open) => !open)}
+                className="inline-flex items-center gap-2 rounded-full border-2 border-[#4f6df5] bg-white px-4 py-2 text-sm font-extrabold text-[#303b77] transition hover:bg-[#f1f3ff] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-[#dfff38]"
+              >
+                Subjects
+                <span
+                  aria-hidden="true"
+                  className={`text-xs transition ${subjectMenuOpen ? "rotate-180" : ""}`}
+                >
+                  ▼
+                </span>
+              </button>
+
+              {subjectMenuOpen ? (
+                <div
+                  role="menu"
+                  aria-label="Subjects"
+                  className="absolute right-0 top-[calc(100%+0.7rem)] w-64 overflow-hidden rounded-2xl border-2 border-[#dfe1e7] bg-white p-2 shadow-[0_18px_45px_rgba(30,34,48,0.16)]"
+                >
+                  {(["Math", "English"] as const).map((subjectOption) => {
+                    const isActive = subjectOption === subject;
+                    return (
+                      <button
+                        key={subjectOption}
+                        type="button"
+                        role="menuitemradio"
+                        aria-checked={isActive}
+                        aria-label={`${subjectOption}, 4 practice topics`}
+                        onClick={() => chooseSubject(subjectOption)}
+                        className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-left transition ${
+                          isActive
+                            ? "bg-[#eef1ff] text-[#3047a5]"
+                            : "text-[#3f4146] hover:bg-[#f6f6f7]"
+                        }`}
+                      >
+                        <span>
+                          <span className="block text-sm font-black">
+                            {subjectOption}
+                          </span>
+                          <span className="mt-0.5 block text-xs font-semibold text-[#777980]">
+                            4 practice topics
+                          </span>
+                        </span>
+                        <span className="text-lg" aria-hidden="true">
+                          {isActive ? "✓" : subjectOption === "Math" ? "+" : "Aa"}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              ) : null}
+            </div>
             <span className="inline-flex items-center gap-2 rounded-full border-2 border-[#d7d8dc] bg-white px-4 py-2 text-sm font-black">
               Grade 4
               <span className="text-[#a9ca00]" aria-hidden="true">
@@ -152,7 +308,7 @@ export default function App() {
         </nav>
       </header>
 
-      <AnnouncementBar />
+      <AnnouncementBar subject={subject} />
 
       <section
         id="home"
@@ -239,17 +395,19 @@ export default function App() {
                   Your learning path
                 </p>
                 <h1
-                  aria-label="Grade 4 Math Practice"
+                  aria-label={`Grade 4 ${subject} Practice`}
                   className="mt-3 text-4xl font-black leading-[1.02] tracking-[-0.055em] sm:text-5xl"
                 >
                   Grade 4
-                  <span className="block">Math Practice</span>
+                  <span className="block">{subject} Practice</span>
                 </h1>
                 <p className="mt-4 max-w-md text-base font-semibold leading-7 text-[#65676d]">
-                  Choose a topic to start practicing
+                  {isMath
+                    ? "Choose a topic to start practicing"
+                    : "Read, write, and build word confidence"}
                 </p>
               </div>
-              <LearningPathIllustration />
+              <LearningPathIllustration subject={subject} />
             </div>
 
             <div className="border-t-2 border-[#d9e0fb] bg-[#eef2ff] px-7 py-6 sm:px-10">
@@ -289,22 +447,32 @@ export default function App() {
               id="topics-heading"
               className="mt-2 text-3xl font-black tracking-[-0.045em] sm:text-4xl"
             >
-              Math topics
+              {subject} topics
             </h2>
           </div>
           <p className="max-w-md text-sm font-semibold leading-6 text-[#6b6d72]">
-            Build number confidence through focused, kid-friendly practice.
+            {isMath
+              ? "Build number confidence through focused, kid-friendly practice."
+              : "Grow reading and writing confidence with focused, kid-friendly practice."}
           </p>
         </header>
 
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {topics.map((topic) => (
-            <TopicCard
-              key={topic.name}
-              {...topic}
-              onSelect={() => startTopic(topic.name)}
-            />
-          ))}
+          {isMath
+            ? mathTopics.map((topic) => (
+                <TopicCard
+                  key={topic.name}
+                  {...topic}
+                  onSelect={() => startMathTopic(topic.name)}
+                />
+              ))
+            : englishTopics.map((topic) => (
+                <TopicCard
+                  key={topic.name}
+                  {...topic}
+                  onSelect={() => startEnglishTopic(topic.name)}
+                />
+              ))}
         </div>
       </section>
     </main>

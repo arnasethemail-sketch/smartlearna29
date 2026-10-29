@@ -101,4 +101,43 @@ describe("topic selection", () => {
       screen.getByRole("heading", { name: "Math topics" }),
     ).toBeTruthy();
   });
+
+  it("switches subjects and starts an English reading round", () => {
+    render(<App />);
+
+    const subjectButton = screen.getByRole("button", {
+      name: "Choose subject",
+    });
+    expect(subjectButton.textContent).toContain("Subjects");
+
+    fireEvent.click(subjectButton);
+    expect(
+      screen
+        .getByRole("menuitemradio", { name: "Math, 4 practice topics" })
+        .getAttribute("aria-checked"),
+    ).toBe("true");
+
+    fireEvent.click(
+      screen.getByRole("menuitemradio", {
+        name: "English, 4 practice topics",
+      }),
+    );
+
+    expect(
+      screen.getByRole("heading", { name: "Grade 4 English Practice" }),
+    ).toBeTruthy();
+    expect(
+      screen.getByRole("heading", { name: "English topics" }),
+    ).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Start Reading" })).toBeTruthy();
+
+    fireEvent.click(screen.getByRole("button", { name: "Start Reading" }));
+
+    expect(
+      screen.getByRole("heading", { name: "Reading Practice" }),
+    ).toBeTruthy();
+    expect(
+      screen.getByText("Why does Maya visit the garden every morning?"),
+    ).toBeTruthy();
+  });
 });
