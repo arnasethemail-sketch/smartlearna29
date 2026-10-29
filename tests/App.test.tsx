@@ -139,5 +139,40 @@ describe("topic selection", () => {
     expect(
       screen.getByText("Why does Maya visit the garden every morning?"),
     ).toBeTruthy();
+    expect(screen.getByText("1 / 20")).toBeTruthy();
+  });
+
+  it("offers Science and Social Studies with 20-question practice", () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Choose subject" }));
+    expect(
+      screen.getByRole("menuitemradio", {
+        name: "Science, 4 practice topics",
+      }),
+    ).toBeTruthy();
+    expect(
+      screen.getByRole("menuitemradio", {
+        name: "Social Studies, 4 practice topics",
+      }),
+    ).toBeTruthy();
+
+    fireEvent.click(
+      screen.getByRole("menuitemradio", {
+        name: "Science, 4 practice topics",
+      }),
+    );
+    expect(
+      screen.getByRole("heading", { name: "Grade 4 Science Practice" }),
+    ).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Science topics" })).toBeTruthy();
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "Start Plants & Animals" }),
+    );
+    expect(
+      screen.getByRole("heading", { name: "Plants & Animals Practice" }),
+    ).toBeTruthy();
+    expect(screen.getByText("1 / 20")).toBeTruthy();
   });
 });

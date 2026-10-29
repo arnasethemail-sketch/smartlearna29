@@ -1,4 +1,4 @@
-export const TOTAL_UCMAS_QUESTIONS = 10;
+export const TOTAL_UCMAS_QUESTIONS = 20;
 export const UCMAS_VALUES_PER_QUESTION = 10;
 export const UCMAS_ANSWER_SECONDS = 15;
 export const UCMAS_MIN_SPEED_MS = 100;

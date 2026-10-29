@@ -5,6 +5,13 @@ import { AdditionPractice } from "./features/addition/AdditionPractice";
 import { EnglishPractice } from "./features/english/EnglishPractice";
 import type { EnglishTopicName } from "./features/english/englishContent";
 import { FractionPractice } from "./features/fractions/FractionPractice";
+import { KnowledgePractice } from "./features/knowledge/KnowledgePractice";
+import type {
+  KnowledgeSubjectName,
+  KnowledgeTopicName,
+  ScienceTopicName,
+  SocialStudiesTopicName,
+} from "./features/knowledge/knowledgeContent";
 import { SubtractionPractice } from "./features/subtraction/SubtractionPractice";
 import { UcmasPractice } from "./features/ucmas/UcmasPractice";
 
@@ -14,11 +21,12 @@ type MathTopicName =
   | "UCMAS Mental Maths"
   | "Fractions";
 
-type SubjectName = "Math" | "English";
+type SubjectName = "Math" | "English" | KnowledgeSubjectName;
 
 type SelectedTopic =
   | { subject: "Math"; name: MathTopicName }
-  | { subject: "English"; name: EnglishTopicName };
+  | { subject: "English"; name: EnglishTopicName }
+  | { subject: KnowledgeSubjectName; name: KnowledgeTopicName };
 
 type TopicDetails<T extends string> = {
   name: T;
@@ -95,6 +103,70 @@ const englishTopics: Array<TopicDetails<EnglishTopicName>> = [
   },
 ];
 
+const scienceTopics: Array<TopicDetails<ScienceTopicName>> = [
+  {
+    name: "Plants & Animals",
+    icon: "🌱",
+    description: "Explore life cycles, habitats, food chains, and adaptations.",
+    accent: "purple",
+    number: "01",
+  },
+  {
+    name: "Earth & Space",
+    icon: "🌎",
+    description: "Learn about weather, the water cycle, planets, and Earth's motion.",
+    accent: "mint",
+    number: "02",
+  },
+  {
+    name: "Matter & Energy",
+    icon: "⚛",
+    description: "Investigate matter, forces, light, sound, and energy changes.",
+    accent: "sky",
+    number: "03",
+  },
+  {
+    name: "Science Skills",
+    icon: "🔬",
+    description: "Practice observations, fair tests, measurements, and conclusions.",
+    accent: "coral",
+    number: "04",
+    statusLabel: "New",
+  },
+];
+
+const socialStudiesTopics: Array<TopicDetails<SocialStudiesTopicName>> = [
+  {
+    name: "Geography",
+    icon: "🗺",
+    description: "Read maps and learn about landforms, regions, and populations.",
+    accent: "purple",
+    number: "01",
+  },
+  {
+    name: "U.S. History",
+    icon: "📜",
+    description: "Explore important people, events, documents, and movements.",
+    accent: "mint",
+    number: "02",
+  },
+  {
+    name: "Government",
+    icon: "🏛",
+    description: "Understand branches, rights, responsibilities, and elections.",
+    accent: "sky",
+    number: "03",
+  },
+  {
+    name: "Economics",
+    icon: "$",
+    description: "Learn about needs, goods, services, saving, and smart choices.",
+    accent: "coral",
+    number: "04",
+    statusLabel: "New",
+  },
+];
+
 const practiceDays = [
   { label: "M", complete: true },
   { label: "T", complete: false },
@@ -120,6 +192,29 @@ function LearningPathIllustration({ subject }: { subject: SubjectName }) {
         </div>
         <div className="absolute bottom-3 right-7 flex h-24 w-24 -rotate-2 items-center justify-center rounded-full border-2 border-[#17624c] bg-[#36d3a0] text-2xl font-black text-[#123d31] shadow-[7px_8px_0_#c7f7e8]">
           ABC
+        </div>
+      </div>
+    );
+  }
+
+  if (subject === "Science" || subject === "Social Studies") {
+    const isScience = subject === "Science";
+
+    return (
+      <div
+        className="relative mx-auto h-48 w-56"
+        role="img"
+        aria-label={`Colorful Grade 4 ${subject} learning blocks`}
+      >
+        <div className="absolute inset-x-4 bottom-1 h-6 rounded-[50%] bg-[#cfd7f6]/70 blur-sm" />
+        <div className="absolute left-3 top-10 flex h-28 w-28 -rotate-6 items-center justify-center rounded-[1.75rem] border-2 border-[#263665] bg-[#4f6df5] text-5xl text-white shadow-[8px_10px_0_#dbe2ff]">
+          <span aria-hidden="true">{isScience ? "🔬" : "🗺"}</span>
+        </div>
+        <div className="absolute right-2 top-4 flex h-24 w-24 rotate-6 items-center justify-center rounded-[1.5rem] border-2 border-[#624b09] bg-[#ffd84d] text-5xl shadow-[7px_8px_0_#fff1a8]">
+          <span aria-hidden="true">{isScience ? "🌎" : "🏛"}</span>
+        </div>
+        <div className="absolute bottom-3 right-7 flex h-24 w-24 -rotate-2 items-center justify-center rounded-full border-2 border-[#17624c] bg-[#36d3a0] text-3xl font-black text-[#123d31] shadow-[7px_8px_0_#c7f7e8]">
+          {isScience ? "⚛" : "$"}
         </div>
       </div>
     );
@@ -173,6 +268,15 @@ export default function App() {
     setSelectedTopic({ subject: "English", name: topic });
   };
 
+  const startKnowledgeTopic = (
+    nextSubject: KnowledgeSubjectName,
+    topic: KnowledgeTopicName,
+  ) => {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    setSelectedTopic({ subject: nextSubject, name: topic });
+  };
+
   const chooseSubject = (nextSubject: SubjectName) => {
     setSubject(nextSubject);
     setSelectedTopic(null);
@@ -209,14 +313,37 @@ export default function App() {
     );
   }
 
-  const isMath = subject === "Math";
+  if (
+    selectedTopic?.subject === "Science" ||
+    selectedTopic?.subject === "Social Studies"
+  ) {
+    return (
+      <KnowledgePractice
+        topic={selectedTopic.name}
+        onBackToTopics={() => setSelectedTopic(null)}
+      />
+    );
+  }
+
+  const subjectSubtitle: Record<SubjectName, string> = {
+    Math: "Choose a topic to start practicing",
+    English: "Read, write, and build word confidence",
+    Science: "Investigate living things, Earth, matter, and scientific thinking",
+    "Social Studies": "Explore places, history, government, and economics",
+  };
+  const subjectDescription: Record<SubjectName, string> = {
+    Math: "Build number confidence through focused, kid-friendly practice.",
+    English: "Grow reading and writing confidence with focused, kid-friendly practice.",
+    Science: "Build curiosity through Grade 4 science questions and explanations.",
+    "Social Studies": "Connect geography, history, civics, and economics to everyday life.",
+  };
 
   return (
     <main className="min-h-screen bg-[#f7f7f8] text-[#17181a]">
       <header className="relative z-30 border-b border-[#dedfe2] bg-white">
         <nav className="mx-auto flex h-[74px] w-full max-w-6xl items-center justify-between px-5 sm:px-8">
           <div className="flex items-center gap-10">
-            <Brand label={isMath ? "MathPractice" : "EnglishPractice"} />
+            <Brand label={`${subject.replaceAll(" ", "")}Practice`} />
             <div className="hidden h-full items-center gap-7 md:flex">
               <a
                 href="#home"
@@ -265,7 +392,7 @@ export default function App() {
                   aria-label="Subjects"
                   className="absolute right-0 top-[calc(100%+0.7rem)] w-64 overflow-hidden rounded-2xl border-2 border-[#dfe1e7] bg-white p-2 shadow-[0_18px_45px_rgba(30,34,48,0.16)]"
                 >
-                  {(["Math", "English"] as const).map((subjectOption) => {
+                  {(["Math", "English", "Science", "Social Studies"] as const).map((subjectOption) => {
                     const isActive = subjectOption === subject;
                     return (
                       <button
@@ -290,7 +417,15 @@ export default function App() {
                           </span>
                         </span>
                         <span className="text-lg" aria-hidden="true">
-                          {isActive ? "✓" : subjectOption === "Math" ? "+" : "Aa"}
+                          {isActive
+                            ? "✓"
+                            : subjectOption === "Math"
+                              ? "+"
+                              : subjectOption === "English"
+                                ? "Aa"
+                                : subjectOption === "Science"
+                                  ? "⚛"
+                                  : "⌖"}
                         </span>
                       </button>
                     );
@@ -402,9 +537,7 @@ export default function App() {
                   <span className="block">{subject} Practice</span>
                 </h1>
                 <p className="mt-4 max-w-md text-base font-semibold leading-7 text-[#65676d]">
-                  {isMath
-                    ? "Choose a topic to start practicing"
-                    : "Read, write, and build word confidence"}
+                  {subjectSubtitle[subject]}
                 </p>
               </div>
               <LearningPathIllustration subject={subject} />
@@ -451,14 +584,12 @@ export default function App() {
             </h2>
           </div>
           <p className="max-w-md text-sm font-semibold leading-6 text-[#6b6d72]">
-            {isMath
-              ? "Build number confidence through focused, kid-friendly practice."
-              : "Grow reading and writing confidence with focused, kid-friendly practice."}
+            {subjectDescription[subject]}
           </p>
         </header>
 
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-          {isMath
+          {subject === "Math"
             ? mathTopics.map((topic) => (
                 <TopicCard
                   key={topic.name}
@@ -466,13 +597,31 @@ export default function App() {
                   onSelect={() => startMathTopic(topic.name)}
                 />
               ))
-            : englishTopics.map((topic) => (
-                <TopicCard
-                  key={topic.name}
-                  {...topic}
-                  onSelect={() => startEnglishTopic(topic.name)}
-                />
-              ))}
+            : subject === "English"
+              ? englishTopics.map((topic) => (
+                  <TopicCard
+                    key={topic.name}
+                    {...topic}
+                    onSelect={() => startEnglishTopic(topic.name)}
+                  />
+                ))
+              : subject === "Science"
+                ? scienceTopics.map((topic) => (
+                    <TopicCard
+                      key={topic.name}
+                      {...topic}
+                      onSelect={() => startKnowledgeTopic("Science", topic.name)}
+                    />
+                  ))
+                : socialStudiesTopics.map((topic) => (
+                    <TopicCard
+                      key={topic.name}
+                      {...topic}
+                      onSelect={() =>
+                        startKnowledgeTopic("Social Studies", topic.name)
+                      }
+                    />
+                  ))}
         </div>
       </section>
     </main>

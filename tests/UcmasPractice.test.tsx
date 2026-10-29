@@ -76,7 +76,7 @@ describe("UCMAS Mental Maths practice", () => {
     expect(
       screen.getByRole("button", { name: "Cancel and Back to Topics" }),
     ).toBeTruthy();
-    expect(screen.getByText("Question 1 of 10")).toBeTruthy();
+    expect(screen.getByText("Question 1 of 20")).toBeTruthy();
     expect(screen.queryByRole("textbox")).toBeNull();
     expect(document.body.textContent).not.toContain("minus one");
     expect(spokenUtterances[0].text).toBe("one");
@@ -99,7 +99,7 @@ describe("UCMAS Mental Maths practice", () => {
     expect(screen.queryByRole("textbox")).toBeNull();
 
     act(() => vi.advanceTimersByTime(2000));
-    expect(screen.getByText("Question 2 of 10")).toBeTruthy();
+    expect(screen.getByText("Question 2 of 20")).toBeTruthy();
     expect(screen.getByRole("heading", { name: "Listen carefully" })).toBeTruthy();
   });
 
@@ -145,12 +145,12 @@ describe("UCMAS Mental Maths practice", () => {
     expect(spokenUtterances).toHaveLength(2);
   });
 
-  it("finishes after exactly 10 submitted questions", () => {
+  it("finishes after exactly 20 submitted questions", () => {
     render(<UcmasPractice onBackToTopics={vi.fn()} />);
     startRound();
 
-    for (let questionNumber = 1; questionNumber <= 10; questionNumber += 1) {
-      expect(screen.getByText(`Question ${questionNumber} of 10`)).toBeTruthy();
+    for (let questionNumber = 1; questionNumber <= 20; questionNumber += 1) {
+      expect(screen.getByText(`Question ${questionNumber} of 20`)).toBeTruthy();
       finishCurrentSpokenSequence();
 
       fireEvent.change(screen.getByLabelText("Your final answer"), {
@@ -162,7 +162,7 @@ describe("UCMAS Mental Maths practice", () => {
       ).toBeTruthy();
       fireEvent.click(
         screen.getByRole("button", {
-          name: questionNumber === 10 ? "See Results" : "Next Question",
+          name: questionNumber === 20 ? "See Results" : "Next Question",
         }),
       );
     }
@@ -170,7 +170,7 @@ describe("UCMAS Mental Maths practice", () => {
     expect(
       screen.getByRole("heading", { name: "Mental Maths finished!" }),
     ).toBeTruthy();
-    expect(screen.getByText("10 out of 10")).toBeTruthy();
+    expect(screen.getByText("20 out of 20")).toBeTruthy();
     expect(screen.getByText("100%")).toBeTruthy();
     expect(document.body.textContent).not.toContain("minus one");
   });

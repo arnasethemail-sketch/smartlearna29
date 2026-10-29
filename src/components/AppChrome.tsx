@@ -28,7 +28,7 @@ export function Brand({ tone = "dark", label = "MathPractice" }: BrandProps) {
 export function AnnouncementBar({
   subject = "Math",
 }: {
-  subject?: "Math" | "English";
+  subject?: string;
 }) {
   return (
     <div className="border-b border-[#e4dfee] bg-[linear-gradient(90deg,#e9edff_0%,#f8eaf5_52%,#fff0d9_100%)] px-4 py-3 text-center text-sm font-extrabold text-[#30205f]">

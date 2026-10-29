@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Brand } from "../../components/AppChrome";
 import {
   englishQuestionBanks,
+  type EnglishQuestion,
   type EnglishTopicName,
 } from "./englishContent";
 
@@ -10,11 +11,33 @@ type EnglishPracticeProps = {
   onBackToTopics: () => void;
 };
 
+type MultipleChoicePracticeProps = {
+  subject: string;
+  topic: string;
+  questions: EnglishQuestion[];
+  onBackToTopics: () => void;
+};
+
 export function EnglishPractice({
   topic,
   onBackToTopics,
 }: EnglishPracticeProps) {
-  const questions = englishQuestionBanks[topic];
+  return (
+    <MultipleChoicePractice
+      subject="English"
+      topic={topic}
+      questions={englishQuestionBanks[topic]}
+      onBackToTopics={onBackToTopics}
+    />
+  );
+}
+
+export function MultipleChoicePractice({
+  subject,
+  topic,
+  questions,
+  onBackToTopics,
+}: MultipleChoicePracticeProps) {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
   const [score, setScore] = useState(0);
@@ -50,7 +73,7 @@ export function EnglishPractice({
       <main className="min-h-screen bg-[#f7f7f8] text-[#17181a]">
         <header className="border-b border-[#dedfe2] bg-white">
           <div className="mx-auto flex h-[74px] w-full max-w-5xl items-center justify-between px-5 sm:px-8">
-            <Brand label="EnglishPractice" />
+            <Brand label={`${subject.replaceAll(" ", "")}Practice`} />
             <button
               type="button"
               onClick={onBackToTopics}
@@ -90,7 +113,7 @@ export function EnglishPractice({
                 onClick={onBackToTopics}
                 className="rounded-xl border-2 border-[#d7d8dc] bg-white px-6 py-3 font-black"
               >
-                Back to English topics
+                Back to {subject} topics
               </button>
             </div>
           </article>
@@ -103,7 +126,7 @@ export function EnglishPractice({
     <main className="min-h-screen bg-[#f7f7f8] text-[#17181a]">
       <header className="border-b border-[#dedfe2] bg-white">
         <div className="mx-auto flex h-[74px] w-full max-w-5xl items-center justify-between px-5 sm:px-8">
-          <Brand label="EnglishPractice" />
+          <Brand label={`${subject.replaceAll(" ", "")}Practice`} />
           <button
             type="button"
             onClick={onBackToTopics}
@@ -118,7 +141,7 @@ export function EnglishPractice({
         <div className="flex items-end justify-between gap-5">
           <div>
             <p className="text-xs font-black uppercase tracking-[0.18em] text-[#4f6df5]">
-              Grade 4 English
+              Grade 4 {subject}
             </p>
             <h1 className="mt-2 text-3xl font-black tracking-[-0.045em]">
               {topic} Practice
