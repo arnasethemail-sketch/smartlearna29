@@ -194,6 +194,13 @@ export function MultipleChoicePractice({
             {question.prompt}
           </h2>
 
+          {subject === "English" && topic === "Spelling" ? (
+            <p className="mt-3 text-sm font-semibold leading-6 text-[#66686e]">
+              Pick the correctly spelled word. The other three choices are
+              intentional practice misspellings.
+            </p>
+          ) : null}
+
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             {question.choices.map((choice) => {
               const isSelected = selectedChoice === choice;

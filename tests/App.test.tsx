@@ -142,6 +142,24 @@ describe("topic selection", () => {
     expect(screen.getByText("1 / 20")).toBeTruthy();
   });
 
+  it("explains that spelling distractors are intentional misspellings", () => {
+    render(<App />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Choose subject" }));
+    fireEvent.click(
+      screen.getByRole("menuitemradio", {
+        name: "English, 5 practice topics",
+      }),
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Start Spelling" }));
+
+    expect(
+      screen.getByText(
+        "Pick the correctly spelled word. The other three choices are intentional practice misspellings.",
+      ),
+    ).toBeTruthy();
+  });
+
   it("offers Science and Social Studies with 20-question practice", () => {
     render(<App />);
 
