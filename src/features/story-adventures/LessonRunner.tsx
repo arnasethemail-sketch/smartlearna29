@@ -219,7 +219,7 @@ function StoryReference({
         <figure className="overflow-hidden rounded-2xl border-2 border-[#ced8ff] bg-white">
           <img
             src={resolveAssetPath(lesson.illustration.src)}
-            alt={lesson.illustration.alt}
+            alt={regionalizeText(lesson.illustration.alt, region)}
             className="aspect-[5/3] w-full object-cover"
           />
           <figcaption className="border-t border-[#d8def5] px-4 py-3 text-xs font-bold leading-5 text-[#5f6474]">
@@ -301,7 +301,9 @@ function ReadingStep({
                 </h3>
               </div>
               <span className="rounded-full bg-[#dfff38] px-3 py-1 text-xs font-black text-[#263000]">
-                {lesson.informational ? "Informational" : lesson.genre}
+                {lesson.informational
+                  ? "Informational"
+                  : regionalizeText(lesson.genre, region)}
               </span>
             </div>
 
@@ -309,7 +311,7 @@ function ReadingStep({
               <figure className="my-5 overflow-hidden rounded-2xl border-2 border-[#ced8ff] bg-[#eef2ff]">
                 <img
                   src={resolveAssetPath(lesson.illustration.src)}
-                  alt={lesson.illustration.alt}
+                  alt={regionalizeText(lesson.illustration.alt, region)}
                   className="aspect-[5/3] w-full object-cover"
                 />
                 <figcaption className="border-t border-[#d8def5] bg-white px-4 py-3 text-xs font-bold leading-5 text-[#5f6474]">
@@ -319,7 +321,7 @@ function ReadingStep({
             ) : (
               <div className="my-5 rounded-2xl border-l-8 border-[#36c998] bg-[#eafaf4] p-4 text-sm font-bold leading-6 text-[#1c5d49]">
                 <span className="block text-xs font-black uppercase tracking-[0.14em]">
-                  {page.callout.label}
+                  {regionalizeText(page.callout.label, region)}
                 </span>
                 <span className="mt-1 block">
                   {regionalizeText(page.callout.text, region)}
@@ -337,7 +339,7 @@ function ReadingStep({
               <div className="mt-auto pt-5">
                 <div className="rounded-2xl border-l-8 border-[#ffd84d] bg-[#fff9d9] p-4 text-sm font-bold leading-6 text-[#67520a]">
                   <span className="block text-xs font-black uppercase tracking-[0.14em]">
-                    {page.callout.label}
+                    {regionalizeText(page.callout.label, region)}
                   </span>
                   <span className="mt-1 block">
                     {regionalizeText(page.callout.text, region)}
@@ -466,7 +468,10 @@ function VocabularyBankStep({
                 <label className="text-sm font-black text-[#505461]">
                   Definition Bank
                   <select
-                    aria-label={`Definition for ${item.word}`}
+                    aria-label={`Definition for ${regionalizeText(
+                      item.word,
+                      region,
+                    )}`}
                     value={answer.definition ?? ""}
                     onChange={(event) =>
                       updateMatch(item.word, "definition", event.target.value)
@@ -484,7 +489,10 @@ function VocabularyBankStep({
                 <label className="text-sm font-black text-[#505461]">
                   Synonym Bank
                   <select
-                    aria-label={`Synonym for ${item.word}`}
+                    aria-label={`Synonym for ${regionalizeText(
+                      item.word,
+                      region,
+                    )}`}
                     value={answer.synonym ?? ""}
                     onChange={(event) =>
                       updateMatch(item.word, "synonym", event.target.value)
@@ -965,6 +973,10 @@ function ParagraphWritingStep({
   const selectedOptions = lesson.paragraphTask.sentenceOptions.filter((item) =>
     draft.selectedDetailIds.includes(item.id),
   );
+  const regionalRequiredVocabulary =
+    lesson.paragraphTask.requiredVocabulary.map((word) =>
+      regionalizeText(word, region),
+    );
   const preview = [
     draft.topicSentence,
     ...selectedOptions.map((item) => item.text),
@@ -1078,7 +1090,7 @@ function ParagraphWritingStep({
           Revision workshop
           <span className="mt-1 block text-xs font-semibold text-[#626b8b]">
             {regionalizeText(lesson.paragraphTask.revisionPrompt, region)} Use at
-            least one lesson word: {lesson.paragraphTask.requiredVocabulary.join(", ")}.
+            least one lesson word: {regionalRequiredVocabulary.join(", ")}.
           </span>
           <textarea
             rows={5}
@@ -1095,7 +1107,7 @@ function ParagraphWritingStep({
           {preview
             ? highlightVocabulary(
                 regionalizeText(preview, region),
-                lesson.paragraphTask.requiredVocabulary,
+                regionalRequiredVocabulary,
               )
             : "Your paragraph will appear here as you build it."}
         </p>
@@ -1239,7 +1251,10 @@ function TextFeaturesStep({
               </label>
               {showReferences ? (
                 <div className="mt-4 rounded-xl bg-[#eef8f4] p-3 text-sm leading-6 text-[#285446]">
-                  <p><strong>Feature:</strong> {feature.feature}</p>
+                  <p>
+                    <strong>Feature:</strong>{" "}
+                    {regionalizeText(feature.feature, region)}
+                  </p>
                   <p><strong>Location:</strong> {regionalizeText(feature.location, region)}</p>
                   <p><strong>Purpose:</strong> {regionalizeText(feature.purpose, region)}</p>
                   <p><strong>How it helps:</strong> {regionalizeText(feature.helpsBecause, region)}</p>
@@ -1316,9 +1331,12 @@ function CompleteStep({
           : "Adventure solved—strong work!"}
       </h2>
       <p className="mx-auto mt-4 max-w-2xl font-semibold leading-7 text-[#666b78]">
-        You read {regionalizeText(lesson.title, region)}, practised three words,
-        wrote thoughtful responses, revised a paragraph, and investigated text
-        features. Your real work has been saved on this device.
+        You read {regionalizeText(lesson.title, region)}, {regionalizeText(
+          "practised",
+          region,
+        )} three words, wrote thoughtful responses, revised a paragraph, and
+        investigated text features. Your real work has been saved on this
+        device.
       </p>
 
       {earnedMilestone ? (

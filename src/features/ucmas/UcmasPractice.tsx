@@ -448,7 +448,7 @@ export function UcmasPractice({ onBackToTopics }: UcmasPracticeProps) {
                   className="mt-4 flex items-start gap-2 rounded-2xl bg-[#fff7d9] px-3 py-2.5 text-xs font-bold leading-5 text-[#765b00]"
                 >
                   <span className="text-base" aria-hidden="true">{"\ud83d\udd12"}</span>
-                  Your speed stays the same for all 10 questions.
+                  Your speed stays the same for all 20 questions.
                 </p>
               </div>
 

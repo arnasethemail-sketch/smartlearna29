@@ -293,7 +293,10 @@ export function StoryAdventures({ onBackToEnglish }: StoryAdventuresProps) {
               <div className="grid lg:grid-cols-[260px_minmax(0,1fr)]">
                 <img
                   src={`${import.meta.env.BASE_URL}${mainLesson.illustration.src.replace(/^\//, "")}`}
-                  alt={mainLesson.illustration.alt}
+                  alt={regionalizeText(
+                    mainLesson.illustration.alt,
+                    state.region,
+                  )}
                   className="h-full min-h-64 w-full object-cover"
                 />
                 <div className="p-6 sm:p-8">
@@ -314,7 +317,7 @@ export function StoryAdventures({ onBackToEnglish }: StoryAdventuresProps) {
                         key={skill}
                         className="rounded-lg bg-[#f3f4f7] px-2.5 py-1 text-xs font-bold text-[#5f6470]"
                       >
-                        {skill}
+                        {regionalizeText(skill, state.region)}
                       </span>
                     ))}
                   </div>

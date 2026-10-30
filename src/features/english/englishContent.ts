@@ -244,7 +244,7 @@ export const englishQuestionBanks: Record<
     },
     {
       prompt: "Which word best completes the sentence? The rabbit made a ___ escape.",
-      choices: ["swift", "sleepy", "wooden", "silentest"],
+      choices: ["swift", "sleepy", "wooden", "noisy"],
       answer: "swift",
       explanation: "Swift means fast and correctly describes an escape.",
     },

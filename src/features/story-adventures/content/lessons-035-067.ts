@@ -393,7 +393,7 @@ export const lessons035To067: StoryLesson[] = [
     informational: false,
     band: "developing",
     objective: "Trace how characters adapt a plan when changing conditions create new needs.",
-    skillTags: ["RL.5.2", "RL.5.3", "cause and effect", "problem solving", "sequence writing"],
+    skillTags: ["RL.5.2", "RL.5.3", "cause and effect", "problem-solving", "sequence writing"],
     pages: [
       {
         pageNumber: 1,
@@ -1362,7 +1362,7 @@ export const lessons035To067: StoryLesson[] = [
     informational: false,
     band: "intermediate",
     objective: "Interpret a multi-part code by combining symbols, coordinates, and repeated patterns.",
-    skillTags: ["RL.5.1", "RL.5.5", "pattern reasoning", "sequence", "collaborative problem solving"],
+    skillTags: ["RL.5.1", "RL.5.5", "pattern reasoning", "sequence", "collaborative problem-solving"],
     pages: [
       {
         pageNumber: 1,
@@ -1525,7 +1525,7 @@ export const lessons035To067: StoryLesson[] = [
     informational: false,
     band: "intermediate",
     objective: "Analyze a sequence of safe decisions and explain how precise information supports emergency responders.",
-    skillTags: ["RL.5.1", "RL.5.3", "sequence", "problem solving", "procedural explanation"],
+    skillTags: ["RL.5.1", "RL.5.3", "sequence", "problem-solving", "procedural explanation"],
     pages: [
       {
         pageNumber: 1,
@@ -2237,7 +2237,7 @@ export const lessons035To067: StoryLesson[] = [
         "The squirrel puppet sat on a tree branch.",
       ],
       "Add a sentence showing how a plausible idea can still be wrong.",
-      "Conclude with a principle for collaborative problem solving.",
+      "Conclude with a principle for collaborative problem-solving.",
       "Use an example transition, improve one general noun, and include corroborate or deduction.",
       ["corroborate", "deduction"],
       "Revision mattered more than speed in the Detective Games because the first plausible idea was not always correct. For example, paw prints suggested the mascot, but the timing and checklist contradicted that accusation. In the final case, teams had to corroborate one another's clues before explaining the missing prop. Judges rewarded this careful revision rather than quick answers. A strong deduction grows when collaborators share evidence, compare alternatives, and correct an idea openly.",

@@ -9,6 +9,19 @@ describe("subject question banks", () => {
     });
   });
 
+  it("keeps the audited vocabulary choices free of the invalid silentest form", () => {
+    const escapeQuestion = englishQuestionBanks.Vocabulary.find((question) =>
+      question.prompt.includes("The rabbit made a ___ escape"),
+    );
+
+    expect(escapeQuestion?.choices).toEqual([
+      "swift",
+      "sleepy",
+      "wooden",
+      "noisy",
+    ]);
+  });
+
   it("keeps every spelling answer and spelled-out explanation consistent", () => {
     englishQuestionBanks.Spelling.forEach((question) => {
       expect(question.choices).toHaveLength(4);

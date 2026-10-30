@@ -1306,7 +1306,7 @@ export const lessons001To034: StoryLesson[] = [
     genre: "School debate comedy",
     band: "foundation",
     objective: "Identify reasons and evidence in competing proposals and summarize a fair decision process.",
-    skillTags: ["opinion and reasons", "compare ideas", "main idea", "decision making"],
+    skillTags: ["opinion and reasons", "compare ideas", "main idea", "decision-making"],
     pageOneSubheading: "Crunchy Against Chewy",
     pageOne: [
       "Room Twelve had to choose one snack for its reading celebration. Team Crunchy supported whole-grain crackers, while Team Chewy promoted dried fruit strips. Posters appeared overnight. CRACKERS HELP PAGES TURN FASTER, claimed one. FRUIT STRIPS MAKE STORIES SWEETER, answered another. Neither slogan provided useful evidence.",
@@ -1341,7 +1341,7 @@ export const lessons001To034: StoryLesson[] = [
       question("Think and Search", "Why could taste votes alone not produce the fairest decision?", "Taste was tied and was only one criterion; safety, cost, mess, accessibility, storage, and waste also mattered.", "The criteria list and page 2 results must be combined."),
       question("On My Own", "Which criterion would you consider most important when choosing a class snack, and why?", "Safety is most important because a snack should not put any classmate at risk, even if another option is more popular.", "Any listed criterion is acceptable with a thoughtful reason.", true),
       question("Think and Search", "How did the compromise address concerns about cost, waste, choice, and crumbs?", "Smaller portions kept the cost manageable, bulk containers reduced wrappers, two foods offered choice, and table eating controlled crumbs.", "Details from the compromise and review paragraphs support the answer."),
-      question("Author and You", "Why does the author call the decision process the class’s fairest choice?", "The process let students test claims, admit limitations, and revise ideas, producing a solution that respected more needs than a simple winner would.", "The ending contrasts team victory with evidence-based decision making."),
+      question("Author and You", "Why does the author call the decision process the class’s fairest choice?", "The process let students test claims, admit limitations, and revise ideas, producing a solution that respected more needs than a simple winner would.", "The ending contrasts team victory with evidence-based decision-making."),
     ]),
     paragraphTask: makeParagraphTask(20, {
       prompt: "Explain why the class’s compromise was stronger than either original proposal.",

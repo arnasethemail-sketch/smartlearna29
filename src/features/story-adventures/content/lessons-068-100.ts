@@ -918,7 +918,7 @@ const drafts: LessonDraft[] = [
     title: "The Community Garden Decision",
     genre: "Community problem-solving story",
     objective: "Synthesize environmental and community evidence to recommend a fair use of limited space.",
-    skillTags: ["decision making", "synthesis", "stakeholder perspectives", "evidence-based writing"],
+    skillTags: ["decision-making", "synthesis", "stakeholder perspectives", "evidence-based writing"],
     subheadings: ["Four Plans for One Vacant Lot", "A Design That Shares Space"],
     page1: [
       "Maple Creek’s neighbourhood council invited Grade 5 students to help plan a vacant lot. The space could become a community garden, but the phrase meant different things to different people. Gardeners requested vegetable plots. Families wanted an open gathering lawn. A food pantry hoped for reliable produce, while nearby residents worried about noise, water use, and traffic.",
@@ -1686,7 +1686,7 @@ const drafts: LessonDraft[] = [
       accent: "#2f9a79",
     },
     vocabulary: [
-      ["sediment", "small particles of soil, sand, or other material carried by water", "silt", "particles", "Some settles when water slows."],
+      ["sediment", "small particles of soil, sand, or other material carried by water", "silt", "particles", "Some sediment settles when water slows."],
       ["restoration", "work that helps a damaged ecosystem recover its structure or function", "renewal", "rehabilitation", "It may reconnect water flow or native plants."],
       ["saturated", "filled or soaked with as much water as it can hold", "waterlogged", "soaked", "Wetland soils may remain this way."],
     ],
@@ -1756,7 +1756,7 @@ const drafts: LessonDraft[] = [
       ["precision", "the exactness or level of detail in a measurement’s display", "exactness", "specificity", "A minute value can look exact even if the clock is wrong."],
     ],
     questions: [
-      ["Right There", "How far slow was the hallway camera?", "The hallway camera was sixteen minutes slow.", "The final paragraph on page 1 reports the test result."],
+      ["Right There", "How many minutes slow was the hallway camera?", "The hallway camera was sixteen minutes slow.", "The final paragraph on page 1 reports the test result."],
       ["Think and Search", "Why did the parking receipt not prove when the guest left the building?", "Its time marked payment expiry, not departure, and the guest still had a courtesy period before returning to the car.", "Page 2 explains the receipt label and timing."],
       ["On My Own", "What two details would you record when timing a class experiment, and why?", "I would record a synchronized start time and the measured duration so the event can be placed on a timeline and its length checked.", "Any suitable timing details with logical reasons are acceptable.", true],
       ["Think and Search", "How did correcting the computer and camera clocks create a realistic sequence?", "The actual recording ended at 2:15, and the guest left the hall around 2:21 after packing and talking, rather than appearing to leave at 2:05.", "Both clock offsets and intervening actions appear on page 2."],
@@ -1975,7 +1975,7 @@ const drafts: LessonDraft[] = [
     title: "A Decision with Two Good Answers",
     genre: "Ethical community story",
     objective: "Compare two defensible choices using shared values, evidence, and acknowledged trade-offs.",
-    skillTags: ["decision making", "multiple perspectives", "trade-offs", "reasoned judgement"],
+    skillTags: ["decision-making", "multiple perspectives", "trade-offs", "reasoned judgement"],
     subheadings: ["Save the Bell or Build the Ramp?", "A Choice Without a Villain"],
     page1: [
       "A storm damaged Maple Creek’s historic town-hall bell tower just as the building needed a new accessible entrance. The available grant could fully restore the tower or fully build the ramp, but not both that year. Preservation supporters valued the bell as a community symbol. Accessibility advocates argued that everyone should be able to enter the hall independently now.",

@@ -334,6 +334,41 @@ describe("Story Adventures regional English", () => {
     );
   });
 
+  it("converts every additional Canadian spelling family used by the lessons", () => {
+    expect(
+      regionalizeText(
+        "The colourful neighbourhood centrepiece was coloured while neighbours favoured favourable signs and practised colouring.",
+        "US",
+      ),
+    ).toBe(
+      "The colorful neighborhood centerpiece was colored while neighbors favored favorable signs and practiced coloring.",
+    );
+    expect(
+      regionalizeText(
+        "Honoured travellers measured aluminium in centimetres and kilometres while signalling across the harbour.",
+        "US",
+      ),
+    ).toBe(
+      "Honored travelers measured aluminum in centimeters and kilometers while signaling across the harbor.",
+    );
+    expect(
+      regionalizeText(
+        "Labour was cancelled while workers were shovelling mould, relabelled the unlabelled yoghurt, initialled a judgement, and pencilled a note.",
+        "US",
+      ),
+    ).toBe(
+      "Labor was canceled while workers were shoveling mold, relabeled the unlabeled yogurt, initialed a judgment, and penciled a note.",
+    );
+    expect(
+      regionalizeText(
+        "We practise after practice. The meter measured one metre of vapour with no odour.",
+        "US",
+      ),
+    ).toBe(
+      "We practice after practice. The meter measured one meter of vapor with no odor.",
+    );
+  });
+
   it("renders the required Canadian lesson title and its US title variant", () => {
     const lesson = storyLessons[13];
     const progress = makeFilledProgress(lesson, "reading");
@@ -358,5 +393,54 @@ describe("Story Adventures regional English", () => {
       screen.getAllByRole("heading", { name: "Why Leaves Change Color" })
         .length,
     ).toBeGreaterThan(0);
+    expect(
+      screen.getByRole("img", {
+        name: "A labeled branch shows green, yellow, orange, and red leaves with a close-up of the separation layer",
+      }),
+    ).toBeTruthy();
+  });
+
+  it("regionalizes callout labels and completion copy in US mode", () => {
+    const lesson = storyLessons.find(({ sequence }) => sequence === 15)!;
+    const commonProps = {
+      lesson,
+      lessons: storyLessons,
+      textScale: "standard" as const,
+      updateLesson: vi.fn(),
+      onExit: vi.fn(),
+      onOpenLesson: vi.fn(),
+    };
+    const view = render(
+      <LessonRunner
+        {...commonProps}
+        progress={makeFilledProgress(lesson, "reading")}
+        region="US"
+      />,
+    );
+
+    expect(screen.getByText("Color Clue")).toBeTruthy();
+
+    view.rerender(
+      <LessonRunner
+        {...commonProps}
+        progress={makeFilledProgress(lesson, "complete")}
+        region="US"
+      />,
+    );
+    expect(document.body.textContent).toContain("practiced three words");
+  });
+});
+
+describe("Story Adventures copy quality", () => {
+  it("keeps the audited wetland hint and camera question grammatical", () => {
+    const wetlandsLesson = storyLessons.find(({ sequence }) => sequence === 91);
+    const timelineLesson = storyLessons.find(({ sequence }) => sequence === 92);
+
+    expect(
+      wetlandsLesson?.vocabulary.find(({ word }) => word === "sediment")?.hint,
+    ).toBe("Some sediment settles when water slows.");
+    expect(timelineLesson?.comprehension[0].prompt).toBe(
+      "How many minutes slow was the hallway camera?",
+    );
   });
 });

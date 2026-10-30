@@ -69,6 +69,9 @@ describe("UCMAS Mental Maths practice", () => {
 
     expect(screen.getByText("One Digit — 10 Rows")).toBeTruthy();
     expect(screen.getByText("Medium · 1.5 seconds")).toBeTruthy();
+    expect(
+      screen.getByText("Your speed stays the same for all 20 questions."),
+    ).toBeTruthy();
 
     startRound();
 
