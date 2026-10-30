@@ -1,4 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  LEARNING_PROGRESS_APPLIED_EVENT,
+  LEGACY_PROGRESS_CHANGED_EVENT,
+} from "../progress/events";
 import type {
   EnglishRegion,
   LessonProgress,
@@ -85,6 +89,7 @@ export function loadStoryState(): StoryAdventureState {
 export function saveStoryState(state: StoryAdventureState) {
   if (typeof window === "undefined") return;
   window.localStorage.setItem(STORY_PROGRESS_STORAGE_KEY, JSON.stringify(state));
+  window.dispatchEvent(new Event(LEGACY_PROGRESS_CHANGED_EVENT));
 }
 
 export function useStoryProgress() {
@@ -93,6 +98,19 @@ export function useStoryProgress() {
   useEffect(() => {
     saveStoryState(state);
   }, [state]);
+
+  useEffect(() => {
+    const refreshFromAccount = () => setState(loadStoryState());
+    window.addEventListener(
+      LEARNING_PROGRESS_APPLIED_EVENT,
+      refreshFromAccount,
+    );
+    return () =>
+      window.removeEventListener(
+        LEARNING_PROGRESS_APPLIED_EVENT,
+        refreshFromAccount,
+      );
+  }, []);
 
   const updateLesson = useCallback(
     (

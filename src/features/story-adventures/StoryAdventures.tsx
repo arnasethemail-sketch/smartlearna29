@@ -258,9 +258,9 @@ export function StoryAdventures({ onBackToEnglish }: StoryAdventuresProps) {
           <div className="rounded-2xl border-2 border-[#d8e5fb] bg-[#eef6ff] p-5 text-sm font-semibold leading-6 text-[#40516e]">
             <p className="font-black">Saved on this device</p>
             <p className="mt-1">
-              Answers and progress save automatically in this browser. No child
-              profile or personal information is collected, and progress does not
-              sync across devices.
+              Answers save automatically on this device. Sign in with a parent or
+              guardian account to sync progress across devices; no child name, age,
+              school, or date of birth is requested.
             </p>
           </div>
         </aside>

@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { AnnouncementBar, Brand } from "../../components/AppChrome";
+import { createPracticeAttemptId } from "../practiceAttemptId";
+import { useLearningProgress } from "../progress";
+import { LEARNING_PROGRESS_APPLIED_EVENT } from "../progress/events";
 import {
   FractionQuestionCard,
   type FractionFeedback,
@@ -25,6 +28,9 @@ export function FractionPractice({
   onBackToTopics,
 }: FractionPracticeProps) {
   const roundStartedAtRef = useRef(Date.now());
+  const attemptIdRef = useRef(createPracticeAttemptId("fractions"));
+  const { updatePracticeProgress, refreshLegacyProgress } =
+    useLearningProgress();
   const [questionNumber, setQuestionNumber] = useState(1);
   const [question, setQuestion] = useState(() =>
     generateFractionQuestion(1),
@@ -39,6 +45,16 @@ export function FractionPractice({
     loadFractionBestTime,
   );
   const [isNewBestTime, setIsNewBestTime] = useState(false);
+
+  useEffect(() => {
+    const refreshBestTime = () => setBestTimeSeconds(loadFractionBestTime());
+    window.addEventListener(LEARNING_PROGRESS_APPLIED_EVENT, refreshBestTime);
+    return () =>
+      window.removeEventListener(
+        LEARNING_PROGRESS_APPLIED_EVENT,
+        refreshBestTime,
+      );
+  }, []);
 
   useEffect(() => {
     if (isComplete) {
@@ -77,18 +93,60 @@ export function FractionPractice({
     }
 
     if (isFractionSelectionCorrect(selectedParts.length, question)) {
-      setScore((currentScore) => currentScore + 1);
+      const nextScore = score + 1;
+      setScore(nextScore);
+      updatePracticeProgress({
+        attemptId: attemptIdRef.current,
+        subject: "Math",
+        topic: "Fractions",
+        answered: questionNumber,
+        total: TOTAL_FRACTION_QUESTIONS,
+        score: nextScore,
+        status: "in-progress",
+        durationSeconds: Math.max(
+          0,
+          Math.floor((Date.now() - roundStartedAtRef.current) / 1000),
+        ),
+      });
       setFeedback("correct");
       return;
     }
 
     if (incorrectAttempts === 0) {
       setIncorrectAttempts(1);
+      updatePracticeProgress({
+        attemptId: attemptIdRef.current,
+        subject: "Math",
+        topic: "Fractions",
+        answered: questionNumber - 1,
+        total: TOTAL_FRACTION_QUESTIONS,
+        score,
+        status: "in-progress",
+        durationSeconds: Math.max(
+          0,
+          Math.floor((Date.now() - roundStartedAtRef.current) / 1000),
+        ),
+        metadata: { currentQuestionAttempts: 1 },
+      });
       setFeedback("try-again");
       return;
     }
 
     setIncorrectAttempts(2);
+    updatePracticeProgress({
+      attemptId: attemptIdRef.current,
+      subject: "Math",
+      topic: "Fractions",
+      answered: questionNumber,
+      total: TOTAL_FRACTION_QUESTIONS,
+      score,
+      status: "in-progress",
+      durationSeconds: Math.max(
+        0,
+        Math.floor((Date.now() - roundStartedAtRef.current) / 1000),
+      ),
+      metadata: { currentQuestionAttempts: 2 },
+    });
     setFeedback("incorrect");
   };
 
@@ -113,7 +171,19 @@ export function FractionPractice({
 
       if (updatedTimeRecord.isNewBestTime) {
         saveFractionBestTime(completedTime);
+        refreshLegacyProgress();
       }
+      updatePracticeProgress({
+        attemptId: attemptIdRef.current,
+        subject: "Math",
+        topic: "Fractions",
+        answered: TOTAL_FRACTION_QUESTIONS,
+        total: TOTAL_FRACTION_QUESTIONS,
+        score,
+        status: "completed",
+        durationSeconds: completedTime,
+        metadata: { bestTimeSeconds: updatedTimeRecord.bestTime },
+      });
       setIsComplete(true);
       return;
     }
@@ -128,6 +198,7 @@ export function FractionPractice({
 
   const restartRound = () => {
     roundStartedAtRef.current = Date.now();
+    attemptIdRef.current = createPracticeAttemptId("fractions");
     setQuestionNumber(1);
     setQuestion(generateFractionQuestion(1));
     setSelectedParts([]);

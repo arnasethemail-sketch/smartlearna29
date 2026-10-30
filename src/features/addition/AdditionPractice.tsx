@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { AnnouncementBar, Brand } from "../../components/AppChrome";
+import { createPracticeAttemptId } from "../practiceAttemptId";
+import { useLearningProgress } from "../progress";
+import { LEARNING_PROGRESS_APPLIED_EVENT } from "../progress/events";
 import {
   AdditionQuestionCard,
   type AdditionFeedback,
@@ -27,6 +30,9 @@ type AdditionPracticeProps = {
 
 export function AdditionPractice({ onBackToTopics }: AdditionPracticeProps) {
   const roundStartedAtRef = useRef(Date.now());
+  const attemptIdRef = useRef(createPracticeAttemptId("addition"));
+  const { updatePracticeProgress, refreshLegacyProgress } =
+    useLearningProgress();
   const [questionNumber, setQuestionNumber] = useState(1);
   const [question, setQuestion] = useState(() => generateAdditionQuestion(1));
   const [answerDigits, setAnswerDigits] = useState(createEmptyAdditionDigits);
@@ -40,6 +46,16 @@ export function AdditionPractice({ onBackToTopics }: AdditionPracticeProps) {
     loadAdditionBestTime,
   );
   const [isNewBestTime, setIsNewBestTime] = useState(false);
+
+  useEffect(() => {
+    const refreshBestTime = () => setBestTimeSeconds(loadAdditionBestTime());
+    window.addEventListener(LEARNING_PROGRESS_APPLIED_EVENT, refreshBestTime);
+    return () =>
+      window.removeEventListener(
+        LEARNING_PROGRESS_APPLIED_EVENT,
+        refreshBestTime,
+      );
+  }, []);
 
   useEffect(() => {
     if (isComplete) {
@@ -74,6 +90,7 @@ export function AdditionPractice({ onBackToTopics }: AdditionPracticeProps) {
     }
 
     const isCorrect = submittedAnswer === question.correctAnswer;
+    const nextScore = score + (isCorrect ? 1 : 0);
     const updatedStreak = isCorrect
       ? Math.min(streak + 1, LEVEL_UP_STREAK)
       : 0;
@@ -84,8 +101,23 @@ export function AdditionPractice({ onBackToTopics }: AdditionPracticeProps) {
     );
 
     if (isCorrect) {
-      setScore((currentScore) => currentScore + 1);
+      setScore(nextScore);
     }
+
+    updatePracticeProgress({
+      attemptId: attemptIdRef.current,
+      subject: "Math",
+      topic: "Addition",
+      answered: questionNumber,
+      total: TOTAL_ADDITION_QUESTIONS,
+      score: nextScore,
+      status: "in-progress",
+      durationSeconds: Math.max(
+        0,
+        Math.floor((Date.now() - roundStartedAtRef.current) / 1000),
+      ),
+      metadata: { level: question.level },
+    });
 
     setStreak(updatedStreak);
     setInputError(null);
@@ -112,7 +144,19 @@ export function AdditionPractice({ onBackToTopics }: AdditionPracticeProps) {
       setIsNewBestTime(updatedBestTime.isNewBestTime);
       if (updatedBestTime.isNewBestTime) {
         saveAdditionBestTime(updatedBestTime.bestTime);
+        refreshLegacyProgress();
       }
+      updatePracticeProgress({
+        attemptId: attemptIdRef.current,
+        subject: "Math",
+        topic: "Addition",
+        answered: TOTAL_ADDITION_QUESTIONS,
+        total: TOTAL_ADDITION_QUESTIONS,
+        score,
+        status: "completed",
+        durationSeconds: completedTime,
+        metadata: { bestTimeSeconds: updatedBestTime.bestTime },
+      });
       setIsComplete(true);
       return;
     }
@@ -129,6 +173,7 @@ export function AdditionPractice({ onBackToTopics }: AdditionPracticeProps) {
 
   const restartRound = () => {
     roundStartedAtRef.current = Date.now();
+    attemptIdRef.current = createPracticeAttemptId("addition");
     setQuestionNumber(1);
     setQuestion(generateAdditionQuestion(1));
     setAnswerDigits(createEmptyAdditionDigits());

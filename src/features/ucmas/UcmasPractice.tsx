@@ -6,6 +6,8 @@ import {
   type FormEvent,
 } from "react";
 import { AnnouncementBar, Brand } from "../../components/AppChrome";
+import { createPracticeAttemptId } from "../practiceAttemptId";
+import { useLearningProgress } from "../progress";
 import {
   formatUcmasSpeed,
   generateUcmasQuestion,
@@ -39,6 +41,9 @@ type UcmasFeedback = {
 export function UcmasPractice({ onBackToTopics }: UcmasPracticeProps) {
   const answerInputRef = useRef<HTMLInputElement | null>(null);
   const cancelSpeechRef = useRef<() => void>(() => undefined);
+  const roundStartedAtRef = useRef(Date.now());
+  const attemptIdRef = useRef(createPracticeAttemptId("ucmas-mental-maths"));
+  const { updatePracticeProgress } = useLearningProgress();
   const [phase, setPhase] = useState<UcmasPhase>("setup");
   const [selectedSpeedMs, setSelectedSpeedMs] = useState(
     UCMAS_DEFAULT_SPEED_MS,
@@ -118,6 +123,23 @@ export function UcmasPractice({ onBackToTopics }: UcmasPracticeProps) {
     }
 
     if (countdown <= 0) {
+      updatePracticeProgress({
+        attemptId: attemptIdRef.current,
+        subject: "Math",
+        topic: "UCMAS Mental Maths",
+        answered: questionNumber,
+        total: TOTAL_UCMAS_QUESTIONS,
+        score,
+        status:
+          questionNumber === TOTAL_UCMAS_QUESTIONS
+            ? "completed"
+            : "in-progress",
+        durationSeconds: Math.max(
+          0,
+          Math.floor((Date.now() - roundStartedAtRef.current) / 1000),
+        ),
+        metadata: { speedMs: roundSpeedMs, timedOut: true },
+      });
       setFeedback({ isCorrect: false, timedOut: true });
       setPhase("feedback");
       return;
@@ -128,7 +150,7 @@ export function UcmasPractice({ onBackToTopics }: UcmasPracticeProps) {
     }, 1000);
 
     return () => window.clearTimeout(countdownTimer);
-  }, [countdown, phase]);
+  }, [countdown, phase, questionNumber, roundSpeedMs, score, updatePracticeProgress]);
 
   useEffect(() => {
     if (phase !== "feedback" || !feedback?.timedOut) {
@@ -141,6 +163,8 @@ export function UcmasPractice({ onBackToTopics }: UcmasPracticeProps) {
 
   const startRound = () => {
     const lockedSpeed = selectedSpeedMs;
+    roundStartedAtRef.current = Date.now();
+    attemptIdRef.current = createPracticeAttemptId("ucmas-mental-maths");
     setRoundSpeedMs(lockedSpeed);
     setQuestionNumber(1);
     setScore(0);
@@ -161,9 +185,28 @@ export function UcmasPractice({ onBackToTopics }: UcmasPracticeProps) {
     }
 
     const isCorrect = submittedAnswer === question.correctAnswer;
+    const nextScore = score + (isCorrect ? 1 : 0);
     if (isCorrect) {
-      setScore((currentScore) => currentScore + 1);
+      setScore(nextScore);
     }
+
+    updatePracticeProgress({
+      attemptId: attemptIdRef.current,
+      subject: "Math",
+      topic: "UCMAS Mental Maths",
+      answered: questionNumber,
+      total: TOTAL_UCMAS_QUESTIONS,
+      score: nextScore,
+      status:
+        questionNumber === TOTAL_UCMAS_QUESTIONS
+          ? "completed"
+          : "in-progress",
+      durationSeconds: Math.max(
+        0,
+        Math.floor((Date.now() - roundStartedAtRef.current) / 1000),
+      ),
+      metadata: { speedMs: roundSpeedMs, timedOut: false },
+    });
 
     setInputError(null);
     setFeedback({ isCorrect, timedOut: false });
@@ -172,6 +215,8 @@ export function UcmasPractice({ onBackToTopics }: UcmasPracticeProps) {
 
   const restartRound = () => {
     cancelSpeech();
+    roundStartedAtRef.current = Date.now();
+    attemptIdRef.current = createPracticeAttemptId("ucmas-mental-maths");
     setQuestion(null);
     setQuestionNumber(1);
     setScore(0);

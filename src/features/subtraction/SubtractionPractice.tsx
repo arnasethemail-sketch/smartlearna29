@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { AnnouncementBar, Brand } from "../../components/AppChrome";
+import { createPracticeAttemptId } from "../practiceAttemptId";
+import { useLearningProgress } from "../progress";
+import { LEARNING_PROGRESS_APPLIED_EVENT } from "../progress/events";
 import {
   combineSubtractionDigits,
   createEmptySubtractionDigits,
@@ -29,6 +32,9 @@ export function SubtractionPractice({
   onBackToTopics,
 }: SubtractionPracticeProps) {
   const roundStartedAtRef = useRef(Date.now());
+  const attemptIdRef = useRef(createPracticeAttemptId("subtraction"));
+  const { updatePracticeProgress, refreshLegacyProgress } =
+    useLearningProgress();
   const [questionNumber, setQuestionNumber] = useState(1);
   const [question, setQuestion] = useState(() =>
     generateSubtractionQuestion(1),
@@ -46,6 +52,17 @@ export function SubtractionPractice({
     loadSubtractionBestTime,
   );
   const [isNewBestTime, setIsNewBestTime] = useState(false);
+
+  useEffect(() => {
+    const refreshBestTime = () =>
+      setBestTimeSeconds(loadSubtractionBestTime());
+    window.addEventListener(LEARNING_PROGRESS_APPLIED_EVENT, refreshBestTime);
+    return () =>
+      window.removeEventListener(
+        LEARNING_PROGRESS_APPLIED_EVENT,
+        refreshBestTime,
+      );
+  }, []);
 
   useEffect(() => {
     if (isComplete) {
@@ -80,6 +97,7 @@ export function SubtractionPractice({
     }
 
     const isCorrect = submittedAnswer === question.correctAnswer;
+    const nextScore = score + (isCorrect ? 1 : 0);
     const updatedStreak = isCorrect
       ? Math.min(streak + 1, SUBTRACTION_LEVEL_UP_STREAK)
       : 0;
@@ -90,8 +108,23 @@ export function SubtractionPractice({
     );
 
     if (isCorrect) {
-      setScore((currentScore) => currentScore + 1);
+      setScore(nextScore);
     }
+
+    updatePracticeProgress({
+      attemptId: attemptIdRef.current,
+      subject: "Math",
+      topic: "Subtraction",
+      answered: questionNumber,
+      total: TOTAL_SUBTRACTION_QUESTIONS,
+      score: nextScore,
+      status: "in-progress",
+      durationSeconds: Math.max(
+        0,
+        Math.floor((Date.now() - roundStartedAtRef.current) / 1000),
+      ),
+      metadata: { level: question.level },
+    });
 
     setStreak(updatedStreak);
     setInputError(null);
@@ -118,7 +151,19 @@ export function SubtractionPractice({
       setIsNewBestTime(updatedBestTime.isNewBestTime);
       if (updatedBestTime.isNewBestTime) {
         saveSubtractionBestTime(updatedBestTime.bestTime);
+        refreshLegacyProgress();
       }
+      updatePracticeProgress({
+        attemptId: attemptIdRef.current,
+        subject: "Math",
+        topic: "Subtraction",
+        answered: TOTAL_SUBTRACTION_QUESTIONS,
+        total: TOTAL_SUBTRACTION_QUESTIONS,
+        score,
+        status: "completed",
+        durationSeconds: completedTime,
+        metadata: { bestTimeSeconds: updatedBestTime.bestTime },
+      });
       setIsComplete(true);
       return;
     }
@@ -135,6 +180,7 @@ export function SubtractionPractice({
 
   const restartRound = () => {
     roundStartedAtRef.current = Date.now();
+    attemptIdRef.current = createPracticeAttemptId("subtraction");
     setQuestionNumber(1);
     setQuestion(generateSubtractionQuestion(1));
     setAnswerDigits(createEmptySubtractionDigits());

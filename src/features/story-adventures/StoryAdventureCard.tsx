@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { LEARNING_PROGRESS_APPLIED_EVENT } from "../progress/events";
 import { loadStoryState } from "./progress";
 
 type StoryAdventureCardProps = {
@@ -5,7 +7,17 @@ type StoryAdventureCardProps = {
 };
 
 export function StoryAdventureCard({ onSelect }: StoryAdventureCardProps) {
-  const state = loadStoryState();
+  const [state, setState] = useState(loadStoryState);
+
+  useEffect(() => {
+    const refreshProgress = () => setState(loadStoryState());
+    window.addEventListener(LEARNING_PROGRESS_APPLIED_EVENT, refreshProgress);
+    return () =>
+      window.removeEventListener(
+        LEARNING_PROGRESS_APPLIED_EVENT,
+        refreshProgress,
+      );
+  }, []);
   const progress = Object.values(state.progressByLesson);
   const completed = progress.filter((item) => item.status === "completed").length;
   const inProgress = progress.find((item) => item.status === "in-progress");

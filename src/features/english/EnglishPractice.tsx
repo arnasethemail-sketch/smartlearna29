@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Brand } from "../../components/AppChrome";
+import { createPracticeAttemptId } from "../practiceAttemptId";
+import { useLearningProgress } from "../progress";
 import {
   englishQuestionBanks,
   type EnglishQuestion,
@@ -38,6 +40,11 @@ export function MultipleChoicePractice({
   questions,
   onBackToTopics,
 }: MultipleChoicePracticeProps) {
+  const attemptIdRef = useRef(
+    createPracticeAttemptId(`${subject}-${topic}`),
+  );
+  const startedAtRef = useRef(Date.now());
+  const { updatePracticeProgress } = useLearningProgress();
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
   const [score, setScore] = useState(0);
@@ -50,9 +57,24 @@ export function MultipleChoicePractice({
     if (!selectedChoice) return;
 
     const nextScore = score + (isCorrect ? 1 : 0);
+    const isLastQuestion = questionIndex === questions.length - 1;
     setScore(nextScore);
+    updatePracticeProgress({
+      attemptId: attemptIdRef.current,
+      subject,
+      topic,
+      answered: questionIndex + 1,
+      total: questions.length,
+      score: nextScore,
+      status: isLastQuestion ? "completed" : "in-progress",
+      durationSeconds: Math.max(
+        0,
+        Math.floor((Date.now() - startedAtRef.current) / 1000),
+      ),
+      metadata: { format: "multiple-choice" },
+    });
 
-    if (questionIndex === questions.length - 1) {
+    if (isLastQuestion) {
       setComplete(true);
       return;
     }
@@ -62,6 +84,8 @@ export function MultipleChoicePractice({
   };
 
   const retry = () => {
+    attemptIdRef.current = createPracticeAttemptId(`${subject}-${topic}`);
+    startedAtRef.current = Date.now();
     setQuestionIndex(0);
     setSelectedChoice(null);
     setScore(0);
