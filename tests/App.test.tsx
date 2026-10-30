@@ -119,7 +119,7 @@ describe("topic selection", () => {
 
     fireEvent.click(
       screen.getByRole("menuitemradio", {
-        name: "English, 5 practice topics",
+        name: "English, 6 practice topics",
       }),
     );
 
@@ -148,7 +148,7 @@ describe("topic selection", () => {
     fireEvent.click(screen.getByRole("button", { name: "Choose subject" }));
     fireEvent.click(
       screen.getByRole("menuitemradio", {
-        name: "English, 5 practice topics",
+        name: "English, 6 practice topics",
       }),
     );
     fireEvent.click(screen.getByRole("button", { name: "Start Spelling" }));

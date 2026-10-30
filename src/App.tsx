@@ -14,6 +14,7 @@ import type {
 } from "./features/knowledge/knowledgeContent";
 import { SubtractionPractice } from "./features/subtraction/SubtractionPractice";
 import { StoryAdventureCard } from "./features/story-adventures/StoryAdventureCard";
+import { GraphicNovelCard } from "./features/graphic-novel/GraphicNovelCard";
 import { UcmasPractice } from "./features/ucmas/UcmasPractice";
 
 const StoryAdventures = lazy(() =>
@@ -34,6 +35,10 @@ const MidnightHotel = lazy(() =>
   })),
 );
 
+const GraphicNovel = lazy(() =>
+  import("./features/graphic-novel/GraphicNovel").then((module) => ({ default: module.GraphicNovel })),
+);
+
 type MathTopicName =
   | "Addition"
   | "Subtraction"
@@ -41,7 +46,14 @@ type MathTopicName =
   | "Fractions";
 
 type SubjectName = "Math" | "English" | KnowledgeSubjectName;
-type EnglishSelection = EnglishTopicName | "Story Adventures" | "Story Lab" | "Midnight Hotel";
+type EnglishSelection = EnglishTopicName | "Story Adventures" | "Story Lab" | "Midnight Hotel" | "Graphic Novel Lessons";
+
+function englishCollectionFromHash(): EnglishSelection | null {
+  if (window.location.hash === "#graphic-novel") return "Graphic Novel Lessons";
+  if (window.location.hash === "#midnight-hotel") return "Midnight Hotel";
+  if (window.location.hash === "#story-lab") return "Story Lab";
+  return null;
+}
 
 type SelectedTopic =
   | { subject: "Math"; name: MathTopicName }
@@ -269,23 +281,24 @@ function LearningPathIllustration({ subject }: { subject: SubjectName }) {
 
 export default function App() {
   const [subject, setSubject] = useState<SubjectName>(() =>
-    ["#story-lab", "#midnight-hotel"].includes(window.location.hash) ? "English" : "Math",
+    englishCollectionFromHash() ? "English" : "Math",
   );
   const [subjectMenuOpen, setSubjectMenuOpen] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState<SelectedTopic | null>(() =>
-    ["#story-lab", "#midnight-hotel"].includes(window.location.hash)
-      ? { subject: "English", name: window.location.hash === "#midnight-hotel" ? "Midnight Hotel" : "Story Lab" }
+    englishCollectionFromHash()
+      ? { subject: "English", name: englishCollectionFromHash()! }
       : null,
   );
 
   useEffect(() => {
     const followStoryLabLink = () => {
-      if (["#story-lab", "#midnight-hotel"].includes(window.location.hash)) {
+      const collection = englishCollectionFromHash();
+      if (collection) {
         setSubject("English");
         setSubjectMenuOpen(false);
-        setSelectedTopic({ subject: "English", name: window.location.hash === "#midnight-hotel" ? "Midnight Hotel" : "Story Lab" });
+        setSelectedTopic({ subject: "English", name: collection });
       } else {
-        setSelectedTopic((current) => current?.name === "Story Lab" || current?.name === "Midnight Hotel" ? null : current);
+        setSelectedTopic((current) => current?.name === "Story Lab" || current?.name === "Midnight Hotel" || current?.name === "Graphic Novel Lessons" ? null : current);
       }
     };
     window.addEventListener("hashchange", followStoryLabLink);
@@ -342,6 +355,10 @@ export default function App() {
 
   if (selectedTopic?.subject === "Math" && selectedTopic.name === "Fractions") {
     return <FractionPractice onBackToTopics={() => setSelectedTopic(null)} />;
+  }
+
+  if (selectedTopic?.subject === "English" && selectedTopic.name === "Graphic Novel Lessons") {
+    return <Suspense fallback={<main className="flex min-h-screen items-center justify-center bg-[#f7f3ea] px-5 text-[#25243a]"><p className="text-xl font-bold">Opening your graphic novel collection…</p></main>}><GraphicNovel onBackToEnglish={() => { setSelectedTopic(null); setSubject("English"); window.location.hash = "topics"; }} /></Suspense>;
   }
 
   if (selectedTopic?.subject === "English" && selectedTopic.name === "Midnight Hotel") {
@@ -475,7 +492,7 @@ export default function App() {
                 >
                   {(["Math", "English", "Science", "Social Studies"] as const).map((subjectOption) => {
                     const isActive = subjectOption === subject;
-                    const topicCount = subjectOption === "English" ? 5 : 4;
+                    const topicCount = subjectOption === "English" ? 6 : 4;
                     return (
                       <button
                         key={subjectOption}
@@ -647,7 +664,7 @@ export default function App() {
                 <div>
                   <p className="text-sm font-black text-[#263665]">
                     {subject === "English"
-                      ? "Five learning paths are ready for you"
+                      ? "Six learning paths are ready for you"
                       : "Four skills are ready for you"}
                   </p>
                   <p className="mt-1 text-sm font-semibold text-[#6a7190]">
@@ -711,6 +728,10 @@ export default function App() {
                     <StoryAdventureCard
                       onSelect={() => startEnglishTopic("Story Adventures")}
                     />
+                    <GraphicNovelCard onSelect={() => {
+                      startEnglishTopic("Graphic Novel Lessons");
+                      window.location.hash = "graphic-novel";
+                    }} />
                   </>
                 )
               : subject === "Science"

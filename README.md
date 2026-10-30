@@ -1,9 +1,24 @@
 # SmartLearn Grade Practice
 
 SmartLearn is a Vite and React practice site for Grade 4 maths, English,
-science, and social studies, plus Grade 5 Story Adventures. It is published as
+science, and social studies, plus Grade 5 Story Adventures and graphic-novel
+English lessons. It is published as
 a static site on GitHub Pages and uses Supabase for parent- or
 guardian-managed sign-in and cloud progress storage.
+
+## Graphic-novel English lessons
+
+Open `#graphic-novel` in the existing app for the 24-chapter Hotel Transylvania
+adaptation, with 192 individually illustrated panels and six learning activities
+per chapter. Reading position, written answers, spelling, revisions and review
+notes use the existing account progress store. Written work has clearly labelled
+self/parent review; spelling and vocabulary matches have automatic checks.
+
+Course and validation notes are in `docs/graphic-novel-course-notes.md`. The
+reviewed artwork prompt inventory is `docs/graphic-novel-art-prompts.json`.
+Run `npm test` and `npm run build` before deployment. Production artwork tests
+verify all 192 panel files, native dimensions, unique checksums and alternative
+text without requiring private production references.
 
 ## Run locally
 

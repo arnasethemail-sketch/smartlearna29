@@ -13,7 +13,7 @@ describe("Story Adventures entry flow", () => {
     fireEvent.click(screen.getByRole("button", { name: "Choose subject" }));
     fireEvent.click(
       screen.getByRole("menuitemradio", {
-        name: "English, 5 practice topics",
+        name: "English, 6 practice topics",
       }),
     );
 
