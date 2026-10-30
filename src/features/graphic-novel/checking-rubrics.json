@@ -1,0 +1,1442 @@
+[
+  {
+    "questionId": "ch01-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Dracula should avoid bonfires and fireworks near the hotel.",
+      "Bright fires or fireworks could attract humans and reveal the hidden hotel."
+    ],
+    "evidencePanelIds": [
+      "ch01-p07"
+    ],
+    "revisionPrompt": "What could bright lights reveal about the hotel's location?"
+  },
+  {
+    "questionId": "ch01-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch01-p02",
+      "ch01-p03",
+      "ch01-p07",
+      "ch01-p08"
+    ],
+    "revisionPrompt": "Give your judgement, add a detail about protection or freedom, and explain how that detail supports your view."
+  },
+  {
+    "questionId": "ch01-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Describe one helpful kind of encouragement and explain how it would help someone practise."
+  },
+  {
+    "questionId": "ch01-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Dracula builds a hidden hotel to keep Mavis safe.",
+      "Dracula closes the outside door when young Mavis asks about the world.",
+      "Dracula promises to protect Mavis."
+    ],
+    "evidencePanelIds": [
+      "ch01-p02",
+      "ch01-p03",
+      "ch01-p05",
+      "ch01-p07"
+    ],
+    "revisionPrompt": "Choose two different protective actions and explain what each action is meant to prevent."
+  },
+  {
+    "questionId": "ch01-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "The date 1895 places the opening events in the past.",
+      "The time label helps readers follow Mavis growing older and the order of events."
+    ],
+    "evidencePanelIds": [
+      "ch01-p01",
+      "ch01-p02",
+      "ch01-p04"
+    ],
+    "revisionPrompt": "Think about how the date helps you follow young Mavis and the later scenes."
+  },
+  {
+    "questionId": "ch02-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Frank chooses mail because he is afraid of flying.",
+      "Frank worries that an aeroplane could catch fire."
+    ],
+    "evidencePanelIds": [
+      "ch02-p04"
+    ],
+    "revisionPrompt": "Explain the fear behind Frank's unusual travel choice."
+  },
+  {
+    "questionId": "ch02-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch02-p01",
+      "ch02-p03",
+      "ch02-p06"
+    ],
+    "revisionPrompt": "Choose the kind of celebration you would prefer, then connect your reason to a detail in the chapter."
+  },
+  {
+    "questionId": "ch02-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Describe a welcoming action and explain how it could help a new guest feel included."
+  },
+  {
+    "questionId": "ch02-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "The hotel staff deal with urgent plumbing and cleaning problems.",
+      "Children running around create extra work at the hotel.",
+      "Dracula has to organise the guests' activities and events."
+    ],
+    "evidencePanelIds": [
+      "ch02-p02",
+      "ch02-p03",
+      "ch02-p06"
+    ],
+    "revisionPrompt": "Find two jobs or problems that happen after the visitors arrive."
+  },
+  {
+    "questionId": "ch02-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "The pictures show monster guests with abilities and arrivals unlike ordinary human guests.",
+      "Griffin is invisible, Frank arrives in parcels, and Murray leaves sand."
+    ],
+    "evidencePanelIds": [
+      "ch02-p04",
+      "ch02-p05",
+      "ch02-p06"
+    ],
+    "revisionPrompt": "Describe a visible difference and explain why it makes these guests unusual."
+  },
+  {
+    "questionId": "ch03-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Dracula lets Mavis visit the human village beyond the cemetery.",
+      "Mavis should return from the village in about thirty minutes."
+    ],
+    "evidencePanelIds": [
+      "ch03-p06"
+    ],
+    "revisionPrompt": "Include both the place Mavis may visit and roughly how long she may stay."
+  },
+  {
+    "questionId": "ch03-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch03-p04",
+      "ch03-p05",
+      "ch03-p06"
+    ],
+    "revisionPrompt": "State your choice, then use something Mavis wants, says or does to explain it."
+  },
+  {
+    "questionId": "ch03-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Describe a preparation step and explain how it would help you make your request clearly."
+  },
+  {
+    "questionId": "ch03-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Dracula is reluctant to allow a trip to Hawaii.",
+      "Dracula restricts Mavis's first trip to a nearby village.",
+      "Dracula disappears after giving Mavis permission."
+    ],
+    "evidencePanelIds": [
+      "ch03-p05",
+      "ch03-p06",
+      "ch03-p08"
+    ],
+    "revisionPrompt": "Use two actions that suggest worry; do not treat an unanswered question as proof of a later plan."
+  },
+  {
+    "questionId": "ch03-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "Mavis's widened eyes show surprise at Dracula's unexpected permission.",
+      "The close-up makes Mavis's astonishment easier for readers to understand."
+    ],
+    "evidencePanelIds": [
+      "ch03-p03"
+    ],
+    "revisionPrompt": "Look at Mavis's expression and connect it to what she has just heard."
+  },
+  {
+    "questionId": "ch04-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Zombies who work at the hotel are pretending to be human villagers.",
+      "Dracula directs the workers' deception."
+    ],
+    "evidencePanelIds": [
+      "ch04-p04",
+      "ch04-p05"
+    ],
+    "revisionPrompt": "Identify who is wearing the disguises, rather than who Mavis thinks they are."
+  },
+  {
+    "questionId": "ch04-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch04-p04",
+      "ch04-p05",
+      "ch04-p07",
+      "ch04-p08"
+    ],
+    "revisionPrompt": "Explain your view using a detail about what Dracula intends and what his plan actually does."
+  },
+  {
+    "questionId": "ch04-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Suggest one way to check a claim, and explain why that check could make the information more reliable."
+  },
+  {
+    "questionId": "ch04-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Mavis believes the threatening villagers are real humans.",
+      "The reader sees a zombie's mask slip and learns that the villagers are disguised hotel workers.",
+      "The reader sees Dracula directing the deception."
+    ],
+    "evidencePanelIds": [
+      "ch04-p03",
+      "ch04-p04",
+      "ch04-p05",
+      "ch04-p07"
+    ],
+    "revisionPrompt": "Explain what Mavis believes and compare it with two clues available to the reader."
+  },
+  {
+    "questionId": "ch04-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "The slipping mask reveals the village trick to readers before Mavis understands it.",
+      "The panel order lets readers compare the villagers' appearance with their real identity."
+    ],
+    "evidencePanelIds": [
+      "ch04-p03",
+      "ch04-p04",
+      "ch04-p07"
+    ],
+    "revisionPrompt": "Explain what new information the mask gives the reader and when the reader learns it."
+  },
+  {
+    "questionId": "ch05-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Martha's gift may be opened when Mavis turns 118."
+    ],
+    "evidencePanelIds": [
+      "ch05-p06"
+    ],
+    "revisionPrompt": "Find the age in the instructions for the unopened gift."
+  },
+  {
+    "questionId": "ch05-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch05-p03",
+      "ch05-p04",
+      "ch05-p05",
+      "ch05-p06"
+    ],
+    "revisionPrompt": "Decide whether the comfort solves the problem fully, partly or not at all, and support your view with a chapter detail."
+  },
+  {
+    "questionId": "ch05-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Suggest a supportive action that someone can actually do, and explain why it would help."
+  },
+  {
+    "questionId": "ch05-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Dracula acts concerned and comforting when he speaks with Mavis.",
+      "Dracula tries to keep the shrunken head silent about his deception.",
+      "Dracula defends his actions to the shrunken head while hiding the truth from Mavis."
+    ],
+    "evidencePanelIds": [
+      "ch05-p01",
+      "ch05-p02",
+      "ch05-p05",
+      "ch05-p07"
+    ],
+    "revisionPrompt": "Compare what Dracula reveals to each listener, using a detail from each conversation."
+  },
+  {
+    "questionId": "ch05-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "The closed gift hides its contents while showing that it matters to Mavis.",
+      "The unopened present creates curiosity about what will be revealed later."
+    ],
+    "evidencePanelIds": [
+      "ch05-p06"
+    ],
+    "revisionPrompt": "Explain what the picture lets you know and what it deliberately leaves unknown."
+  },
+  {
+    "questionId": "ch06-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Jonathan follows the unusual figures returning from the staged village.",
+      "The flames around the figures attract Jonathan's attention and lead him toward the castle."
+    ],
+    "evidencePanelIds": [
+      "ch06-p02"
+    ],
+    "revisionPrompt": "Say which figures Jonathan follows and what draws his attention to them."
+  },
+  {
+    "questionId": "ch06-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch06-p04",
+      "ch06-p06",
+      "ch06-p07",
+      "ch06-p08"
+    ],
+    "revisionPrompt": "Choose an approach and explain a likely consequence using what Jonathan understands in this chapter."
+  },
+  {
+    "questionId": "ch06-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Describe a safe way to get information about the object before making a judgement about it."
+  },
+  {
+    "questionId": "ch06-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Dracula's staged village uses conspicuous flames.",
+      "Jonathan follows the returning figures from that village to the hidden hotel.",
+      "The plan to keep humans away helps a human discover the hotel."
+    ],
+    "evidencePanelIds": [
+      "ch06-p02",
+      "ch06-p03",
+      "ch06-p07"
+    ],
+    "revisionPrompt": "Link Dracula's earlier plan to Jonathan's route and the unexpected result."
+  },
+  {
+    "questionId": "ch06-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "The flashback shows the route Jonathan followed before reaching the hotel.",
+      "The earlier scene explains how the village plan caused his arrival."
+    ],
+    "evidencePanelIds": [
+      "ch06-p02",
+      "ch06-p03"
+    ],
+    "revisionPrompt": "Explain what the earlier scene shows that a picture of the conversation alone would leave unclear."
+  },
+  {
+    "questionId": "ch07-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Jonathan initially thinks the creatures are ordinary people wearing party costumes."
+    ],
+    "evidencePanelIds": [
+      "ch07-p01"
+    ],
+    "revisionPrompt": "Separate Jonathan's first belief from what he discovers later."
+  },
+  {
+    "questionId": "ch07-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch07-p01",
+      "ch07-p03",
+      "ch07-p04",
+      "ch07-p05"
+    ],
+    "revisionPrompt": "Explain whether concealment helps or harms understanding, and connect your view to one event Jonathan experiences."
+  },
+  {
+    "questionId": "ch07-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Give an example of a polite question or a request for permission, and explain how it respects the other person."
+  },
+  {
+    "questionId": "ch07-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Jonathan begins excited because he believes the monsters are people in costumes.",
+      "Jonathan becomes frightened when he discovers that the monsters are real.",
+      "Dracula's explanation and their later joke begin to ease Jonathan's fear."
+    ],
+    "evidencePanelIds": [
+      "ch07-p01",
+      "ch07-p03",
+      "ch07-p04",
+      "ch07-p07",
+      "ch07-p08"
+    ],
+    "revisionPrompt": "Trace at least two events and explain how Jonathan's feelings change with them."
+  },
+  {
+    "questionId": "ch07-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "Jonathan's enthusiastic costume comment changes to alarm when he says the creatures are real.",
+      "The short speech bubbles and expressions show excitement changing into fear."
+    ],
+    "evidencePanelIds": [
+      "ch07-p01",
+      "ch07-p04"
+    ],
+    "revisionPrompt": "Compare what Jonathan says in the two panels and explain the change in tone."
+  },
+  {
+    "questionId": "ch08-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Dracula claims Jonathan has come to help plan Mavis's birthday party."
+    ],
+    "evidencePanelIds": [
+      "ch08-p04"
+    ],
+    "revisionPrompt": "Name the job Dracula invents for Jonathan."
+  },
+  {
+    "questionId": "ch08-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch08-p02",
+      "ch08-p04",
+      "ch08-p07"
+    ],
+    "revisionPrompt": "Use information available to the reader to explain whether you would trust this explanation."
+  },
+  {
+    "questionId": "ch08-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Explain how you would clarify the two instructions before deciding what to do."
+  },
+  {
+    "questionId": "ch08-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Dracula turns back when Mavis appears.",
+      "Dracula hesitates instead of rushing to the emergency.",
+      "Dracula resists letting Mavis keep Jonathan company."
+    ],
+    "evidencePanelIds": [
+      "ch08-p03",
+      "ch08-p06",
+      "ch08-p07"
+    ],
+    "revisionPrompt": "Choose two unusual reactions Mavis can observe without already knowing Jonathan's secret."
+  },
+  {
+    "questionId": "ch08-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "The separate public and private conversations show which characters can hear each instruction.",
+      "Dracula publicly allows future conversation but privately tells Jonathan the opposite."
+    ],
+    "evidencePanelIds": [
+      "ch08-p07"
+    ],
+    "revisionPrompt": "Compare the public message with the private whisper and identify who hears each."
+  },
+  {
+    "questionId": "ch09-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "The secret tunnels were designed as an escape route if humans invaded the hotel."
+    ],
+    "evidencePanelIds": [
+      "ch09-p01"
+    ],
+    "revisionPrompt": "Explain the emergency the tunnels were meant to help the monsters escape."
+  },
+  {
+    "questionId": "ch09-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch09-p05",
+      "ch09-p06",
+      "ch09-p07",
+      "ch09-p08"
+    ],
+    "revisionPrompt": "Choose how you would answer Frank and explain a consequence of that choice in this chapter."
+  },
+  {
+    "questionId": "ch09-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Suggest respectful words and an action that gives the other person their privacy back."
+  },
+  {
+    "questionId": "ch09-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Wrong doors interrupt Dracula and Jonathan's attempt to avoid other people.",
+      "Dracula's friends stop the pair to discuss music.",
+      "Mavis and Frank ask Jonathan questions while Dracula tries to hide him."
+    ],
+    "evidencePanelIds": [
+      "ch09-p02",
+      "ch09-p03",
+      "ch09-p04",
+      "ch09-p05",
+      "ch09-p06"
+    ],
+    "revisionPrompt": "Link two interruptions to Dracula's unsuccessful goal of avoiding conversations."
+  },
+  {
+    "questionId": "ch09-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "Frank's right arm connects Dracula's invented family explanation to a specific body part.",
+      "Frank takes the absurd cousin story seriously, which makes the visual joke clear."
+    ],
+    "evidencePanelIds": [
+      "ch09-p07"
+    ],
+    "revisionPrompt": "Connect the arm in the picture with the family story Dracula has just invented."
+  },
+  {
+    "questionId": "ch10-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Jonathan suggests a faster and livelier beat for the song.",
+      "Jonathan demonstrates a more energetic performance."
+    ],
+    "evidencePanelIds": [
+      "ch10-p03",
+      "ch10-p05"
+    ],
+    "revisionPrompt": "Describe the musical change Jonathan suggests, rather than only saying he wants a different song."
+  },
+  {
+    "questionId": "ch10-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch10-p03",
+      "ch10-p05",
+      "ch10-p07",
+      "ch10-p08"
+    ],
+    "revisionPrompt": "State your musical preference and connect it to a reaction or feature of the performances."
+  },
+  {
+    "questionId": "ch10-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Describe a respectful way to suggest a change while recognising the group's existing work."
+  },
+  {
+    "questionId": "ch10-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Mavis is delighted by Jonathan's energetic performance.",
+      "The guests want Jonathan to continue performing.",
+      "Dracula rejects changes and insists on following his schedule."
+    ],
+    "evidencePanelIds": [
+      "ch10-p07",
+      "ch10-p08"
+    ],
+    "revisionPrompt": "Contrast Mavis's reaction with Dracula's reaction, using a specific detail for each."
+  },
+  {
+    "questionId": "ch10-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "Jonathan's stage-dive mistake does not stop the guests from enjoying his performance.",
+      "Showing the guests' positive response makes clear that the mistake is not a total failure."
+    ],
+    "evidencePanelIds": [
+      "ch10-p06",
+      "ch10-p07"
+    ],
+    "revisionPrompt": "Explain how the guests' reaction changes the meaning of the mistake."
+  },
+  {
+    "questionId": "ch11-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Water could wash away Jonathan's monster makeup.",
+      "Losing the makeup would reveal that Jonathan is human."
+    ],
+    "evidencePanelIds": [
+      "ch11-p07"
+    ],
+    "revisionPrompt": "Connect the water to the disguise and then to the secret Dracula wants to keep."
+  },
+  {
+    "questionId": "ch11-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch11-p04",
+      "ch11-p05",
+      "ch11-p07"
+    ],
+    "revisionPrompt": "Explain a consequence of the excuse or of a direct explanation, using the pool scene."
+  },
+  {
+    "questionId": "ch11-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Choose an action that helps people pause or understand the activity, and explain why it would help."
+  },
+  {
+    "questionId": "ch11-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "At breakfast Dracula orders omelettes to distract the chef from detecting the human visitor.",
+      "At the pool Dracula intervenes to keep water from removing Jonathan's makeup.",
+      "Dracula gives Jonathan a soft landing at the pool."
+    ],
+    "evidencePanelIds": [
+      "ch11-p03",
+      "ch11-p07",
+      "ch11-p08"
+    ],
+    "revisionPrompt": "Use one breakfast action and one pool action, and identify the risk each addresses."
+  },
+  {
+    "questionId": "ch11-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "The close-up shows that Jonathan's disguise depends on makeup.",
+      "Seeing the fragile makeup helps readers understand why Dracula fears the water."
+    ],
+    "evidencePanelIds": [
+      "ch11-p06",
+      "ch11-p07"
+    ],
+    "revisionPrompt": "Explain what the visible makeup tells the reader about the risk at the pool."
+  },
+  {
+    "questionId": "ch12-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Jonathan suggests that his contact lenses might explain why Dracula's memory trick fails."
+    ],
+    "evidencePanelIds": [
+      "ch12-p02"
+    ],
+    "revisionPrompt": "Name Jonathan's suggested explanation without presenting it as a proven fact."
+  },
+  {
+    "questionId": "ch12-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch12-p07",
+      "ch12-p08"
+    ],
+    "revisionPrompt": "Use Jonathan's action at sunrise and its effect on Mavis to support your view of his trustworthiness."
+  },
+  {
+    "questionId": "ch12-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Describe an adjustment that would let someone participate and explain how it meets their needs."
+  },
+  {
+    "questionId": "ch12-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Jonathan's account of human travel differs from Mavis's frightening expectations about humans.",
+      "Jonathan helps Mavis safely enjoy a sunrise she normally could not watch.",
+      "Both experiences widen Mavis's view beyond what she expected."
+    ],
+    "evidencePanelIds": [
+      "ch12-p05",
+      "ch12-p06",
+      "ch12-p07",
+      "ch12-p08"
+    ],
+    "revisionPrompt": "Explain a change in Mavis's expectations from the travel conversation and another from the sunrise."
+  },
+  {
+    "questionId": "ch12-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "The sunlight shows the beautiful sunrise view.",
+      "The shadow shows the protected place where Mavis can remain safe.",
+      "The contrast makes Jonathan's considerate solution visible."
+    ],
+    "evidencePanelIds": [
+      "ch12-p07",
+      "ch12-p08"
+    ],
+    "revisionPrompt": "Explain the different jobs of the bright area and the shaded area in the same scene."
+  },
+  {
+    "questionId": "ch13-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Dracula claims Jonathan left because he disliked Mavis and the other guests."
+    ],
+    "evidencePanelIds": [
+      "ch13-p05"
+    ],
+    "revisionPrompt": "Report Dracula's explanation as a claim, rather than assuming it is the true reason."
+  },
+  {
+    "questionId": "ch13-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch13-p05",
+      "ch13-p07",
+      "ch13-p08"
+    ],
+    "revisionPrompt": "Compare what Dracula says with Jonathan's return, then explain your judgement."
+  },
+  {
+    "questionId": "ch13-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Write a polite question that asks for clarification instead of assuming someone is lying."
+  },
+  {
+    "questionId": "ch13-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "The friends believe Jonathan is a welcome monster visitor.",
+      "Dracula claims Jonathan has left because he dislikes the guests.",
+      "The reader sees Jonathan on the roof with Mavis before he falls through."
+    ],
+    "evidencePanelIds": [
+      "ch13-p01",
+      "ch13-p04",
+      "ch13-p05",
+      "ch13-p06",
+      "ch13-p08"
+    ],
+    "revisionPrompt": "Keep the friends' belief, Dracula's claim and the reader's information separate."
+  },
+  {
+    "questionId": "ch13-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "Switching between the roof and the sauna gives readers information the people below do not have.",
+      "The rooftop scene sets up the contradiction when Jonathan falls through the roof."
+    ],
+    "evidencePanelIds": [
+      "ch13-p04",
+      "ch13-p05",
+      "ch13-p06",
+      "ch13-p07"
+    ],
+    "revisionPrompt": "Explain what the reader knows before the people in the sauna discover it."
+  },
+  {
+    "questionId": "ch14-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Dracula moves the tables with magic.",
+      "Dracula calls out a table's number and the position where it should move."
+    ],
+    "evidencePanelIds": [
+      "ch14-p02"
+    ],
+    "revisionPrompt": "Describe both the method Dracula uses and the commands that guide the tables."
+  },
+  {
+    "questionId": "ch14-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch14-p04",
+      "ch14-p05",
+      "ch14-p06",
+      "ch14-p08"
+    ],
+    "revisionPrompt": "Use something the characters do together to explain whether their relationship is changing."
+  },
+  {
+    "questionId": "ch14-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Suggest a rule or behaviour and explain how it helps everyone enjoy the competition."
+  },
+  {
+    "questionId": "ch14-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Dracula starts angry and gives Jonathan the job of moving tables.",
+      "Dracula joins the table race and laughs with Jonathan.",
+      "Dracula admits the race was fun and then worries when Jonathan is missing."
+    ],
+    "evidencePanelIds": [
+      "ch14-p01",
+      "ch14-p05",
+      "ch14-p07",
+      "ch14-p08"
+    ],
+    "revisionPrompt": "Trace at least two stages of Dracula's attitude and connect each to an event."
+  },
+  {
+    "questionId": "ch14-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "The table numbers connect Dracula's spoken instructions to particular tables.",
+      "The action pictures show the tables' movement and positions during the race."
+    ],
+    "evidencePanelIds": [
+      "ch14-p02",
+      "ch14-p04",
+      "ch14-p05"
+    ],
+    "revisionPrompt": "Explain how the labels and the moving pictures provide different kinds of information."
+  },
+  {
+    "questionId": "ch15-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Quasimodo asks Jonathan to frighten his rat to prove that Jonathan is a monster."
+    ],
+    "evidencePanelIds": [
+      "ch15-p06"
+    ],
+    "revisionPrompt": "Identify the test Quasimodo gives Jonathan, including who must be frightened."
+  },
+  {
+    "questionId": "ch15-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch15-p03",
+      "ch15-p04",
+      "ch15-p07",
+      "ch15-p08"
+    ],
+    "revisionPrompt": "Connect Dracula's rescue actions to your judgement, allowing for more than one possible motive."
+  },
+  {
+    "questionId": "ch15-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Describe a specific expression of thanks or helpful response, and explain why it matters."
+  },
+  {
+    "questionId": "ch15-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Dracula first orders the staff to intercept Quasimodo.",
+      "When the interception fails, Dracula follows and defends Jonathan's disguise in the kitchen.",
+      "Dracula then uses magic to freeze the chef."
+    ],
+    "evidencePanelIds": [
+      "ch15-p03",
+      "ch15-p04",
+      "ch15-p05",
+      "ch15-p07"
+    ],
+    "revisionPrompt": "Put at least three rescue steps in order, starting before Dracula reaches the kitchen."
+  },
+  {
+    "questionId": "ch15-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "The narration connects Mavis's conversation with Jonathan's danger happening elsewhere.",
+      "Knowing about the other events explains why Dracula is distracted and leaves suddenly."
+    ],
+    "evidencePanelIds": [
+      "ch15-p01",
+      "ch15-p02",
+      "ch15-p03",
+      "ch15-p04"
+    ],
+    "revisionPrompt": "Explain how the narration connects two things happening at the same time."
+  },
+  {
+    "questionId": "ch16-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "The legend claims that both of Mavis's parents died in the fire.",
+      "Dracula corrects the legend by explaining that Martha died but he survived.",
+      "Dracula says that humans attacked their home."
+    ],
+    "evidencePanelIds": [
+      "ch16-p02",
+      "ch16-p03"
+    ],
+    "revisionPrompt": "Contrast the legend's claim about the parents with Dracula's correction."
+  },
+  {
+    "questionId": "ch16-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch16-p03",
+      "ch16-p04",
+      "ch16-p05"
+    ],
+    "revisionPrompt": "Explain how the history affects your understanding, using a detail, without assuming that understanding requires approval."
+  },
+  {
+    "questionId": "ch16-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Explain an honest limit or a promise about an action you can control, and say why that is fair."
+  },
+  {
+    "questionId": "ch16-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Jonathan initially repeats the legend confidently.",
+      "Jonathan listens to Dracula's correction and recognises his loss.",
+      "Jonathan acknowledges that he cannot guarantee every human's behaviour and offers to leave."
+    ],
+    "evidencePanelIds": [
+      "ch16-p01",
+      "ch16-p02",
+      "ch16-p03",
+      "ch16-p06",
+      "ch16-p07"
+    ],
+    "revisionPrompt": "Use two moments to show how Jonathan's understanding or response changes."
+  },
+  {
+    "questionId": "ch16-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "Different framing separates the second-hand legend from Dracula's personal memory.",
+      "The visual distinction helps readers recognise that the two versions have different sources."
+    ],
+    "evidencePanelIds": [
+      "ch16-p02",
+      "ch16-p03"
+    ],
+    "revisionPrompt": "Explain how the framing tells you whose version you are seeing."
+  },
+  {
+    "questionId": "ch17-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "The music stops after Dracula shouts that the village is not real."
+    ],
+    "evidencePanelIds": [
+      "ch17-p08"
+    ],
+    "revisionPrompt": "Identify Dracula's revelation at the end of the chapter, rather than the earlier disagreement."
+  },
+  {
+    "questionId": "ch17-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch17-p05",
+      "ch17-p06",
+      "ch17-p07"
+    ],
+    "revisionPrompt": "Use Mavis's question and Dracula's response to support your judgement about the conversation."
+  },
+  {
+    "questionId": "ch17-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Give a respectful way to question a rule and explain how it could help the conversation."
+  },
+  {
+    "questionId": "ch17-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "The party begins with joyful music, gratitude and celebration.",
+      "The middle of the chapter becomes tense as Dracula interrupts Mavis and Jonathan and an argument grows.",
+      "The music stops after Dracula reveals that the village was not real."
+    ],
+    "evidencePanelIds": [
+      "ch17-p01",
+      "ch17-p02",
+      "ch17-p04",
+      "ch17-p06",
+      "ch17-p08"
+    ],
+    "revisionPrompt": "Use one event from the beginning, middle and ending to explain the mood changes."
+  },
+  {
+    "questionId": "ch17-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "The wide final panel shows that the revelation is public and affects the whole room.",
+      "The stopped celebration contrasts with the chapter's lively opening."
+    ],
+    "evidencePanelIds": [
+      "ch17-p01",
+      "ch17-p08"
+    ],
+    "revisionPrompt": "Explain what seeing the whole room's reaction adds to the revelation."
+  },
+  {
+    "questionId": "ch18-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Quasimodo accuses Jonathan of being human through a translator.",
+      "The rat wipes away Jonathan's makeup and exposes his human identity."
+    ],
+    "evidencePanelIds": [
+      "ch18-p03",
+      "ch18-p04"
+    ],
+    "revisionPrompt": "Explain the physical action that makes Jonathan's disguise fail in front of the guests."
+  },
+  {
+    "questionId": "ch18-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch18-p05",
+      "ch18-p06"
+    ],
+    "revisionPrompt": "Support your view with a character's behaviour in this chapter or a clearly named earlier scene."
+  },
+  {
+    "questionId": "ch18-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Give respectful, honest wording and explain how it avoids deliberately hurting the other person."
+  },
+  {
+    "questionId": "ch18-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Dracula admits that he staged the village, which damages Mavis's trust in him.",
+      "Jonathan's monster disguise is exposed, but Mavis initially accepts that he is human.",
+      "Jonathan's later rejection hurts Mavis, separately from the discovery of his identity."
+    ],
+    "evidencePanelIds": [
+      "ch18-p01",
+      "ch18-p02",
+      "ch18-p04",
+      "ch18-p05",
+      "ch18-p07"
+    ],
+    "revisionPrompt": "Identify both deceptions and explain Mavis's different reactions without confusing discovery with rejection."
+  },
+  {
+    "questionId": "ch18-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "Jonathan's glance at Dracula suggests that their earlier private conversation influences his hesitation.",
+      "The glance gives readers a clue about pressure or conflict without fully explaining every motive."
+    ],
+    "evidencePanelIds": [
+      "ch18-p06",
+      "ch18-p07"
+    ],
+    "revisionPrompt": "Use the glance as a clue to a possible influence, rather than claiming it proves every motive."
+  },
+  {
+    "questionId": "ch19-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Mavis asks Dracula to erase her memories or make her forget."
+    ],
+    "evidencePanelIds": [
+      "ch19-p02"
+    ],
+    "revisionPrompt": "Look at what Mavis asks her father to do when he finds her."
+  },
+  {
+    "questionId": "ch19-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch19-p04",
+      "ch19-p05",
+      "ch19-p06"
+    ],
+    "revisionPrompt": "Explain the effect you think the gift has on Mavis using a detail about its message and her current feelings."
+  },
+  {
+    "questionId": "ch19-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Offer a gentle, realistic encouragement and explain how it leaves room for hope without making a guarantee."
+  },
+  {
+    "questionId": "ch19-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Mavis decides to stay because she feels defeated and believes her dreams are gone.",
+      "Mavis is unhappy rather than content with the life Dracula has tried to protect.",
+      "Dracula recognises the pain his choices have caused and regrets his actions."
+    ],
+    "evidencePanelIds": [
+      "ch19-p06",
+      "ch19-p07",
+      "ch19-p08"
+    ],
+    "revisionPrompt": "Explain why staying and being happy are different here, using two details."
+  },
+  {
+    "questionId": "ch19-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "The open keepsake brings Martha's earlier hopes into Mavis's present disappointment.",
+      "The object links the family's past with what Mavis and Dracula are feeling now."
+    ],
+    "evidencePanelIds": [
+      "ch19-p04",
+      "ch19-p05",
+      "ch19-p06"
+    ],
+    "revisionPrompt": "Explain which earlier hopes the keepsake brings into the present scene."
+  },
+  {
+    "questionId": "ch20-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Winnie identifies the airport as Jonathan's destination by following his scent."
+    ],
+    "evidencePanelIds": [
+      "ch20-p06",
+      "ch20-p07"
+    ],
+    "revisionPrompt": "Name the character who identifies the destination and distinguish her role from the others' help."
+  },
+  {
+    "questionId": "ch20-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch20-p02",
+      "ch20-p03",
+      "ch20-p04",
+      "ch20-p08"
+    ],
+    "revisionPrompt": "Connect Dracula's admissions and actions to your judgement about the apology."
+  },
+  {
+    "questionId": "ch20-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Describe a repair that fits a possible mistake and explain how the action helps beyond saying sorry."
+  },
+  {
+    "questionId": "ch20-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Dracula asks for help and follows Jonathan's boot prints.",
+      "Wayne recognises his own limits and brings in his children to help.",
+      "Winnie uses the scent trail to identify the airport while the group helps with the journey."
+    ],
+    "evidencePanelIds": [
+      "ch20-p03",
+      "ch20-p05",
+      "ch20-p06",
+      "ch20-p07",
+      "ch20-p08"
+    ],
+    "revisionPrompt": "Describe three different contributions and explain how they help the same search."
+  },
+  {
+    "questionId": "ch20-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "Close-ups make the boot prints and clothing visible as clues.",
+      "The clue pictures connect the searchers' next decisions to the evidence they find."
+    ],
+    "evidencePanelIds": [
+      "ch20-p05",
+      "ch20-p06",
+      "ch20-p07"
+    ],
+    "revisionPrompt": "Explain how each close-up helps the reader follow the reason for a new search action."
+  },
+  {
+    "questionId": "ch21-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "The festival volunteers hold up their capes to form a shaded route.",
+      "The cape tunnel protects Dracula from sunlight as he moves through the town."
+    ],
+    "evidencePanelIds": [
+      "ch21-p07"
+    ],
+    "revisionPrompt": "Describe what the crowd does together and how it protects Dracula."
+  },
+  {
+    "questionId": "ch21-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch21-p03",
+      "ch21-p04",
+      "ch21-p05",
+      "ch21-p07",
+      "ch21-p08"
+    ],
+    "revisionPrompt": "Use the festival crowd's actions to explain a change in opinion without treating one group as proof about every human."
+  },
+  {
+    "questionId": "ch21-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Describe a shared goal, different contributions and why working together helps your imagined group."
+  },
+  {
+    "questionId": "ch21-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "The monsters expect humans to react with fear or hostility.",
+      "The festival crowd instead celebrates the monsters and cheers Frank.",
+      "People listen to the problem and cooperate to make a shaded cape tunnel."
+    ],
+    "evidencePanelIds": [
+      "ch21-p01",
+      "ch21-p03",
+      "ch21-p04",
+      "ch21-p05",
+      "ch21-p07"
+    ],
+    "revisionPrompt": "Compare the expectation with at least two actions the people actually take."
+  },
+  {
+    "questionId": "ch21-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "The wide picture shows many people coordinating to hold up the capes.",
+      "The wide view shows a continuous shaded route and Dracula's path through it."
+    ],
+    "evidencePanelIds": [
+      "ch21-p07"
+    ],
+    "revisionPrompt": "Explain what the wider view shows about the scale and purpose of the group's work."
+  },
+  {
+    "questionId": "ch22-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Dracula uses magic to speak through the pilot's announcement.",
+      "Jonathan can hear the apology inside the aeroplane through that announcement."
+    ],
+    "evidencePanelIds": [
+      "ch22-p04"
+    ],
+    "revisionPrompt": "Identify the new way Dracula sends his words after the window conversation fails."
+  },
+  {
+    "questionId": "ch22-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch22-p04",
+      "ch22-p05",
+      "ch22-p06",
+      "ch22-p07"
+    ],
+    "revisionPrompt": "Choose one part of the apology, describe it accurately and explain why it matters to your judgement."
+  },
+  {
+    "questionId": "ch22-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Explain why the other person's feelings, choices or time still matter after an apology."
+  },
+  {
+    "questionId": "ch22-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Dracula admits trying to keep Mavis to himself and recognises her need to discover life.",
+      "Dracula values Mavis and Jonathan's connection and thanks Jonathan for being someone she could trust.",
+      "Dracula asks for forgiveness instead of ordering Jonathan away."
+    ],
+    "evidencePanelIds": [
+      "ch22-p04",
+      "ch22-p05",
+      "ch22-p06",
+      "ch22-p07",
+      "ch22-p08"
+    ],
+    "revisionPrompt": "Find three details showing changed attitudes, rather than only saying that Dracula is sorry."
+  },
+  {
+    "questionId": "ch22-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "The inside and outside views show the window separating Dracula from Jonathan.",
+      "The views reveal the noise and glass barrier that make their first conversation fail.",
+      "The failed exchange explains why Dracula needs a different way to be heard."
+    ],
+    "evidencePanelIds": [
+      "ch22-p01",
+      "ch22-p02",
+      "ch22-p04"
+    ],
+    "revisionPrompt": "Explain how the views show the obstacles to communication and the need for a new channel."
+  },
+  {
+    "questionId": "ch23-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Dracula presents Mavis with a black-and-pink backpack.",
+      "Jonathan appears with the present because he has returned to the hotel."
+    ],
+    "evidencePanelIds": [
+      "ch23-p03",
+      "ch23-p04"
+    ],
+    "revisionPrompt": "Include both the gift and the person revealed with it."
+  },
+  {
+    "questionId": "ch23-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch23-p03",
+      "ch23-p04",
+      "ch23-p06",
+      "ch23-p07",
+      "ch23-p08"
+    ],
+    "revisionPrompt": "Give your judgement and support it with two actions Dracula takes, rather than only repeating his apology."
+  },
+  {
+    "questionId": "ch23-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Describe a practical balance between making choices and keeping communication or support."
+  },
+  {
+    "questionId": "ch23-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Jonathan admits that fear of Dracula's threat influenced his hurtful rejection.",
+      "Jonathan explains that his earlier rejection did not express his real feelings for Mavis.",
+      "Dracula acknowledges his threat and admits that he was wrong."
+    ],
+    "evidencePanelIds": [
+      "ch23-p04",
+      "ch23-p05",
+      "ch23-p06"
+    ],
+    "revisionPrompt": "Explain what each character admits about his own part in the rejection."
+  },
+  {
+    "questionId": "ch23-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "Showing the front of the backpack hides Jonathan briefly and creates a surprise.",
+      "The sequence lets the reader share Mavis's discovery that Jonathan has returned.",
+      "The gift becomes a sign of Dracula's changed support for Mavis."
+    ],
+    "evidencePanelIds": [
+      "ch23-p03",
+      "ch23-p04"
+    ],
+    "revisionPrompt": "Explain how the order of the reveal changes what the reader understands about the gift."
+  },
+  {
+    "questionId": "ch24-q01",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Jonathan invites Dracula to join the final performance."
+    ],
+    "evidencePanelIds": [
+      "ch24-p03"
+    ],
+    "revisionPrompt": "Identify who extends the invitation, rather than who accepts it."
+  },
+  {
+    "questionId": "ch24-q02",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [
+      "ch24-p03",
+      "ch24-p04",
+      "ch24-p05",
+      "ch24-p06",
+      "ch24-p08"
+    ],
+    "revisionPrompt": "Give your judgement, then explain one improvement and one thing the characters may still need to work on."
+  },
+  {
+    "questionId": "ch24-q03",
+    "kind": "opinion",
+    "expectedIdeas": [],
+    "evidencePanelIds": [],
+    "revisionPrompt": "Choose a lesson from the story and show how it could help with an imagined disagreement."
+  },
+  {
+    "questionId": "ch24-q04",
+    "kind": "factual",
+    "expectedIdeas": [
+      "Dracula changes from blocking Mavis's independence to supporting her choices.",
+      "Dracula changes from fearing all humans to accepting help from a human crowd.",
+      "Dracula changes from concealing the truth and controlling events to admitting mistakes and joining others."
+    ],
+    "evidencePanelIds": [
+      "ch24-p03",
+      "ch24-p05",
+      "ch24-p06",
+      "ch24-p07",
+      "ch24-p08"
+    ],
+    "revisionPrompt": "Explain two changes by comparing a beginning scene with a later scene for each."
+  },
+  {
+    "questionId": "ch24-q05",
+    "kind": "interpretive",
+    "expectedIdeas": [
+      "The LOOKING BACK labels identify panels five to seven as memories of earlier events.",
+      "The labels separate the recap from the current celebration.",
+      "The labels prevent readers from thinking those events repeat or happen after the ending."
+    ],
+    "evidencePanelIds": [
+      "ch24-p05",
+      "ch24-p06",
+      "ch24-p07",
+      "ch24-p08"
+    ],
+    "revisionPrompt": "Explain how the labels help you tell earlier evidence apart from the current scene."
+  }
+]

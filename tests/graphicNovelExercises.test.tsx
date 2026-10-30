@@ -3,13 +3,24 @@
 import { useState } from "react";
 import type { ComponentType } from "react";
 import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { chapters } from "../src/features/graphic-novel/data";
 import type { GraphicChapter } from "../src/features/graphic-novel/data";
 import { Comprehension, MarkedSentence, ParagraphWorkshop, TextFeatures, Vocabulary, VocabularyBank } from "../src/features/graphic-novel/Exercises";
 import type { ExerciseProps } from "../src/features/graphic-novel/Exercises";
 import { createChapterWork } from "../src/features/graphic-novel/progress";
 import type { ChapterWork } from "../src/features/graphic-novel/types";
+import type { AutomaticCheck, CheckTarget } from "../src/features/graphic-novel/checking-types";
+
+vi.mock("../src/features/graphic-novel/checking", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("../src/features/graphic-novel/checking")>();
+  return { ...actual, checkWrittenResponse: vi.fn(async (chapter: GraphicChapter, work: ChapterWork, target: CheckTarget): Promise<AutomaticCheck> => ({
+    schemaVersion: 1, targetKey: actual.checkTargetKey(target), inputFingerprint: actual.currentCheckFingerprint(chapter, work, target),
+    checkedAt: "2026-10-30T00:00:00.000Z", method: "local-rules-v1", overall: "ready", summary: "Your explanation answers this question.",
+    dimensions: { meaning: { rating: "ready", feedback: "The meaning is clear." }, support: { rating: "ready", feedback: "You gave a relevant reason." }, clarity: { rating: "ready", feedback: "The sentence is clear." }, conventions: { rating: "ready", feedback: "The writing is easy to follow." } },
+    strengths: ["A clear explanation."], nextSteps: [], evidencePanelIds: [],
+  })) };
+});
 
 afterEach(cleanup);
 
@@ -25,7 +36,7 @@ function renderSection(Component: ComponentType<ExerciseProps>, chapter: Graphic
 }
 
 describe("Graphic novel written worksheets", () => {
-  it("keeps five written answers alongside classifications/checklists and hides guidance until requested", () => {
+  it("keeps five written answers alongside classifications/checklists and checks answers without a parent review form", async () => {
     const chapter = chapters[0];
     const view = renderSection(Comprehension);
     expect(screen.getAllByRole("textbox", { name: "Your written answer" })).toHaveLength(5);
@@ -42,9 +53,11 @@ describe("Graphic novel written worksheets", () => {
     const input = screen.getAllByRole("textbox", { name: "Your written answer" })[0];
     fireEvent.change(input, { target: { value: "The builder wanted the hotel to stay hidden, so he warned against bright fires." } });
     fireEvent.blur(input);
-    fireEvent.click(screen.getByRole("button", { name: "Review my answer to question 1" }));
+    fireEvent.click(screen.getByRole("button", { name: "Check my answer to question 1" }));
+    expect(await screen.findByRole("heading", { name: "Looks good" })).toBeTruthy();
     expect(screen.getByText(chapter.comprehension[0].answerGuidance)).toBeTruthy();
-    expect(screen.getByRole("combobox", { name: /^Meaning/ })).toBeTruthy();
+    expect(screen.queryByRole("combobox", { name: /^Meaning/ })).toBeNull();
+    expect(view.readWork().automaticChecks[`comprehension:${chapter.comprehension[0].id}`].dimensions.meaning.rating).toBe("ready");
     expect(view.readWork().comprehension[chapter.comprehension[0].id].history).toEqual(["The builder wanted the hotel to stay hidden, so he warned against bright fires."]);
     expect(view.readWork().comprehension[chapter.comprehension[0].id].review.meaning).toBe("");
     fireEvent.change(input, { target: { value: "A revised answer with the reason more clearly explained." } });

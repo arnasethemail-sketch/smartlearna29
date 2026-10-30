@@ -38,6 +38,9 @@ jobs:
       - name: Run tests
         run: npm test
 
+      - name: Verify free checker on CPU
+        run: node --experimental-strip-types scripts/check-local-semantic-model.mjs
+
       - name: Build app
         env:
           VITE_SUPABASE_URL: https://pkskxeetlndqunvsdeog.supabase.co

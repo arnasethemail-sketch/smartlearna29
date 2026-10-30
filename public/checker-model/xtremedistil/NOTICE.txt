@@ -1,0 +1,12 @@
+Local answer-checking model
+Fine-tuned model: MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33
+Revision: c07f66d9cbf781191bee66edfe8ad7856f045781
+Fine-tuned model license: MIT, as declared by its author in MODEL-CARD.md.
+Base model: microsoft/xtremedistil-l6-h256-uncased, MIT.
+LICENSE.txt preserves the base model's original Microsoft MIT notice.
+The model and tokenizer run on the learner's device. No inference service is used.
+The model is a small binary entailment classifier, not a certified student assessor.
+Modified ONNX packaging: lossless FLOAT16 initializer storage with explicit FLOAT32
+casts before the unchanged original computation. Source/output SHA-256, tool
+versions, and reproducible transformation are recorded in ../manifest.json and
+scripts/repack-local-checker.mjs. No weight value was changed by this transformation.

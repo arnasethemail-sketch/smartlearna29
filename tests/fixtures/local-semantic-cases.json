@@ -1,0 +1,206 @@
+{
+  "note": "Authored diagnostic cases, not a certified grading benchmark. Some paraphrases require chapter context. Baselines are pinned original FLOAT32 source CPU outputs; low entailment means uncertainty.",
+  "sourceSha256": "89ca1f96830106de21fcea15b55685060dd6faafd7864a790594910f2e661e3f",
+  "cases": [
+    {
+      "id": "builder-paraphrase",
+      "premise": "The builder warned Dracula not to use bonfires or fireworks, because the lights could reveal the hotel to humans.",
+      "hypothesis": "He said the lights would help people find the secret hotel.",
+      "humanMeaning": "entailed",
+      "sourceFP32": {
+        "forward": 0.620439498015608,
+        "reverse": 0.0037652116637636084
+      }
+    },
+    {
+      "id": "builder-negated",
+      "premise": "The builder warned Dracula not to use bonfires or fireworks, because the lights could reveal the hotel to humans.",
+      "hypothesis": "He said lights could never reveal the hotel.",
+      "humanMeaning": "not-entailed",
+      "sourceFP32": {
+        "forward": 0.001448532903772731,
+        "reverse": 0.002543585704352714
+      }
+    },
+    {
+      "id": "refuge-paraphrase",
+      "premise": "a place that offers shelter or protection",
+      "hypothesis": "Somewhere you can stay safely.",
+      "humanMeaning": "entailed",
+      "sourceFP32": {
+        "forward": 0.9594937321631836,
+        "reverse": 0.9821768201146647
+      }
+    },
+    {
+      "id": "refuge-wrong",
+      "premise": "a place that offers shelter or protection",
+      "hypothesis": "A place where people are deliberately put in danger.",
+      "humanMeaning": "not-entailed",
+      "sourceFP32": {
+        "forward": 0.0016941632369039414,
+        "reverse": 0.008024322049761987
+      }
+    },
+    {
+      "id": "protect-paraphrase",
+      "premise": "Dracula wanted to keep his daughter safe from humans.",
+      "hypothesis": "Dracula wanted to protect Mavis.",
+      "humanMeaning": "entailed",
+      "sourceFP32": {
+        "forward": 0.10309420366763462,
+        "reverse": 0.32971244340724676
+      }
+    },
+    {
+      "id": "protect-negated",
+      "premise": "Dracula did not want to keep his daughter safe from humans.",
+      "hypothesis": "Dracula wanted to protect Mavis.",
+      "humanMeaning": "not-entailed",
+      "sourceFP32": {
+        "forward": 0.012882844079752574,
+        "reverse": 0.005642593365249205
+      }
+    },
+    {
+      "id": "protect-wrong",
+      "premise": "Dracula built a bakery to sell delicious cakes.",
+      "hypothesis": "Dracula wanted to protect Mavis.",
+      "humanMeaning": "not-entailed",
+      "sourceFP32": {
+        "forward": 0.006389377324834134,
+        "reverse": 0.0018017752648442765
+      }
+    },
+    {
+      "id": "curious-paraphrase",
+      "premise": "Mavis wonders what lies beyond the castle and wants to discover it.",
+      "hypothesis": "Mavis is curious about the outside world.",
+      "humanMeaning": "entailed",
+      "sourceFP32": {
+        "forward": 0.5741580866868344,
+        "reverse": 0.005466299144928009
+      }
+    },
+    {
+      "id": "curious-negated",
+      "premise": "Mavis has no interest in anything beyond the castle.",
+      "hypothesis": "Mavis is curious about the outside world.",
+      "humanMeaning": "not-entailed",
+      "sourceFP32": {
+        "forward": 0.020516732000637253,
+        "reverse": 0.0011368494019846523
+      }
+    },
+    {
+      "id": "promise-paraphrase",
+      "premise": "Dracula said that Mavis could explore when she turned 118.",
+      "hypothesis": "Dracula promised to let Mavis explore on her birthday.",
+      "humanMeaning": "entailed",
+      "sourceFP32": {
+        "forward": 0.16786722223956482,
+        "reverse": 0.013159906125970882
+      }
+    },
+    {
+      "id": "promise-negated",
+      "premise": "Dracula refused to let Mavis explore on her birthday.",
+      "hypothesis": "Dracula let Mavis explore on her birthday.",
+      "humanMeaning": "not-entailed",
+      "sourceFP32": {
+        "forward": 0.0028226825717696624,
+        "reverse": 0.001360596311994612
+      }
+    },
+    {
+      "id": "disguise-paraphrase",
+      "premise": "Jonathan put on makeup and a patched costume so nobody would see he was human.",
+      "hypothesis": "Jonathan disguised himself as a monster.",
+      "humanMeaning": "entailed",
+      "sourceFP32": {
+        "forward": 0.05827966644357813,
+        "reverse": 0.0033808400806551258
+      }
+    },
+    {
+      "id": "disguise-wrong",
+      "premise": "Jonathan wore a swimsuit because he was going swimming.",
+      "hypothesis": "Jonathan disguised himself as a monster.",
+      "humanMeaning": "not-entailed",
+      "sourceFP32": {
+        "forward": 0.013337735969898021,
+        "reverse": 0.0017235583679329404
+      }
+    },
+    {
+      "id": "trust-paraphrase",
+      "premise": "Mavis was upset when she discovered her father had lied to her.",
+      "hypothesis": "Dracula's lie damaged Mavis's trust.",
+      "humanMeaning": "entailed",
+      "sourceFP32": {
+        "forward": 0.007849137056972507,
+        "reverse": 0.00926125123698183
+      }
+    },
+    {
+      "id": "trust-negated",
+      "premise": "Mavis trusted her father more because he had always told her the truth.",
+      "hypothesis": "Dracula's lie damaged Mavis's trust.",
+      "humanMeaning": "not-entailed",
+      "sourceFP32": {
+        "forward": 0.0038618316152750133,
+        "reverse": 0.002936311165070709
+      }
+    },
+    {
+      "id": "coop-paraphrase",
+      "premise": "The townspeople held their capes over Dracula so he could travel safely in the shade.",
+      "hypothesis": "The people cooperated to protect Dracula from sunlight.",
+      "humanMeaning": "entailed",
+      "sourceFP32": {
+        "forward": 0.9267140993561789,
+        "reverse": 0.014833303617320943
+      }
+    },
+    {
+      "id": "coop-wrong",
+      "premise": "The townspeople removed all the shade because they wanted Dracula to be hurt by the sun.",
+      "hypothesis": "The people cooperated to protect Dracula from sunlight.",
+      "humanMeaning": "not-entailed",
+      "sourceFP32": {
+        "forward": 0.009588832585550655,
+        "reverse": 0.001707879186044902
+      }
+    },
+    {
+      "id": "forgive-paraphrase",
+      "premise": "Dracula admitted he was wrong and began supporting Mavis's choices.",
+      "hypothesis": "Dracula changed from controlling Mavis to supporting her independence.",
+      "humanMeaning": "entailed",
+      "sourceFP32": {
+        "forward": 0.11417920762852701,
+        "reverse": 0.05856852994583706
+      }
+    },
+    {
+      "id": "forgive-negated",
+      "premise": "Dracula refused to admit he was wrong and kept controlling every choice Mavis made.",
+      "hypothesis": "Dracula changed from controlling Mavis to supporting her independence.",
+      "humanMeaning": "not-entailed",
+      "sourceFP32": {
+        "forward": 0.014090055508023263,
+        "reverse": 0.0021844130200137997
+      }
+    },
+    {
+      "id": "silly-unrelated",
+      "premise": "Purple pizza pirates jump around on Jupiter.",
+      "hypothesis": "Dracula protected his daughter from humans.",
+      "humanMeaning": "not-entailed",
+      "sourceFP32": {
+        "forward": 0.01651562297995425,
+        "reverse": 0.0014437232439692854
+      }
+    }
+  ]
+}

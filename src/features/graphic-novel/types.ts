@@ -1,6 +1,8 @@
+import type { AutomaticCheck } from "./checking-types";
+
 export type ParagraphSlot = "topicSentence" | "detail1" | "detail2" | "detail3" | "conclusion";
 
-/** These are human review notes, not machine-certified semantic scores. */
+/** Legacy manual notes remain readable; new automatic feedback is stored separately. */
 export type WritingReview = {
   meaning: string;
   support: string;
@@ -103,6 +105,7 @@ export type ChapterWork = {
   checklistLegend: Record<string, string>;
   teacherBannedWords: string[];
   submittedSnapshots: string[];
+  automaticChecks: Record<string, AutomaticCheck>;
   review: WritingReview & { parentOverride: boolean };
   updatedAt: string;
 };

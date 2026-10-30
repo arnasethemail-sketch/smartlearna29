@@ -11,11 +11,19 @@ guardian-managed sign-in and cloud progress storage.
 Open `#graphic-novel` in the existing app for the 24-chapter Hotel Transylvania
 adaptation, with 192 individually illustrated panels and six learning activities
 per chapter. Reading position, written answers, spelling, revisions and review
-notes use the existing account progress store. Written work has clearly labelled
-self/parent review; spelling and vocabulary matches have automatic checks.
+notes use the existing account progress store. All 14 written activities per
+chapter have free, on-device checking for meaning, support, clarity and writing
+conventions. Spelling and vocabulary matches also have automatic checks.
+No parent grading, paid AI API, API key or new subscription is required.
+
+The meaning checker downloads approximately 38 MB from this same website on
+first use and caches the model in the browser. A low-confidence result is
+explicitly uncertain, and a justified opinion need not agree with an example.
+Automatic feedback is guidance rather than a guarantee of writing mastery.
 
 Course and validation notes are in `docs/graphic-novel-course-notes.md`. The
 reviewed artwork prompt inventory is `docs/graphic-novel-art-prompts.json`.
+The free checking architecture and limits are in `docs/free-answer-checker.md`.
 Run `npm test` and `npm run build` before deployment. Production artwork tests
 verify all 192 panel files, native dimensions, unique checksums and alternative
 text without requiring private production references.

@@ -3,6 +3,8 @@ import { useLearningProgress } from "../progress";
 import type { LearningProgressSnapshot, PracticeAttempt } from "../progress";
 import { chapters, graphicCourse, type GraphicChapter } from "./data";
 import type { ChapterWork, ParagraphSlot, WritingReview } from "./types";
+import { allCheckTargets, currentCheckFingerprint } from "./checking-input";
+import { checkTargetKey, type AutomaticCheck, type CheckDimension, type CheckRating } from "./checking-types";
 
 export const GRAPHIC_PROGRESS_FORMAT = "graphic-novel-chapter-v1";
 export const PARAGRAPH_SLOTS: ParagraphSlot[] = ["topicSentence", "detail1", "detail2", "detail3", "conclusion"];
@@ -58,6 +60,7 @@ export function createChapterWork(chapter: GraphicChapter, random = Math.random)
     checklistLegend: { ...graphicCourse.config.worksheetPolicy.optionalProvisionalHelp },
     teacherBannedWords: [],
     submittedSnapshots: [],
+    automaticChecks: {},
     review: { ...emptyWritingReview(), parentOverride: false },
     updatedAt: new Date(0).toISOString(),
   };
@@ -95,10 +98,67 @@ function revisionHistory<T>(entries: unknown[], defaults: T, hasContent: (entry:
   return entries.filter(record).map((entry) => withDefaults(defaults, entry)).filter(hasContent);
 }
 
+const checkRatings = new Set<CheckRating>(["ready", "developing", "revise", "uncertain"]);
+function checkRating(value: unknown): value is CheckRating {
+  return typeof value === "string" && checkRatings.has(value as CheckRating);
+}
+function checkText(value: unknown): value is string {
+  return typeof value === "string" && Boolean(value.trim());
+}
+function checkTextArray(value: unknown): value is string[] {
+  return Array.isArray(value) && value.every(checkText);
+}
+function checkDimension(value: unknown): value is CheckDimension {
+  return record(value) && checkRating(value.rating) && checkText(value.feedback);
+}
+function checkDate(value: unknown): value is string {
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?(?:Z|[+-]\d{2}:\d{2})$/.test(value) || !Number.isFinite(Date.parse(value))) return false;
+  const year = Number(value.slice(0, 4)), month = Number(value.slice(5, 7)), day = Number(value.slice(8, 10));
+  const leapYear = year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
+  const daysInMonth = [31, leapYear ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][month - 1];
+  return day >= 1 && day <= daysInMonth && Number(value.slice(11, 13)) <= 23 && Number(value.slice(14, 16)) <= 59 && Number(value.slice(17, 19)) <= 59;
+}
+
+/** Repair a dynamic result map without letting damaged feedback hide any answers. */
+function normalizeAutomaticChecks(chapter: GraphicChapter, value: unknown): Record<string, AutomaticCheck> {
+  if (!record(value)) return {};
+  const panelIds = new Set(chapter.panels.map((panel) => panel.id));
+  const checks: Record<string, AutomaticCheck> = {};
+  for (const target of allCheckTargets(chapter)) {
+    const key = checkTargetKey(target);
+    if (!Object.prototype.hasOwnProperty.call(value, key)) continue;
+    const check = value[key];
+    if (!record(check) || check.schemaVersion !== 1 || check.targetKey !== key ||
+      (check.method !== "local-semantic-v1" && check.method !== "local-rules-v1") ||
+      !checkRating(check.overall) || !checkText(check.summary) ||
+      typeof check.inputFingerprint !== "string" || !/^free-check-v\d+:[0-9a-f]{1,8}:[0-9a-f]{1,8}:[1-9]\d{0,8}$/.test(check.inputFingerprint) ||
+      !checkDate(check.checkedAt) ||
+      !record(check.dimensions) || !checkDimension(check.dimensions.meaning) || !checkDimension(check.dimensions.support) ||
+      !checkDimension(check.dimensions.clarity) || !checkDimension(check.dimensions.conventions) ||
+      !checkTextArray(check.strengths) || !checkTextArray(check.nextSteps) ||
+      !Array.isArray(check.evidencePanelIds) || !check.evidencePanelIds.every((id) => typeof id === "string" && panelIds.has(id))) continue;
+    checks[key] = {
+      schemaVersion: 1, targetKey: key, inputFingerprint: check.inputFingerprint, checkedAt: check.checkedAt,
+      method: check.method, overall: check.overall, summary: check.summary,
+      dimensions: {
+        meaning: { rating: check.dimensions.meaning.rating, feedback: check.dimensions.meaning.feedback },
+        support: { rating: check.dimensions.support.rating, feedback: check.dimensions.support.feedback },
+        clarity: { rating: check.dimensions.clarity.rating, feedback: check.dimensions.clarity.feedback },
+        conventions: { rating: check.dimensions.conventions.rating, feedback: check.dimensions.conventions.feedback },
+      },
+      strengths: [...check.strengths], nextSteps: [...check.nextSteps], evidencePanelIds: [...new Set(check.evidencePanelIds as string[])],
+    };
+  }
+  return checks;
+}
+
 export function normalizeChapterWork(chapter: GraphicChapter, value: unknown): ChapterWork | null {
   if (!record(value) || value.chapterId !== chapter.id) return null;
   const defaults = createChapterWork(chapter, () => 0.5);
   const work = withDefaults(defaults, value);
+  // Empty object defaults cannot describe a dictionary's dynamic target keys.
+  // Keep valid prior-draft checks too; their fingerprints identify stale results.
+  work.automaticChecks = normalizeAutomaticChecks(chapter, value.automaticChecks);
   work.section = Math.min(5, Math.max(0, Math.floor(work.section)));
   work.page = Math.min(1, Math.max(0, Math.floor(work.page)));
   work.panelIndex = Math.min(7, Math.max(0, Math.floor(work.panelIndex)));
@@ -280,7 +340,11 @@ export function useGraphicProgress() {
     const currentTime = new Date(Math.max(Date.now(), Date.parse(previous.updatedAt) + 1)).toISOString();
     const work = normalizeChapterWork(chapter, { ...proposed, chapterId: chapter.id, revision: previous.revision + 1, updatedAt: currentTime });
     if (!work) return;
-    work.completedOnce = previous.completedOnce || hasChapterSubmission(chapter, work);
+    // A review belongs to the exact checked inputs. Editing a response reopens
+    // the current draft, while the earlier completed attempt still unlocks it.
+    if (previous.status === "reviewed" && allCheckTargets(chapter).some((target) =>
+      currentCheckFingerprint(chapter, previous, target) !== currentCheckFingerprint(chapter, work, target))) work.status = "in-progress";
+    work.completedOnce = previous.completedOnce || hasChapterSubmission(chapter, previous) || hasChapterSubmission(chapter, work);
     local.current.works = { ...local.current.works, [chapter.id]: work };
     delete local.current.drafts[chapter.id];
     const id = graphicAttemptId(chapter.id);

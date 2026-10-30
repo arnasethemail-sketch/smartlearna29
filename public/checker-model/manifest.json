@@ -1,0 +1,76 @@
+{
+  "modelId": "MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33",
+  "revision": "c07f66d9cbf781191bee66edfe8ad7856f045781",
+  "license": "MIT",
+  "dtype": "fp16-storage-fp32-compute",
+  "repack": {
+    "method": "Lossless FLOAT16 initializer storage with explicit Cast-to-FLOAT32 nodes; original FLOAT32 compute graph unchanged.",
+    "script": "scripts/repack-local-checker.mjs",
+    "sourceBytes": 51140063,
+    "sourceSha256": "89ca1f96830106de21fcea15b55685060dd6faafd7864a790594910f2e661e3f",
+    "convertedInitializers": 105,
+    "convertedValues": 12750594,
+    "maximumWeightError": 0,
+    "tools": {
+      "node": "24.19.0",
+      "protobufSchema": "onnxruntime-web@1.22.0-dev.20250409-89f8206ba4/lib/onnxjs/ort-schema/protobuf/onnx.js"
+    }
+  },
+  "maxTokens": 512,
+  "labels": [
+    "entailment",
+    "not_entailment"
+  ],
+  "files": [
+    {
+      "path": "xtremedistil/config.json",
+      "bytes": 882,
+      "sha256": "7056598267ea0cf462d3b35c5f42c1f0be2bcb06f5e301a1861d7d6f957ca228",
+      "source": "https://huggingface.co/MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33/resolve/c07f66d9cbf781191bee66edfe8ad7856f045781/config.json"
+    },
+    {
+      "path": "xtremedistil/tokenizer.json",
+      "bytes": 711396,
+      "sha256": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+      "source": "https://huggingface.co/MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33/resolve/c07f66d9cbf781191bee66edfe8ad7856f045781/tokenizer.json"
+    },
+    {
+      "path": "xtremedistil/tokenizer_config.json",
+      "bytes": 366,
+      "sha256": "9261e7d79b44c8195c1cada2b453e55b00aeb81e907a6664974b4d7776172ab3",
+      "source": "https://huggingface.co/MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33/resolve/c07f66d9cbf781191bee66edfe8ad7856f045781/tokenizer_config.json"
+    },
+    {
+      "path": "xtremedistil/special_tokens_map.json",
+      "bytes": 125,
+      "sha256": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+      "source": "https://huggingface.co/MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33/resolve/c07f66d9cbf781191bee66edfe8ad7856f045781/special_tokens_map.json"
+    },
+    {
+      "path": "xtremedistil/vocab.txt",
+      "bytes": 231508,
+      "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3",
+      "source": "https://huggingface.co/MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33/resolve/c07f66d9cbf781191bee66edfe8ad7856f045781/vocab.txt"
+    },
+    {
+      "path": "xtremedistil/onnx/model.onnx",
+      "bytes": 25654858,
+      "sha256": "b44b809cc1dc91d8cec959e47f9c86d51c821bca8252c52fbd4c55dfb686a116",
+      "source": "https://huggingface.co/MoritzLaurer/xtremedistil-l6-h256-zeroshot-v1.1-all-33/resolve/c07f66d9cbf781191bee66edfe8ad7856f045781/onnx/model.onnx",
+      "transformation": "See manifest.repack and scripts/repack-local-checker.mjs."
+    },
+    {
+      "path": "runtime/ort-wasm-simd-threaded.mjs",
+      "bytes": 20856,
+      "sha256": "43c25054b6b9ac000f786c65545ff83a45f871e0e310e8c2f4d48a363bb66db4",
+      "source": "npm:onnxruntime-web@1.22.0-dev.20250409-89f8206ba4/dist/ort-wasm-simd-threaded.mjs"
+    },
+    {
+      "path": "runtime/ort-wasm-simd-threaded.wasm",
+      "bytes": 11133407,
+      "sha256": "f061472c6e77d6d50d079aacdc0ff9b63fee287ddd2cbf46cf62438d3891de2b",
+      "source": "npm:onnxruntime-web@1.22.0-dev.20250409-89f8206ba4/dist/ort-wasm-simd-threaded.wasm"
+    }
+  ],
+  "runtimeVersion": "1.22.0-dev.20250409-89f8206ba4"
+}

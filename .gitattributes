@@ -1,0 +1,7 @@
+# Neural weights and runtimes must retain their exact checksum-verified bytes.
+*.onnx binary
+*.wasm binary
+public/checker-model/** -text whitespace=cr-at-eol
+# Preserve upstream formatting in vendored runtime and model documentation.
+public/checker-model/runtime/*.mjs whitespace=-blank-at-eol,-blank-at-eof
+public/checker-model/xtremedistil/MODEL-CARD.md whitespace=-blank-at-eol,-blank-at-eof
