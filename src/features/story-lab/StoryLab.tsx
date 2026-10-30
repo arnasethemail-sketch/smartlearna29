@@ -82,6 +82,7 @@ function StoryLabWorkspace({ onBackToEnglish }: { onBackToEnglish: () => void })
     <main className="story-lab sl-hub">
       <div className="sl-wrap">
         <LabHeader onBack={onBackToEnglish} />
+        <aside className="sl-comparison" style={{ marginTop: 24, padding: 22, background: "#f2e5c9", borderRadius: 14 }}><p className="sl-kicker">THE READER’S PICK HAS A NEW CHAPTER</p><p style={{ marginTop: 8 }}>The Midnight Hotel now has ten complete illustrated stories, with no exercises.</p><a href="#midnight-hotel" className="sl-button sl-button-dark">Read all ten Midnight Hotel stories →</a></aside>
         <section className="sl-intro" aria-labelledby="lab-heading">
           <p className="sl-kicker"><span aria-hidden="true">✧</span> TWO WORLDS. YOU CHOOSE WHAT COMES NEXT.</p>
           <h1 id="lab-heading">Which story will<br /><em>pull you in?</em></h1>

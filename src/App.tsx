@@ -28,6 +28,12 @@ const StoryLab = lazy(() =>
   })),
 );
 
+const MidnightHotel = lazy(() =>
+  import("./features/midnight-hotel/MidnightHotel").then((module) => ({
+    default: module.MidnightHotel,
+  })),
+);
+
 type MathTopicName =
   | "Addition"
   | "Subtraction"
@@ -35,7 +41,7 @@ type MathTopicName =
   | "Fractions";
 
 type SubjectName = "Math" | "English" | KnowledgeSubjectName;
-type EnglishSelection = EnglishTopicName | "Story Adventures" | "Story Lab";
+type EnglishSelection = EnglishTopicName | "Story Adventures" | "Story Lab" | "Midnight Hotel";
 
 type SelectedTopic =
   | { subject: "Math"; name: MathTopicName }
@@ -263,23 +269,23 @@ function LearningPathIllustration({ subject }: { subject: SubjectName }) {
 
 export default function App() {
   const [subject, setSubject] = useState<SubjectName>(() =>
-    window.location.hash === "#story-lab" ? "English" : "Math",
+    ["#story-lab", "#midnight-hotel"].includes(window.location.hash) ? "English" : "Math",
   );
   const [subjectMenuOpen, setSubjectMenuOpen] = useState(false);
   const [selectedTopic, setSelectedTopic] = useState<SelectedTopic | null>(() =>
-    window.location.hash === "#story-lab"
-      ? { subject: "English", name: "Story Lab" }
+    ["#story-lab", "#midnight-hotel"].includes(window.location.hash)
+      ? { subject: "English", name: window.location.hash === "#midnight-hotel" ? "Midnight Hotel" : "Story Lab" }
       : null,
   );
 
   useEffect(() => {
     const followStoryLabLink = () => {
-      if (window.location.hash === "#story-lab") {
+      if (["#story-lab", "#midnight-hotel"].includes(window.location.hash)) {
         setSubject("English");
         setSubjectMenuOpen(false);
-        setSelectedTopic({ subject: "English", name: "Story Lab" });
+        setSelectedTopic({ subject: "English", name: window.location.hash === "#midnight-hotel" ? "Midnight Hotel" : "Story Lab" });
       } else {
-        setSelectedTopic((current) => current?.name === "Story Lab" ? null : current);
+        setSelectedTopic((current) => current?.name === "Story Lab" || current?.name === "Midnight Hotel" ? null : current);
       }
     };
     window.addEventListener("hashchange", followStoryLabLink);
@@ -336,6 +342,10 @@ export default function App() {
 
   if (selectedTopic?.subject === "Math" && selectedTopic.name === "Fractions") {
     return <FractionPractice onBackToTopics={() => setSelectedTopic(null)} />;
+  }
+
+  if (selectedTopic?.subject === "English" && selectedTopic.name === "Midnight Hotel") {
+    return <Suspense fallback={<main className="flex min-h-screen items-center justify-center bg-[#faf5eb] px-5 text-[#392341]"><p className="text-xl font-bold">The hotel is opening its doors…</p></main>}><MidnightHotel onBackToEnglish={() => { setSelectedTopic(null); setSubject("English"); window.location.hash = "topics"; }} /></Suspense>;
   }
 
   if (
@@ -517,20 +527,20 @@ export default function App() {
 
       <AnnouncementBar subject={subject} />
 
-      <section className="mx-auto w-full max-w-6xl px-5 pt-7 sm:px-8" aria-label="Try two new story experiences">
+      <section className="mx-auto w-full max-w-6xl px-5 pt-7 sm:px-8" aria-label="Read ten Midnight Hotel stories">
         <a
-          href="#story-lab"
+          href="#midnight-hotel"
           onClick={() => {
             setSubject("English");
-            startEnglishTopic("Story Lab");
+            startEnglishTopic("Midnight Hotel");
           }}
           className="flex flex-col gap-4 rounded-2xl border border-[#d9c8dc] bg-[#30273b] px-6 py-5 text-[#fff4dd] shadow-[0_10px_25px_rgba(48,39,59,0.1)] transition hover:bg-[#40324c] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#dfff38] sm:flex-row sm:items-center sm:justify-between"
         >
           <span className="flex items-center gap-4">
             <span aria-hidden="true" className="text-3xl text-[#f2cb8f]">✦</span>
-            <span><span className="block text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#e8c28c]">New · Story Lab</span><span className="mt-1 block text-lg font-black">A strange hotel or a secret in the stars?</span><span className="mt-1 block text-xs font-medium leading-6 text-[#dacddd]">Try two short English adventures. Choose the one you want more of.</span></span>
+            <span><span className="block text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#e8c28c]">New · The Midnight Hotel</span><span className="mt-1 block text-lg font-black">Your room is ready. All ten stories are here.</span><span className="mt-1 block text-xs font-medium leading-6 text-[#dacddd]">Funny monsters, illustrated adventures, and the secret of Room 13. No exercises—just stories.</span></span>
           </span>
-          <span className="inline-flex shrink-0 items-center justify-center gap-5 rounded-xl bg-[#f4d8a6] px-5 py-3 text-sm font-black text-[#30273b]">Try A &amp; B <span aria-hidden="true">↗</span></span>
+          <span className="inline-flex shrink-0 items-center justify-center gap-5 rounded-xl bg-[#f4d8a6] px-5 py-3 text-sm font-black text-[#30273b]">Read the stories <span aria-hidden="true">↗</span></span>
         </a>
       </section>
 

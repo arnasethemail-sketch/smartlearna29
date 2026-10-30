@@ -139,7 +139,7 @@ describe("Story Lab experience testing", () => {
     expect(screen.getByRole("button", { name: "Continue experience A" })).toBeTruthy();
   });
 
-  it("opens a shared Story Lab link and returns through English to the sample banner", async () => {
+  it("keeps a shared Story Lab link and links the chosen hotel series from English", async () => {
     window.history.replaceState(null, "", "/#story-lab");
     render(<App />);
 
@@ -147,9 +147,11 @@ describe("Story Lab experience testing", () => {
     fireEvent.click(screen.getByRole("button", { name: "Back to English" }));
     expect(screen.getByRole("heading", { name: "Grade 4 English Practice" })).toBeTruthy();
     expect(window.location.hash).toBe("#topics");
-    fireEvent.click(screen.getByRole("link", { name: /A strange hotel or a secret in the stars\?/ }));
-    expect(await screen.findByRole("heading", { name: /Which story will/ })).toBeTruthy();
-    expect(await screen.findByRole("button", { name: "Start experience A" })).toBeTruthy();
-    expect(await screen.findByRole("button", { name: "Start experience B" })).toBeTruthy();
+    fireEvent.click(screen.getByRole("link", { name: /Your room is ready. All ten stories are here/ }));
+    expect(await screen.findByRole("heading", { name: "Welcome to the Midnight Hotel." })).toBeTruthy();
+    expect(await screen.findByRole("button", { name: "Start story 1" })).toBeTruthy();
+    expect(await screen.findByRole("button", { name: "Read story 10" })).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Back to English" }));
+    expect(document.title).toBe("Grade 4 English Practice");
   });
 });
