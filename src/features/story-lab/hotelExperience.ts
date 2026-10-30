@@ -1,0 +1,137 @@
+import type { StoryExperience } from './types';
+
+export const hotelExperience: StoryExperience = {
+  id: 'hotel',
+  label: 'A',
+  title: 'The Midnight Hotel',
+  subtitle: 'The case of the missing breakfast bell',
+  tone: 'Funny monsters · peculiar clues · a hotel with secrets',
+  hook: 'Your first job at a magical hotel is to find a stolen bell before a hungry dragon eats the reception desk.',
+  estimatedMinutes: 6,
+  scenes: [
+    {
+      id: 'hotel-invitation',
+      title: 'Your sandwich has a message',
+      location: 'The lobby',
+      paragraphs: [
+        'The invitation arrives inside your sandwich. MIDNIGHT HOTEL. JUNIOR DETECTIVE WANTED. BRING SOCKS. You turn it over. PREFERABLY YOUR OWN.',
+        'At sunset, a hotel appears between the dentist and the supermarket. Nia waits outside with Bark Bolt, a dog wearing a security badge. “I handle dangerous intruders,” he says. A vacuum cleaner rolls past. He climbs onto Nia.',
+        'Inside, a dragon nibbles the reception desk. Breakfast cannot begin until someone rings the silver bell. Unfortunately, the bell has vanished. Beside its empty cushion lie a cinnamon crumb and two narrow wheel marks.',
+        '“Excellent,” says Bark Bolt from Nia’s shoulder. “A case with snacks.”',
+      ],
+      interaction: {
+        kind: 'choice',
+        prompt: 'Where will you start investigating?',
+        options: [
+          {
+            id: 'follow-crumbs',
+            text: 'Follow the cinnamon crumbs.',
+            response: 'The trail reaches the kitchen hatch. Bark Bolt eats one crumb “for scientific reasons.” Beneath the hatch, the same narrow wheel marks turn toward the service corridor.',
+            clue: 'The narrow wheel marks lead toward the service corridor.',
+          },
+          {
+            id: 'ask-vampire',
+            text: 'Question the vampire in fluffy slippers.',
+            response: '“I saw something roll toward the service corridor,” she whispers. “Also, please write that my slippers were extremely dignified.” She points to two narrow wheel marks.',
+            clue: 'A witness saw something roll toward the service corridor.',
+          },
+        ],
+      },
+    },
+    {
+      id: 'hotel-kitchen',
+      title: 'Something is trying to look innocent',
+      location: 'The kitchen hatch',
+      paragraphs: [
+        'At the hatch, a ghost chef whisks eggs through his own stomach. “Still getting used to this,” he says. “The bell was here when I delivered the cinnamon buns.”',
+        'A serving trolley slips past. It checks behind itself, ducks beneath a curtain, and quietly shuts a drawer. Nia watches its furtive movements. “Why would a trolley try so hard to avoid being noticed?”',
+        'The trolley immediately puts on sunglasses. They are much too small.',
+        'A card hangs from its handle: MORNING JOB: COLLECT ALL RINGS. Underneath, someone has drawn an empty plate. From the closed drawer comes a tiny, silvery ding.',
+        '“Probably its stomach,” Bark Bolt whispers. “Mine does that.”',
+      ],
+      interaction: {
+        kind: 'question',
+        skill: 'Vocabulary',
+        prompt: 'The trolley moves furtively. What does “furtive” mean here?',
+        options: [
+          { id: 'noisy', text: 'Loud and eager to attract attention' },
+          { id: 'secretive', text: 'Secretive and trying not to be noticed' },
+          { id: 'sleepy', text: 'Too sleepy to move' },
+          { id: 'generous', text: 'Generous and happy to share' },
+        ],
+        correctOptionId: 'secretive',
+        success: 'You noticed the checking, hiding, and quiet movements. This trolley is keeping something secret.',
+        explanation: '“Furtive” means secretive. Checking behind itself, hiding under a curtain, and quietly closing the drawer show that the trolley does not want attention.',
+        clue: 'A silvery ding came from the trolley’s closed drawer.',
+      },
+    },
+    {
+      id: 'hotel-evidence',
+      title: 'The world’s worst disguise',
+      location: 'The service corridor',
+      paragraphs: [
+        'In the corridor, the trolley hides behind a plant. Its wheels, sunglasses, and enormous drawer are all sticking out. The plant looks embarrassed.',
+        'The vampire arrives carrying a plate of toast. “Before anyone asks, I borrowed the jam. Not the bell.” A ghost floats through the ceiling, trailing cold mist.',
+        'Nia crouches beside the wheel marks. They are exactly as far apart as the trolley’s wheels. A cinnamon crumb drops from its drawer. Then comes another ding.',
+        '“Three clues,” she says. “Wheel marks, crumbs, and that sound.”',
+        'Bark Bolt addresses the plant. “You are surrounded.”',
+        '“I am a fern,” it replies. “This has been a very stressful morning.”',
+      ],
+      interaction: {
+        kind: 'question',
+        skill: 'Reading clues',
+        prompt: 'Which explanation best fits all three clues?',
+        options: [
+          { id: 'vampire', text: 'The vampire hid the bell inside her toast.' },
+          { id: 'ghost', text: 'The ghost carried the bell through the ceiling.' },
+          { id: 'fern', text: 'The fern grew a silver bell overnight.' },
+          { id: 'trolley', text: 'The trolley carried the bell away in its drawer.' },
+        ],
+        correctOptionId: 'trolley',
+        success: 'The clues fit together: matching wheels, kitchen crumbs, and a bell-like sound inside the drawer.',
+        explanation: 'The trolley’s wheels match the marks, cinnamon crumbs fall from its drawer, and the drawer makes a silvery ding. The other explanations do not account for those clues.',
+        clue: 'The trolley’s drawer connects all three pieces of evidence.',
+      },
+    },
+    {
+      id: 'hotel-bell',
+      title: 'A very literal employee',
+      location: 'Behind the embarrassed fern',
+      paragraphs: [
+        'The trolley opens its drawer. Inside sit six curtain rings, a rubber swimming ring, an onion ring, and the missing bell.',
+        '“I collected all rings,” it says proudly. “That one rings beautifully.” It taps the bell. DING.',
+        'Nia peels the sticky word RINGS from the job card. Underneath, faded writing reads: COLLECT ALL PLATES. The trolley was following a changed instruction.',
+        '“We found our bell,” Nia says, “but someone wanted breakfast delayed.”',
+        'First, you need to return it and give the trolley a clearer job. Nia begins a note for reception. Bark Bolt guards the onion ring with the serious expression of a dog considering a crime.',
+      ],
+      interaction: {
+        kind: 'question',
+        skill: 'Grammar',
+        prompt: 'Which sentence should Nia put in her note?',
+        options: [
+          { id: 'belong', text: 'The bell belong at the front desk.' },
+          { id: 'belonging', text: 'The bell belonging at the front desk.' },
+          { id: 'belongs', text: 'The bell belongs at the front desk.' },
+          { id: 'are-belongs', text: 'The bell are belongs at the front desk.' },
+        ],
+        correctOptionId: 'belongs',
+        success: '“The bell belongs” is correct. One bell takes the verb “belongs.” Reception will know where to put it.',
+        explanation: '“The bell” is a singular subject, so it takes “belongs.” “Belonging” alone does not form a complete sentence, and “are belongs” does not work here.',
+        clue: 'Someone changed the trolley’s job card from PLATES to RINGS.',
+      },
+    },
+  ],
+  writing: {
+    prompt: 'Help prevent another breakfast disaster. Write a new job card for the trolley: explain what it should collect, what it should leave alone, and where it should take the dishes.',
+    placeholder: 'Your morning job is… Please leave… Take the dishes to…',
+    minWords: 15,
+  },
+  ending: {
+    title: 'Breakfast is saved. The mystery has just checked in.',
+    paragraphs: [
+      'With your draft beside her, Nia makes a new job card. The trolley returns the bell, gathers the empty plates, and proudly wheels them to the kitchen. DING! Breakfast begins. The dragon exchanges the reception desk for twelve pancakes.',
+      'Bark Bolt awards you a detective badge. It is slightly sticky. “Official maple syrup,” he explains.',
+    ],
+    teaser: 'Inside the peeled-off RINGS label is a message: THANK YOU FOR THE DELAY. ROOM 13 IS READY. The hotel has only twelve rooms.',
+  },
+};

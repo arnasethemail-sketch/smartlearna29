@@ -22,6 +22,12 @@ const StoryAdventures = lazy(() =>
   })),
 );
 
+const StoryLab = lazy(() =>
+  import("./features/story-lab/StoryLab").then((module) => ({
+    default: module.StoryLab,
+  })),
+);
+
 type MathTopicName =
   | "Addition"
   | "Subtraction"
@@ -29,7 +35,7 @@ type MathTopicName =
   | "Fractions";
 
 type SubjectName = "Math" | "English" | KnowledgeSubjectName;
-type EnglishSelection = EnglishTopicName | "Story Adventures";
+type EnglishSelection = EnglishTopicName | "Story Adventures" | "Story Lab";
 
 type SelectedTopic =
   | { subject: "Math"; name: MathTopicName }
@@ -256,9 +262,29 @@ function LearningPathIllustration({ subject }: { subject: SubjectName }) {
 }
 
 export default function App() {
-  const [subject, setSubject] = useState<SubjectName>("Math");
+  const [subject, setSubject] = useState<SubjectName>(() =>
+    window.location.hash === "#story-lab" ? "English" : "Math",
+  );
   const [subjectMenuOpen, setSubjectMenuOpen] = useState(false);
-  const [selectedTopic, setSelectedTopic] = useState<SelectedTopic | null>(null);
+  const [selectedTopic, setSelectedTopic] = useState<SelectedTopic | null>(() =>
+    window.location.hash === "#story-lab"
+      ? { subject: "English", name: "Story Lab" }
+      : null,
+  );
+
+  useEffect(() => {
+    const followStoryLabLink = () => {
+      if (window.location.hash === "#story-lab") {
+        setSubject("English");
+        setSubjectMenuOpen(false);
+        setSelectedTopic({ subject: "English", name: "Story Lab" });
+      } else {
+        setSelectedTopic((current) => current?.name === "Story Lab" ? null : current);
+      }
+    };
+    window.addEventListener("hashchange", followStoryLabLink);
+    return () => window.removeEventListener("hashchange", followStoryLabLink);
+  }, []);
 
   useEffect(() => {
     document.title = `Grade 4 ${subject} Practice`;
@@ -310,6 +336,21 @@ export default function App() {
 
   if (selectedTopic?.subject === "Math" && selectedTopic.name === "Fractions") {
     return <FractionPractice onBackToTopics={() => setSelectedTopic(null)} />;
+  }
+
+  if (
+    selectedTopic?.subject === "English" &&
+    selectedTopic.name === "Story Lab"
+  ) {
+    return (
+      <Suspense fallback={<main className="flex min-h-screen items-center justify-center bg-[#fbf8f2] px-5 text-[#30273b]"><p className="text-xl font-bold">Opening two new worlds…</p></main>}>
+        <StoryLab onBackToEnglish={() => {
+          setSelectedTopic(null);
+          setSubject("English");
+          window.location.hash = "topics";
+        }} />
+      </Suspense>
+    );
   }
 
   if (
@@ -475,6 +516,23 @@ export default function App() {
       </header>
 
       <AnnouncementBar subject={subject} />
+
+      <section className="mx-auto w-full max-w-6xl px-5 pt-7 sm:px-8" aria-label="Try two new story experiences">
+        <a
+          href="#story-lab"
+          onClick={() => {
+            setSubject("English");
+            startEnglishTopic("Story Lab");
+          }}
+          className="flex flex-col gap-4 rounded-2xl border border-[#d9c8dc] bg-[#30273b] px-6 py-5 text-[#fff4dd] shadow-[0_10px_25px_rgba(48,39,59,0.1)] transition hover:bg-[#40324c] focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-4 focus-visible:outline-[#dfff38] sm:flex-row sm:items-center sm:justify-between"
+        >
+          <span className="flex items-center gap-4">
+            <span aria-hidden="true" className="text-3xl text-[#f2cb8f]">✦</span>
+            <span><span className="block text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#e8c28c]">New · Story Lab</span><span className="mt-1 block text-lg font-black">A strange hotel or a secret in the stars?</span><span className="mt-1 block text-xs font-medium leading-6 text-[#dacddd]">Try two short English adventures. Choose the one you want more of.</span></span>
+          </span>
+          <span className="inline-flex shrink-0 items-center justify-center gap-5 rounded-xl bg-[#f4d8a6] px-5 py-3 text-sm font-black text-[#30273b]">Try A &amp; B <span aria-hidden="true">↗</span></span>
+        </a>
+      </section>
 
       <section
         id="home"
