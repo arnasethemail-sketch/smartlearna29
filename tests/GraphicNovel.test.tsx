@@ -36,6 +36,9 @@ describe("Graphic novel collection integration", () => {
     const unitHeadings = screen.getAllByRole("heading", { level: 3 });
     expect(unitHeadings.map((item) => item.textContent)).toEqual(expect.arrayContaining(["Promises and protection"]));
     expect(screen.getAllByRole("heading", { level: 4 }).map((item) => item.textContent)).toEqual(chapters.map((item) => item.title));
+    const chapterCards = screen.getAllByRole("article");
+    expect(chapterCards).toHaveLength(24);
+    chapterCards.forEach((card) => expect(card.querySelector("img")).toBeTruthy());
     expect(screen.getAllByRole("button", { name: /^Start chapter/ })).toHaveLength(1);
     expect(screen.getByRole("button", { name: "Finish chapter 1 to continue" }).matches(":disabled")).toBe(true);
     expect(screen.queryByText(chapters[0].comprehension[0].answerGuidance)).toBeNull();
