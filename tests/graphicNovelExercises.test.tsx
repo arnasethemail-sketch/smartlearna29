@@ -111,9 +111,9 @@ describe("Graphic novel written worksheets", () => {
   it("has four feature boxes with all three blank written responses and no prefilled model", () => {
     renderSection(TextFeatures);
     expect(screen.getAllByRole("textbox")).toHaveLength(12);
-    expect(screen.getAllByRole("textbox", { name: "Text feature found" })).toHaveLength(4);
-    expect(screen.getAllByRole("textbox", { name: "Why do you think the author included this text feature?" })).toHaveLength(4);
-    expect(screen.getAllByRole("textbox", { name: "How did this text feature help you understand the text?" })).toHaveLength(4);
+    expect(screen.getAllByRole("textbox", { name: "1. What feature did you spot?" })).toHaveLength(4);
+    expect(screen.getAllByRole("textbox", { name: "2. What is its job?" })).toHaveLength(4);
+    expect(screen.getAllByRole("textbox", { name: "3. What did you learn from it?" })).toHaveLength(4);
     expect(screen.queryByText("An example to compare, not copy")).toBeNull();
     for (const input of screen.getAllByRole("textbox")) expect((input as HTMLTextAreaElement).value).toBe("");
   });
@@ -136,9 +136,9 @@ describe("Graphic novel written worksheets", () => {
 
     const first = within(discoveries[0]);
     const drafts = [
-      ["Text feature found", "Narration box"],
-      ["Why do you think the author included this text feature?", "It explains what happened before the characters spoke."],
-      ["How did this text feature help you understand the text?", "The first narration box tells me when the story begins."],
+      ["1. What feature did you spot?", "Narration box"],
+      ["2. What is its job?", "It explains what happened before the characters spoke."],
+      ["3. What did you learn from it?", "The first narration box tells me when the story begins."],
     ];
     drafts.forEach(([name, value]) => fireEvent.change(first.getByRole("textbox", { name }), { target: { value } }));
     const selector = first.getByRole("combobox", { name: "Story panel for discovery 1" });
@@ -162,6 +162,57 @@ describe("Graphic novel written worksheets", () => {
     expect(saved.panelIndex).toBe(6);
     expect(saved.page).toBe(1);
     expect(saved.readingComplete).toBe(initial.readingComplete);
+  });
+
+  it("offers progressive clues for the panel being viewed without filling in the learner's answers", () => {
+    const view = renderSection(TextFeatures);
+    const first = within(screen.getByRole("article", { name: "Discovery 1" }));
+    expect(first.queryByRole("status")).toBeNull();
+    fireEvent.click(first.getByRole("button", { name: "Give me a clue for discovery 1" }));
+    expect(first.getByRole("status").textContent).toContain("CLUE 1 OF 3 · PANEL 1");
+    expect(first.getByRole("status").textContent).toContain("cream-coloured narration box");
+    fireEvent.click(first.getByRole("button", { name: "Another clue for discovery 1" }));
+    expect(first.getByRole("status").textContent).toContain("CLUE 2 OF 3");
+    fireEvent.click(first.getByRole("button", { name: "Another clue for discovery 1" }));
+    expect(first.getByRole("status").textContent).toContain("CLUE 3 OF 3");
+    expect(first.queryByRole("button", { name: "Another clue for discovery 1" })).toBeNull();
+    expect(first.getAllByRole("textbox").every((input) => !(input as HTMLTextAreaElement).value)).toBe(true);
+
+    fireEvent.change(first.getByRole("combobox", { name: "Story panel for discovery 1" }), { target: { value: "ch01-p08" } });
+    expect(first.getByRole("status").textContent).toContain("CLUE 1 OF 3 · PANEL 8");
+    expect(view.readWork().features[chapters[0].textFeaturesHunt.boxes[0].id].showHelp).toBe(true);
+    fireEvent.click(first.getByRole("button", { name: "Hide clues for discovery 1" }));
+    expect(first.queryByRole("status")).toBeNull();
+  });
+
+  it("uses the selected character's actual words for a dialogue clue", () => {
+    renderSection(TextFeatures);
+    const second = within(screen.getByRole("article", { name: "Discovery 2" }));
+    fireEvent.click(second.getByRole("button", { name: "Give me a clue for discovery 2" }));
+    fireEvent.click(second.getByRole("button", { name: "Another clue for discovery 2" }));
+    expect(second.getByRole("status").textContent).toContain(chapters[0].panels[1].dialogue[0].text);
+    fireEvent.change(second.getByRole("combobox", { name: "Story panel for discovery 2" }), { target: { value: "ch01-p03" } });
+    fireEvent.click(second.getByRole("button", { name: "Another clue for discovery 2" }));
+    expect(second.getByRole("status").textContent).toContain("Mavis says");
+    expect(second.getByRole("status").textContent).toContain("What is out there?");
+  });
+
+  it("counts written discoveries honestly and keeps practice choices separate from saved chapter work", () => {
+    const view = renderSection(TextFeatures);
+    const casebook = within(screen.getByLabelText("Your detective casebook"));
+    const first = within(screen.getByRole("article", { name: "Discovery 1" }));
+    const progress = casebook.getByRole("progressbar", { name: "Discoveries written" });
+    expect(progress.getAttribute("value")).toBe("0");
+    first.getAllByRole("textbox").slice(0, 2).forEach((input) => fireEvent.change(input, { target: { value: "A short draft." } }));
+    expect(progress.getAttribute("value")).toBe("0");
+    fireEvent.change(first.getByRole("textbox", { name: "3. What did you learn from it?" }), { target: { value: "I learn a story detail." } });
+    expect(casebook.getByRole("status").textContent).toBe("1 of 4 discoveries written");
+    expect(progress.getAttribute("value")).toBe("1");
+    expect(view.readWork().automaticChecks).toEqual({});
+    fireEvent.click(screen.getByText("Try one quick clue"));
+    fireEvent.click(screen.getByRole("button", { name: "I learn that Pip has noticed the missing mooncake." }));
+    expect(progress.getAttribute("value")).toBe("1");
+    expect(view.readWork().automaticChecks).toEqual({});
   });
 
   it("shows the native time label beside the first chapter's source image", () => {

@@ -1,0 +1,43 @@
+.gnx-hunt-guide { margin: 0 0 30px; border: 1px solid #d7c7dd; border-radius: 18px; background: #f7f1f8; overflow: hidden; }
+.gnx-hunt-guide > summary { padding: 17px 22px; background: #2c273f; color: #ffe5ac; font-size: 18px; font-weight: 750; cursor: pointer; }
+.gnx-hunt-guide > summary::marker { color: #f5ce83; }
+.gnx-hunt-guide-body { padding: 22px; }
+.gnx-exercises .gnx-hunt-guide-note { margin-bottom: 18px; color: #65576d; font-size: 15px; line-height: 1.6; }
+.gnx-hunt-guide-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: 24px; align-items: start; }
+.gnx-hunt-mini-comic { border: 2px solid #40324e; border-radius: 12px; overflow: hidden; box-shadow: 4px 5px 0 #d8c7dd; }
+.gnx-hunt-mini-comic > figcaption { padding: 10px 16px; background: #40324e; color: #ffe6b3; font: 500 23px/1.3 Georgia, serif; }
+.gnx-hunt-mini-scene { position: relative; min-height: 235px; padding: 16px 18px 105px; background: radial-gradient(circle at 84% 80%, #e4bdd6 0, transparent 45%), linear-gradient(145deg, #ebe3f5, #faf0da); }
+.gnx-exercises .gnx-hunt-mini-narrator { position: relative; z-index: 1; padding: 8px 10px; border: 1px solid #bca272; background: #fff1c8; color: #514034; font-size: 14px; line-height: 1.6; }
+.gnx-hunt-mini-bubble { position: relative; z-index: 1; width: fit-content; max-width: 100%; margin: 15px 0 0 7px !important; padding: 11px 17px; border: 2px solid #43354f; border-radius: 18px 18px 18px 4px; background: #fff; color: #30253d; }
+.gnx-hunt-mini-bubble::after { content: ""; position: absolute; bottom: -11px; left: 18px; width: 16px; height: 16px; border-right: 2px solid #43354f; border-bottom: 2px solid #43354f; transform: skewY(-32deg); background: #fff; }
+.gnx-hunt-mini-bubble cite { display: block; color: #7a5085; font: 800 11px/1.5 Inter, ui-sans-serif, system-ui, sans-serif; letter-spacing: .8px; text-transform: uppercase; }
+.gnx-hunt-mini-bubble p { position: relative; z-index: 1; font-size: 17px; font-weight: 650; line-height: 1.5; }
+.gnx-hunt-mini-tin { position: absolute; bottom: 18px; right: 25px; width: 120px; height: 54px; border: 2px solid #6e5e8b; border-radius: 50% / 20%; background: linear-gradient(90deg, #8d7eb0, #c1b2d7 55%, #9584b3); box-shadow: 8px 7px 0 #76678326; }
+.gnx-hunt-mini-tin::before { content: ""; position: absolute; top: -10px; left: -2px; width: 120px; height: 24px; border: 3px solid #a99abc; border-radius: 50%; background: #48384e; box-shadow: inset 0 5px 4px #22192e66; }
+.gnx-hunt-mini-tin span { position: absolute; top: 24px; left: 0; width: 100%; color: #fff9e9; font-size: 9px; font-weight: 850; letter-spacing: 1.5px; text-align: center; }
+.gnx-hunt-mini-tin i { position: absolute; left: -43px; top: 15px; width: 47px; height: 19px; border: 3px solid #b7a5c8; border-radius: 50%; background: #9280ad; transform: rotate(-38deg); }
+.gnx-hunt-sample-answers { list-style: none; margin: 0; padding: 0; counter-reset: sample-step; }
+.gnx-hunt-sample-answers li { position: relative; counter-increment: sample-step; padding-left: 38px; }
+.gnx-hunt-sample-answers li + li { margin-top: 18px; }
+.gnx-hunt-sample-answers li::before { content: counter(sample-step); position: absolute; left: 0; top: 1px; display: grid; place-items: center; width: 25px; height: 25px; border-radius: 50%; background: #e4d5e9; color: #654772; font-size: 13px; font-weight: 850; }
+.gnx-hunt-sample-answers strong { display: block; color: #33273f; font-size: 16px; line-height: 1.5; }
+.gnx-hunt-sample-answers p { margin-top: 5px; color: #63576d; font-size: 15px; line-height: 1.65; }
+.gnx-hunt-job-clue { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; padding: 13px 16px; border-left: 3px solid #b69254; border-radius: 0 8px 8px 0; background: #fff8e8; color: #5d4a33; font-size: 14px; line-height: 1.6; }
+.gnx-hunt-job-clue strong { display: block; }
+.gnx-hunt-quick-try { margin-top: 16px; font-size: 15px; }
+.gnx-hunt-quick-try > summary { width: fit-content; min-height: 40px; padding: 7px 0; color: #654772; font-weight: 750; cursor: pointer; }
+.gnx-hunt-quick-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.gnx-hunt-quick-choices button { padding: 12px 14px; border: 1px solid #cbb6d2; border-radius: 10px; background: #fffdfa; color: #44334f; text-align: left; font-size: 15px; line-height: 1.6; }
+.gnx-hunt-quick-choices button:hover, .gnx-hunt-quick-choices button[aria-pressed=true] { border-color: #6d477d; background: #ece0f1; }
+.gnx-exercises .gnx-hunt-quick-feedback { margin-top: 12px; padding: 12px 15px; border-radius: 10px; background: #fff5dc; color: #624e2b; font-size: 15px; line-height: 1.65; }
+.gnx-exercises .gnx-hunt-quick-success { background: #e6efdf; color: #355439; }
+@media (max-width: 720px) {
+  .gnx-hunt-guide-layout { grid-template-columns: 1fr; gap: 24px; }
+  .gnx-hunt-mini-scene { min-height: 230px; }
+  .gnx-hunt-guide-body { padding: 18px; }
+  .gnx-hunt-guide > summary { padding: 15px 18px; font-size: 17px; }
+}
+@media (max-width: 480px) {
+  .gnx-hunt-job-clue, .gnx-hunt-quick-choices { grid-template-columns: 1fr; }
+  .gnx-hunt-mini-comic > figcaption { font-size: 22px; }
+}

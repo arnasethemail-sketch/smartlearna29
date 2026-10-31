@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
-import type { GraphicChapter } from "./data";
+import type { GraphicChapter, GraphicPanel } from "./data";
 import { StoryPanel } from "./StoryPanel";
 import "./textFeatures.css";
 
 /** Each discovery has its own reference, so the pictures never live in a different activity. */
-export function FeatureSource({ chapter, number, children }: { chapter: GraphicChapter; number: number; children: ReactNode }) {
+export function FeatureSource({ chapter, number, children }: { chapter: GraphicChapter; number: number; children: ReactNode | ((panel: GraphicPanel) => ReactNode) }) {
   const [panelIndex, setPanelIndex] = useState(Math.min(number - 1, chapter.panels.length - 1));
   const [expanded, setExpanded] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
@@ -34,7 +34,7 @@ export function FeatureSource({ chapter, number, children }: { chapter: GraphicC
     <div className="gnx-feature-source-column">{source("inline")}</div>
     <div className="gnx-feature-answers">
       <div className="gnx-feature-reference-tools"><span>Keep the story close.</span><button type="button" className="gnx-button gnx-button-light" aria-label={`Enlarge story panel ${number}`} onClick={() => setExpanded(true)}>Open story panel <span aria-hidden="true">↗</span></button></div>
-      {children}
+      {typeof children === "function" ? children(chapter.panels[panelIndex]) : children}
     </div>
     {expanded && <dialog className="gnx-feature-dialog" ref={dialog} aria-label={`Story reference for discovery ${number}`} onClose={() => setExpanded(false)}>
       <div className="gnx-feature-dialog-toolbar"><strong>Your story reference</strong><button type="button" className="gnx-button gnx-button-light" onClick={() => dialog.current?.close()}>Return to my answers <span aria-hidden="true">×</span></button></div>

@@ -8,6 +8,8 @@ import { AutomaticFeedback } from "./AutomaticFeedback";
 import "./exercises.css";
 import { ReviewSummary } from "./ReviewSummary";
 import { FeatureSource } from "./FeatureSource";
+import { FeatureHuntGuide } from "./FeatureHuntGuide";
+import { FeatureHints, FEATURE_MISSIONS } from "./FeatureHints";
 
 export type ExerciseProps = {
   chapter: GraphicChapter;
@@ -129,6 +131,14 @@ export function ParagraphWorkshop({ chapter, work, update }: ExerciseProps) {
 }
 
 export function TextFeatures({ chapter, work, update }: ExerciseProps) {
+  const boxes = chapter.textFeaturesHunt.boxes;
+  const isWritten = (id: string) => (["feature", "purpose", "help"] as const).every((field) => work.features[id][field].trim());
+  const writtenCount = boxes.filter((box) => isWritten(box.id)).length;
+  const fields = [
+    { id: "feature" as const, label: "1. What feature did you spot?", tip: "Name it and say where you found it.", starter: "I spotted… in panel…" },
+    { id: "purpose" as const, label: "2. What is its job?", tip: "Explain how this kind of feature tells a story.", starter: "Its job is to…" },
+    { id: "help" as const, label: "3. What did you learn from it?", tip: "Give a detail about this scene. One clear sentence is enough.", starter: "In this scene, it helps me understand…" },
+  ];
   const archive = (id: string) => update((old) => {
     const box = old.features[id];
     const revision = { feature: box.feature, purpose: box.purpose, help: box.help };
@@ -136,10 +146,35 @@ export function TextFeatures({ chapter, work, update }: ExerciseProps) {
     if (!Object.values(revision).some((text) => text.trim()) || (previous && JSON.stringify({ feature: previous.feature, purpose: previous.purpose, help: previous.help }) === JSON.stringify(revision))) return old;
     return { ...old, features: { ...old.features, [id]: { ...box, history: [...box.history, { ...revision, savedAt: new Date().toISOString() }] } } };
   });
-  return <section className="gnx-exercises gnx-feature-hunt"><SectionIntro eyebrow="05 / LOOK CLOSER" title="Text Features Hunt"><p>Use the story pictures and words below to make four different discoveries. For each one, name a feature, explain why it is there, and say how it helps you understand the story.</p><p>Browse any of the eight panels beside each discovery. Open the story panel whenever you need a closer look; your answers stay in place.</p></SectionIntro><div className="gnx-feature-grid">{chapter.textFeaturesHunt.boxes.map((box, boxIndex) => {
-    const response = work.features[box.id];
-    return <article className="gnx-card gnx-feature-box" key={box.id} aria-label={`Discovery ${box.number}`}><header><span className="gnx-eyebrow">DISCOVERY {box.number.toString().padStart(2, "0")}</span><h3>Notice. Explain. Connect.</h3></header><FeatureSource chapter={chapter} number={box.number}>{(["feature", "purpose", "help"] as const).map((field, index) => <label htmlFor={`${box.id}-${field}`} key={field}>{box.prompts[index]}<textarea id={`${box.id}-${field}`} rows={index ? 4 : 2} value={response[field]} onChange={(event) => update((old) => ({ ...old, features: { ...old.features, [box.id]: { ...old.features[box.id], [field]: event.target.value } } }))} onBlur={() => archive(box.id)} /></label>)}<AutomaticFeedback chapter={chapter} work={work} target={{ kind: "feature", id: box.id }} update={update} label="Check text feature" ariaLabel={`Check text feature ${box.number}`} beforeCheck={() => archive(box.id)}><button aria-label={`${response.showHelp ? "Hide feature help" : "Feature help"} ${box.number}`} className="gnx-button gnx-button-light" onClick={() => update((old) => ({ ...old, features: { ...old.features, [box.id]: { ...old.features[box.id], showHelp: !old.features[box.id].showHelp } } }))}>{response.showHelp ? "Hide feature help" : "Feature help"}<span className="gnx-sr-only">{" "}{box.number}</span></button></AutomaticFeedback>{response.showHelp && <aside className="gnx-help"><strong>Look at how the chapter communicates.</strong><p>Who is speaking? What does a narration box explain? Which picture, expression, panel order or title helps you? Choose one specific feature and explain its effect.</p></aside>}{work.automaticChecks?.[`feature:${box.id}`] && <><aside className="gnx-help"><strong>An example to compare, not copy</strong><p>{chapter.textFeaturesHunt.teacherExamples[boxIndex]?.feature}: {chapter.textFeaturesHunt.teacherExamples[boxIndex]?.purpose}</p><p>{chapter.textFeaturesHunt.teacherExamples[boxIndex]?.comprehensionHelp}</p><p className="gnx-note">{chapter.textFeaturesHunt.gradingNote}</p></aside></>}<TextHistory entries={response.history.map((revision) => `${revision.feature}\n${revision.purpose}\n${revision.help}`)} /></FeatureSource></article>;
-  })}</div></section>;
+  return <section className="gnx-exercises gnx-feature-hunt">
+    <SectionIntro eyebrow="05 / STORY DETECTIVE" title="Text Features Hunt">
+      <p>Stories hide clues in their pictures, speech bubbles and narration. Can you find four different ways this chapter helps you understand what is happening?</p>
+      <p>A text feature is a way of showing information. Use the sample below, then try your own discoveries. The missions and clues can help you get started.</p>
+    </SectionIntro>
+    <FeatureHuntGuide />
+    <div className="gnx-casebook" aria-label="Your detective casebook">
+      <div><strong>Your casebook</strong><span role="status">{writtenCount} of {boxes.length} discoveries written</span></div>
+      <progress max={boxes.length} value={writtenCount} aria-label="Discoveries written" />
+      <p>{writtenCount === boxes.length ? "Four discoveries written! Check each one and try a revision if the app suggests one." : "Choose four different features. Write three short answers for each, then choose Check my discovery."}</p>
+    </div>
+    <div className="gnx-feature-grid">{boxes.map((box, boxIndex) => {
+      const response = work.features[box.id];
+      return <article className="gnx-card gnx-feature-box" key={box.id} aria-label={`Discovery ${box.number}`}>
+        <header><div className="gnx-discovery-heading"><span className="gnx-eyebrow">DISCOVERY {box.number.toString().padStart(2, "0")}</span>{isWritten(box.id) && <span className="gnx-discovery-written">Three answers written ✓</span>}</div><h3>{FEATURE_MISSIONS[boxIndex]}</h3><p className="gnx-mission-note">Use this mission or choose another feature you notice. You can browse all eight panels.</p></header>
+        <FeatureSource chapter={chapter} number={box.number}>{(panel) => <>
+          <FeatureHints key={panel.id} chapter={chapter} panel={panel} number={box.number} expanded={response.showHelp} onToggle={() => update((old) => ({ ...old, features: { ...old.features, [box.id]: { ...old.features[box.id], showHelp: !old.features[box.id].showHelp } } }))} />
+          {fields.map((field, index) => <div className="gnx-feature-field" key={field.id}>
+            <label htmlFor={`${box.id}-${field.id}`}>{field.label}</label>
+            <p id={`${box.id}-${field.id}-tip`}>{field.tip}</p>
+            <textarea id={`${box.id}-${field.id}`} aria-describedby={`${box.id}-${field.id}-tip`} placeholder={field.starter} rows={index ? 3 : 2} value={response[field.id]} onChange={(event) => update((old) => ({ ...old, features: { ...old.features, [box.id]: { ...old.features[box.id], [field.id]: event.target.value } } }))} onBlur={() => archive(box.id)} />
+          </div>)}
+          <AutomaticFeedback chapter={chapter} work={work} target={{ kind: "feature", id: box.id }} update={update} label="Check my discovery" ariaLabel={`Check text feature ${box.number}`} beforeCheck={() => archive(box.id)} />
+          {work.automaticChecks?.[`feature:${box.id}`] && <aside className="gnx-help"><strong>An example to compare, not copy</strong><p>{chapter.textFeaturesHunt.teacherExamples[boxIndex]?.feature}: {chapter.textFeaturesHunt.teacherExamples[boxIndex]?.purpose}</p><p>{chapter.textFeaturesHunt.teacherExamples[boxIndex]?.comprehensionHelp}</p><p className="gnx-note">{chapter.textFeaturesHunt.gradingNote}</p></aside>}
+          <TextHistory entries={response.history.map((revision) => `${revision.feature}\n${revision.purpose}\n${revision.help}`)} />
+        </>}</FeatureSource>
+      </article>;
+    })}</div>
+  </section>;
 }
 
 function orderedChoices<T extends { id: string }>(choices: T[], order: string[]) {

@@ -3,6 +3,7 @@ import type { ChapterWork } from "./types";
 import { checkTargetKey, type CheckTarget } from "./checking-types";
 
 export const CHECKER_VERSION = "free-check-v1";
+const FEATURE_CHECKER_REVISION = "feature-check-v2";
 
 export function allCheckTargets(chapter: GraphicChapter): CheckTarget[] {
   return [
@@ -42,7 +43,7 @@ function stable(value: unknown): string {
 
 /** Content identity for stale-feedback detection, never an authentication token. */
 export function currentCheckFingerprint(chapter: GraphicChapter, work: ChapterWork, target: CheckTarget) {
-  const text = stable({ version: CHECKER_VERSION, content: work.contentVersion, chapterId: chapter.id, target, response: checkInput(chapter, work, target) });
+  const text = stable({ version: CHECKER_VERSION, content: work.contentVersion, chapterId: chapter.id, target, response: checkInput(chapter, work, target), ...(target.kind === "feature" ? { featureCheckerRevision: FEATURE_CHECKER_REVISION } : {}) });
   let left = 2166136261, right = 2246822507;
   for (let index = 0; index < text.length; index += 1) {
     left = Math.imul(left ^ text.charCodeAt(index), 16777619);

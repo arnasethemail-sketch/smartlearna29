@@ -37,6 +37,51 @@ function plainStrings(value: unknown): string[] {
   return [];
 }
 
+// A child can explain a feature's job without using the teacher's abstract wording.
+// These narrow patterns confirm native date facts; extra or contradictory claims
+// do not pass merely because they contain a year or a familiar feature name.
+function learningClaim(text: string) {
+  return text.trim().replace(/^(?:(?:it|this)(?: feature| text feature)? helps? me (?:understand|know|see|learn)|i (?:learn|learned|understand|know|see))(?: that)?\s+/i, "");
+}
+
+function nativeDateExplanation(chapter: GraphicChapter, purpose: string, help: string) {
+  const job = normalize(purpose).replace(/^its job is to /, "");
+  const saysWhen = /^(?:(?:it|this|the (?:time|date) label) )?(?:tells?|shows?)(?: me| us| the reader| readers)? (?:when (?:the )?(?:story|scene|events?) (?:happened|happens|takes place|took place)|(?:the )?(?:time|date|year)(?: of (?:the )?(?:story|scene|events?))?)$/.test(job);
+  if (!saysWhen) return null;
+  const claim = normalize(learningClaim(help));
+  const fact = claim.match(/^(?:the )?(?:(baby) )?(?:scene|story) (?:happened|happens|takes place|took place|is set|was set|is|was) in (\d{4})(?: (before|after) mavis (?:grew|grows) up)?$/);
+  if (!fact) return null;
+  const panel = chapter.panels.find((item) => item.narration.match(/^In (\d{4})\b/)?.[1] === fact[2]);
+  if (!panel) return null;
+  if (fact[1] && !/\bbaby\b/i.test(panel.narration)) return null;
+  if (fact[3] && (fact[3] !== "before" || !/\bbaby\b/i.test(panel.narration) || !chapter.panels.some((item) => item.number > panel.number && /\bAs Mavis grew\b/.test(item.narration)))) return null;
+  return panel.id;
+}
+
+function speechEvidencePanels(chapter: GraphicChapter, claim: string) {
+  const ignored = new Set(["a", "an", "the", "i", "me", "my", "you", "your", "he", "she", "it", "his", "her", "they", "we", "our", "to", "of", "is", "are", "was", "were", "be", "am", "do", "does", "did", "that", "this", "and", "or", "but", "in", "on", "at", "for", "with", "not", "no", "what", "who", "when", "where", "how"]);
+  const words = new Set(normalize(claim).split(" ").filter((word) => !ignored.has(word)));
+  return chapter.panels.filter((panel) => panel.dialogue.some((line) => contains(claim, line.speaker) && normalize(line.text).split(" ").some((word) => !ignored.has(word) && words.has(word))));
+}
+
+function featureDescription(chapter: GraphicChapter, text: string) {
+  const description = normalize(text).replace(/^i (?:spotted|found|noticed) /, "").replace(/^(?:a|an|the) /, "");
+  const reference = description.match(/\bin panel (\d+)\b/);
+  const panel = reference ? chapter.panels.find((item) => item.number === Number(reference[1])) : undefined;
+  return { name: description.replace(/ in panel \d+$/, ""), panel, invalidReference: /\bin panel\b/.test(description) && !panel };
+}
+
+function nativeNarrationExplanation(chapter: GraphicChapter, purpose: string, help: string, panelId?: string) {
+  const job = normalize(purpose).replace(/^its job is to /, "");
+  if (!/^(?:(?:it|this|the narration box) )?(?:tells?|shows?|explains?)(?: me| us| the reader| readers)? (?:what (?:is|was) happening|what happens|the events|the scene|what is going on)$/.test(job)) return null;
+  const fact = normalize(learningClaim(help)).match(/^dracula (?:is|was) playing (?:a game of )?peekaboo with (?:baby )?mavis(?: in (\d{4}))?$/);
+  if (!fact) return null;
+  // Confirm the complete simple claim against the written scene, including its
+  // named people, action and optional year; keywords alone never establish it.
+  const panel = chapter.panels.find((item) => (!panelId || item.id === panelId) && /\bDracula\b.*\bbaby\b.*\bMavis\b.*\bgame of peekaboo\b/.test(item.narration) && (!fact[1] || item.narration.match(/^In (\d{4})\b/)?.[1] === fact[1]));
+  return panel?.id ?? null;
+}
+
 /** Every operation is on-device. There is deliberately no API endpoint or key. */
 export async function checkWrittenResponse(chapter: GraphicChapter, work: ChapterWork, target: CheckTarget, onProgress?: (message: string) => void): Promise<AutomaticCheck> {
   const input = checkInput(chapter, work, target);
@@ -206,19 +251,22 @@ export async function checkWrittenResponse(chapter: GraphicChapter, work: Chapte
 
   if (target.kind === "feature") {
     const response = work.features[target.id];
-    const named = normalize(response.feature);
+    const description = featureDescription(chapter, response.feature);
+    const named = description.name;
     const examples = chapter.textFeaturesHunt.teacherExamples;
     const aliases: Array<[RegExp, string]> = [
       [/\btitle\b|\bheading\b/, "Chapter title"], [/narrat|\bcaption\b/, "Narration box"], [/\bspeech\b|\bdialogue\b|\bspeaker\b|\bbubbles?\b/, "Speech bubble"],
       [/\btime\b|\bdate\b|\b1895\b/, "Time label"], [/looking back|\bmemory\b|\brecap\b|\bflashback\b/, "Recap labels"],
       [/number.*(?:table|object)|(?:table|object).*number|\btable (?:57|fifty seven)\b|\bposition (?:23|twenty three)\b/, "Number labels on objects"],
+      [/^(?:pictures?|illustrations?|images?)$/, "Illustration"],
     ];
     const canonicalName = aliases.find(([pattern]) => pattern.test(named))?.[1];
     const example = examples.find((item) => normalize(item.feature) === named || (canonicalName && normalize(item.feature) === normalize(canonicalName)) || (canonicalName === "Recap labels" && /flashback|framed story|recap/i.test(item.feature)));
     const negated = /\b(?:no|not|without|missing|absent|never|isn t|aren t|doesn t|don t)\b/.test(named);
     const hasDate = chapter.panels.some((panel) => /^In \d{4}/.test(panel.narration));
     const hasRecapLabel = chapter.panels.some((panel) => panel.narration.startsWith("LOOKING BACK:"));
-    const knownUnavailable = (canonicalName === "Time label" && !hasDate) || (canonicalName === "Number labels on objects" && chapter.id !== "ch14") || (/looking back|recap label|memory label/.test(named) && !hasRecapLabel) || /\bitalic/.test(named);
+    const referencedFeatureMissing = description.panel && ((canonicalName === "Time label" && !/^In \d{4}\b/.test(description.panel.narration)) || (canonicalName === "Speech bubble" && !description.panel.dialogue.length) || (canonicalName === "Number labels on objects" && description.panel.id !== "ch14-p02") || (canonicalName === "Recap labels" && !description.panel.narration.startsWith("LOOKING BACK:")));
+    const knownUnavailable = description.invalidReference || referencedFeatureMissing || (canonicalName === "Time label" && !hasDate) || (canonicalName === "Number labels on objects" && chapter.id !== "ch14") || (/looking back|recap label|memory label/.test(named) && !hasRecapLabel) || /\bitalic/.test(named);
     // These features are guaranteed by the actual reader renderer. Richer visual
     // interpretations remain welcome, but a generic keyword cannot verify them.
     const nativeFeature = /^(?:(?:comic )?panels?|panel (?:borders?|order|numbers?|sequence)|chapter numbers?|borders?|frames?|gutters?|(?:panel )?layout|pictures?|illustrations?|images?|colou?rs?|colou?r contrast|bold (?:text|speaker names)|speaker names)$/.test(named);
@@ -226,7 +274,15 @@ export async function checkWrittenResponse(chapter: GraphicChapter, work: Chapte
       ? dimension("ready", "You identified a text or visual feature that is present in this chapter.")
       : dimension("uncertain", "The app could not confirm that feature here. Describe exactly where you see it; other valid visual features are welcome.");
     report.evidencePanelIds = example ? [...example.panelIds] : [];
-    if (example) {
+    const datedPanelId = canonicalName === "Time label" && report.dimensions.meaning.rating === "ready" ? nativeDateExplanation(chapter, response.purpose, response.help) : null;
+    const narratedPanelId = canonicalName === "Narration box" && report.dimensions.meaning.rating === "ready" ? nativeNarrationExplanation(chapter, response.purpose, response.help, description.panel?.id) : null;
+    if (datedPanelId) {
+      report.dimensions.support = dimension("ready", "You explained the date's job and connected it to the actual dated scene. The app checked the date and panel order directly.");
+      report.evidencePanelIds = [datedPanelId];
+    } else if (narratedPanelId) {
+      report.dimensions.support = dimension("ready", "You explained the narration's job and named the people and action in the actual written scene. The app checked these details directly.");
+      report.evidencePanelIds = [narratedPanelId];
+    } else if (example) {
       const purpose = await match(response.purpose, [example.purpose]);
       const help = await match(response.help, [example.comprehensionHelp]);
       report.dimensions.support = purpose.strongest >= .8 && help.strongest >= .8
@@ -235,7 +291,30 @@ export async function checkWrittenResponse(chapter: GraphicChapter, work: Chapte
     } else {
       report.dimensions.support = dimension("uncertain", "Explain the feature's job and a specific effect on your reading. The app cannot confirm every visual interpretation.");
     }
-    const identity = (name: string) => aliases.find(([pattern]) => pattern.test(normalize(name)))?.[1] ?? normalize(name);
+    if (report.dimensions.support.rating === "uncertain" && report.dimensions.meaning.rating === "ready") {
+      if (canonicalName === "Speech bubble") {
+        const claim = learningClaim(response.help);
+        // A generic purpose plus a random story fact is not enough. The explanation
+        // must name a speaker and connect to words spoken in a matching panel.
+        const panels = speechEvidencePanels(chapter, claim).filter((panel) => !description.panel || panel.id === description.panel.id);
+        const negation = /\b(?:not|no|never|cannot|can t|doesn t|don t|didn t|isn t|aren t|wasn t|weren t|won t|without)\b/;
+        if (panels.length && !negation.test(normalize(response.purpose)) && !negation.test(normalize(claim))) {
+          const purpose = await match(`Speech bubble. ${response.purpose}`, ["A speech bubble shows a character's own words.", "A speech bubble identifies who is speaking.", "A speech bubble shows what a character says."]);
+          if (purpose.strongest >= .8) {
+            for (const panel of panels) {
+              const source = [panel.narration, ...panel.dialogue.map((line) => `${line.speaker}: ${line.text}`)].join(" ");
+              const detail = await match(source, [claim]);
+              if (detail.strongest >= .8) {
+                report.dimensions.support = dimension("ready", "You explained the bubble's job and named a detail supported by this panel. Check that those spoken words are what helped you notice it.");
+                report.evidencePanelIds = [panel.id];
+                break;
+              }
+            }
+          }
+        }
+      }
+    }
+    const identity = (name: string) => { const cleaned = featureDescription(chapter, name).name; return aliases.find(([pattern]) => pattern.test(cleaned))?.[1] ?? cleaned; };
     const otherFeatures = Object.entries(work.features).filter(([id]) => id !== target.id).map(([, feature]) => identity(feature.feature));
     if (named && otherFeatures.includes(identity(named))) {
       report.nextSteps.push("This feature name is repeated in another box. Try four different discoveries.");
