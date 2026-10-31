@@ -6,6 +6,7 @@ import { cleanup, fireEvent, render, screen, within } from "@testing-library/rea
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { chapters } from "../src/features/graphic-novel/data";
 import type { GraphicChapter } from "../src/features/graphic-novel/data";
+import { artFor, assetUrl } from "../src/features/graphic-novel/artwork";
 import { Comprehension, MarkedSentence, ParagraphWorkshop, TextFeatures, Vocabulary, VocabularyBank } from "../src/features/graphic-novel/Exercises";
 import type { ExerciseProps } from "../src/features/graphic-novel/Exercises";
 import { createChapterWork } from "../src/features/graphic-novel/progress";
@@ -115,6 +116,97 @@ describe("Graphic novel written worksheets", () => {
     expect(screen.getAllByRole("textbox", { name: "How did this text feature help you understand the text?" })).toHaveLength(4);
     expect(screen.queryByText("An example to compare, not copy")).toBeNull();
     for (const input of screen.getAllByRole("textbox")) expect((input as HTMLTextAreaElement).value).toBe("");
+  });
+
+  it("keeps the illustrated source beside each discovery and lets a learner inspect all eight panels without losing answers", () => {
+    const chapter = chapters[0];
+    const initial = createChapterWork(chapter);
+    initial.panelIndex = 6;
+    initial.page = 1;
+    const view = renderSection(TextFeatures, chapter, initial);
+    const discoveries = chapter.textFeaturesHunt.boxes.map((box) => screen.getByRole("article", { name: `Discovery ${box.number}` }));
+
+    discoveries.forEach((discovery, index) => {
+      const panel = chapter.panels[index];
+      expect(within(discovery).getByRole("img", { name: artFor(panel.id)!.alt })).toBeTruthy();
+      expect(within(discovery).getByText(chapter.title)).toBeTruthy();
+      const selector = within(discovery).getByRole("combobox", { name: `Story panel for discovery ${index + 1}` });
+      expect(within(selector).getAllByRole("option").map((option) => option.textContent)).toEqual(chapter.panels.map((item) => `Panel ${item.number} of 8`));
+    });
+
+    const first = within(discoveries[0]);
+    const drafts = [
+      ["Text feature found", "Narration box"],
+      ["Why do you think the author included this text feature?", "It explains what happened before the characters spoke."],
+      ["How did this text feature help you understand the text?", "The first narration box tells me when the story begins."],
+    ];
+    drafts.forEach(([name, value]) => fireEvent.change(first.getByRole("textbox", { name }), { target: { value } }));
+    const selector = first.getByRole("combobox", { name: "Story panel for discovery 1" });
+
+    for (const panel of chapter.panels) {
+      const option = within(selector).getByRole("option", { name: `Panel ${panel.number} of 8` }) as HTMLOptionElement;
+      fireEvent.change(selector, { target: { value: option.value } });
+      const image = first.getByRole("img", { name: artFor(panel.id)!.alt });
+      expect(image.getAttribute("src")).toBe(assetUrl(artFor(panel.id)!.src));
+      expect(first.getByText(panel.narration)).toBeTruthy();
+      for (const line of panel.dialogue) {
+        expect(first.getAllByText(line.speaker).length).toBeGreaterThan(0);
+        expect(first.getByText(line.text)).toBeTruthy();
+      }
+    }
+
+    drafts.forEach(([name, value]) => expect((first.getByRole("textbox", { name }) as HTMLTextAreaElement).value).toBe(value));
+    const saved = view.readWork();
+    const response = saved.features[chapter.textFeaturesHunt.boxes[0].id];
+    expect([response.feature, response.purpose, response.help]).toEqual(drafts.map(([, value]) => value));
+    expect(saved.panelIndex).toBe(6);
+    expect(saved.page).toBe(1);
+    expect(saved.readingComplete).toBe(initial.readingComplete);
+  });
+
+  it("shows the native time label beside the first chapter's source image", () => {
+    renderSection(TextFeatures);
+    const discovery = within(screen.getByRole("article", { name: "Discovery 1" }));
+    expect(discovery.getByText("1895")).toBeTruthy();
+    expect(discovery.getByText(chapters[0].panels[0].narration)).toBeTruthy();
+  });
+
+  it("keeps the flying-table object labels available in the worksheet source", () => {
+    const chapter = chapters[13];
+    renderSection(TextFeatures, chapter);
+    const discovery = within(screen.getByRole("article", { name: "Discovery 2" }));
+    expect(discovery.getByRole("img", { name: artFor("ch14-p02")!.alt })).toBeTruthy();
+    expect(discovery.getByLabelText("Table 57")).toBeTruthy();
+    expect(discovery.getByText("Position 23")).toBeTruthy();
+    expect(discovery.getByText("Table 57 moves to position 23.")).toBeTruthy();
+  });
+
+  it("shows the final chapter's recap label when its source panel is selected", () => {
+    const chapter = chapters[23];
+    renderSection(TextFeatures, chapter);
+    const discovery = within(screen.getByRole("article", { name: "Discovery 1" }));
+    const selector = discovery.getByRole("combobox", { name: "Story panel for discovery 1" });
+    const option = within(selector).getByRole("option", { name: "Panel 5 of 8" }) as HTMLOptionElement;
+    fireEvent.change(selector, { target: { value: option.value } });
+    expect(discovery.getByRole("img", { name: artFor("ch24-p05")!.alt })).toBeTruthy();
+    expect(discovery.getByText("LOOKING BACK")).toBeTruthy();
+    expect(discovery.getByText(chapter.panels[4].narration)).toBeTruthy();
+  });
+
+  it("keeps source labels unique when two discoveries show the same panel", () => {
+    const view = renderSection(TextFeatures);
+    const second = within(screen.getByRole("article", { name: "Discovery 2" }));
+    const selector = second.getByRole("combobox", { name: "Story panel for discovery 2" });
+    const option = within(selector).getByRole("option", { name: "Panel 1 of 8" }) as HTMLOptionElement;
+    fireEvent.change(selector, { target: { value: option.value } });
+
+    const firstHeading = within(screen.getByRole("article", { name: "Discovery 1" })).getByRole("heading", { name: "Panel 1" });
+    const secondHeading = second.getByRole("heading", { name: "Panel 1" });
+    expect(firstHeading.id).not.toBe("");
+    expect(secondHeading.id).not.toBe("");
+    expect(firstHeading.id).not.toBe(secondHeading.id);
+    const ids = [...view.container.querySelectorAll("[id]")].map((element) => element.id);
+    expect(new Set(ids).size).toBe(ids.length);
   });
 
   it("grades saved choice IDs correctly even when both bank orders are reversed and exposes corrections only after submission", () => {
